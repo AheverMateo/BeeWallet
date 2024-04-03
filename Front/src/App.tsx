@@ -4,13 +4,22 @@ import {
   Route,
   RouterProvider
 } from 'react-router-dom';
+import Home from './app/home';
+import Dashboard from './app/dashboard';
+import Login from './app/login';
+import './global.css';
 
 const router = createBrowserRouter(createRoutesFromElements(<>
-  <Route path='/' errorElement={<div>no found</div>}>
-    <Route errorElement={<div>404</div>}>
+  <Route errorElement={<div>no found</div>}>
+    <Route path='/' element={<Home />} errorElement={<div>404</div>}>
       <Route index element={<div>default page</div>} />
-      <Route path='/login' element={<div>login page</div>} />
+      <Route path='/login' element={<Login/>} />
       <Route path='/register' element={<div>register page</div>} />
+      <Route path='/dashboard' element={<Dashboard />}>
+        <Route index element={<div>Dashboard</div>} />
+        <Route path='profile' element={<div>Profile</div>} />
+        <Route path='settings' element={<div>Settings</div>} />
+      </Route>
     </Route>
   </Route>
 </>));
