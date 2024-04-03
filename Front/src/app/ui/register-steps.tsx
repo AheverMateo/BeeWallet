@@ -15,13 +15,13 @@ export function RegisterSteps({step, setStep}: RegisterStepProps) {
         <div className="h-full container mx-auto grid grid-rows-[auto,1fr]">
             <div className="mt-8 space-y-2 max-w-4xl w-full mx-auto">
                 <Slider className="w-[85%] mx-auto" min={1} max={registerSteps.length} value={[step]} step={1}/>
-                <ul className="grid grid-cols-6 gap-2 font-semibold text-[10px] text-slate-300">
+                <ul className="grid grid-cols-6 gap-2 font-semibold text-xs text-slate-300">
                     {registerSteps.map((stp) => (
                         <li key={stp.id} className={clsx("flex gap-4 font-semibold justify-center", {
                             "text-slate-700": step >= stp.id
                         })}>
                             <span className="sr-only">{stp.id}</span>
-                            <p className="text-center">{stp.title}</p>
+                            <p className="text-center whitespace-nowrap">{stp.title}</p>
                         </li>
                     ))}
                 </ul>

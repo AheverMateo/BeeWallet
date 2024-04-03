@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Eye } from "@/assets/icons/eye";
+import { Eye2 } from "@/assets/icons/eye2";
 import { GoogleIcon } from "@/assets/icons/google";
 import { AppleIcon } from "@/assets/icons/apple";
 
@@ -43,7 +44,7 @@ export default function Login() {
                             className="absolute right-0 bottom-0 border-none bg-transparent hover:bg-transparent/5 cursor-pointer"
                             onClick={() => setShowPassword(!showPassword)}
                         >
-                            <Eye />
+                            {showPassword ? <Eye2 /> : <Eye />}
                         </Button>
                     </div>
                     <div >
