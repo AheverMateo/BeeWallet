@@ -1,1 +1,0 @@
-Aca tienen que instalar vite tailwind y todo lo que usen para el front. recuerden crear un git ignore con el node modules y el .env
