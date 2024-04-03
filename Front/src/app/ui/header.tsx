@@ -30,7 +30,10 @@ export default function Header() {
                 >
                     Iniciar Sesión
                 </Button>
-                <Button className="rounded-full">
+                <Button 
+                    className="rounded-full"
+                    onClick={() => navigate('/register')}
+                >
                     Registrarse
                 </Button>
             </div>

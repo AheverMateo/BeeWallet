@@ -50,7 +50,8 @@ export default function Login() {
                         <Button
                             type="submit"
                             size="lg"
-                            className="rounded-full w-full mt-6 select-none"
+                            variant={!values.email && !values.password ? "default" : "secondary"}
+                            className="rounded-full w-full mt-6 select-none font-semibold"
                             disabled={!values.email && !values.password}
                         >
                             Iniciar sesión
@@ -62,11 +63,16 @@ export default function Login() {
                         </Link>
                     </div>
                     <div className="space-y-2">
+                        <br />
                         <span className="text-sm text-slate-600">O inicia sesión con</span>
                         <ul className="flex justify-between [&>li]:w-full [&>li>button]:w-full gap-4">
-                            <li><Button variant="outline" className="rounded-full"><GoogleIcon /></Button></li>
-                            <li><Button variant="outline" className="rounded-full"><img src="/facebookIco.png" alt="facebook icon" className="aspect-square size-6" /></Button></li>
-                            <li><Button variant="outline" className="rounded-full"><AppleIcon /></Button></li>
+                            <li><Button
+                                variant="outline"
+                                className="rounded-full"
+                                type="button"
+                            ><GoogleIcon /></Button></li>
+                            <li><Button type="button" variant="outline" className="rounded-full"><img src="/facebookIco.png" alt="facebook icon" className="aspect-square size-6" /></Button></li>
+                            <li><Button type="button" variant="outline" className="rounded-full"><AppleIcon /></Button></li>
                         </ul>
                     </div>
                 </form>
