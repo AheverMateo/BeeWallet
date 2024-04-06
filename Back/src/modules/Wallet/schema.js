@@ -3,8 +3,9 @@ const { Schema } = mongoose;
 
 const walletSchema = new Schema({
   userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-  currency: { type: String, required: true },
+  currency: { type: String, required: true, default: 'ARS' },
   balance: { type: Types.Decimal128, required: true },
+  transactions: [{ type: Schema.Types.ObjectId, ref: 'Transaction', default: [] }],
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });

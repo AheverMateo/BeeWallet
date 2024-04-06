@@ -1,6 +1,5 @@
 import express from "express";
 import "dotenv/config";
-import jwt from "jsonwebtoken";
 import compression from "compression";
 import { connectDb } from "./config/mongoConnect.js";
 import { addLogger } from "./config/logger.js"; // Import logger and addLogger
@@ -8,6 +7,7 @@ import { logger } from "./config/logger.js";
 
 import usersRouter from "./modules/Users/router.js";
 import authRouter from "./modules/Users/Auth/router.js";
+import walletRouter from "./modules/Wallet/router.js";
 
 connectDb()
 
@@ -28,6 +28,7 @@ app.use(compression({})); // Enable response compression
 // Routers //
 app.use("/api/users", usersRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/wallet", walletRouter);
 
 // Error handlers //
 
