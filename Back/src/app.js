@@ -1,15 +1,16 @@
 import express from "express";
 import "dotenv/config";
-import jwt from "jsonwebtoken";
+import session from "express-session";
 import compression from "compression";
 import { connectDb } from "./config/mongoConnect.js";
 import { addLogger } from "./config/logger.js"; // Import logger and addLogger
 import { logger } from "./config/logger.js";
+import MongoStore from "connect-mongo";
 
 import usersRouter from "./modules/Users/router.js";
 import authRouter from "./modules/Users/Auth/router.js";
 
-connectDb()
+connectDb();
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -18,11 +19,22 @@ app.listen(PORT, () => {
 });
 
 // Middlewares //
-app.use(express.static('public')); // serve public
+app.use(express.static("public")); // serve public
 app.use(addLogger); // general logging
 app.use(express.json()); // Parse JSON requests
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded requests
-
+app.use(
+   session({
+      store: MongoStore.create({
+         mongoUrl: process.env.MONGO_URL,
+         ttl: 3600,
+         dbName: "fintech",
+      }),
+      secret: process.env.SESSION_SECRET,
+      resave: true,
+      saveUninitialized: true,
+   })
+);
 app.use(compression({})); // Enable response compression
 
 // Routers //
@@ -45,4 +57,3 @@ app.use((err, req, res, next) => {
    logger.error(`${err.stack}`);
    res.status(500).json({ error: "Internal Server Error (Catch all   )" });
 });
-
