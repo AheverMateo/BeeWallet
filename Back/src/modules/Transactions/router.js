@@ -6,15 +6,15 @@ import {
     transferByUserId,
     allTransfers,
     deleteTransfer
-  } from './controller.js';
+  } from './controller';
 
 const router = express.Router();
 
 router.get("/:transactionId", transferById);
 router.get("/User/:UserId/:page", transferByUserId);
-router.get("/", allTransfers);
+router.get("/List/:page", allTransfers);
 router.put("/Type",transferTypeUpdate );
 router.post("/",transferBetweenAccounts );
-router.delete("/", deleteTransfer);
+router.delete("/:transactionId", deleteTransfer);
 
 export default router;
