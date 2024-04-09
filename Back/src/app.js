@@ -9,7 +9,7 @@ import MongoStore from "connect-mongo";
 
 import usersRouter from "./modules/Users/router.js";
 import authRouter from "./modules/Users/Auth/router.js";
-import walletsRouter from "./modules/Wallet/router.js";
+import walletsRouter from "./modules/Wallets/router.js";
 import transactionsRouter from "./modules/Transactions/router.js";
 
 connectDb();

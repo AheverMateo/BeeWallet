@@ -6,7 +6,7 @@ import {
     transferByUserId,
     allTransfers,
     deleteTransfer
-  } from '../Transactions/controller';
+  } from './controller.js';
 
 const router = express.Router();
 
