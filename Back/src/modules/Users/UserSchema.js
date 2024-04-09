@@ -12,11 +12,12 @@ const userSchema = new Schema({
     city: String,
     state: String,
     country: String,
-    postalCode: String,
+    zipCode: String,
   },
   phoneNumber: String,
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });
+
 
 export default model('User', userSchema);

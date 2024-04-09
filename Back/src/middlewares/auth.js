@@ -15,9 +15,10 @@ export const isAdmin = (req, res, next) => {
 // Middleware to check if the user is logged in
 export const isLoggedIn = (req, res, next) => {
    // Check if the user is logged in
-   if (!req.user) {
+   if (!req.session.user) {
       return res.status(401).json({ success: false, message: "Unauthorized - Login required" });
    }
    // User is logged in, proceed to the next middleware/route
    next();
 };
+
