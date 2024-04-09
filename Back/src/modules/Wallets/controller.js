@@ -9,6 +9,7 @@ import {
 } from "../Transactions/controller.js";
 import { resSuccess, resFail } from "../../config/utils/response.js";
 import { logger } from "../../config/logger.js";
+import BigNumber from "bignumber.js";
 
 export const createWallet = async (req, res) => {
   const { userId } = req.body;
@@ -93,26 +94,11 @@ export const addWalletBalance = async (req, res) => {
     if (!wallet) {
       return resFail(res, 404, "Wallet not found");
     }
-    wallet.balance += amount;
+    // Use BigNumber for addition
+    wallet.balance = new BigNumber(wallet.balance).plus(amount).toString();
     await wallet.save();
     resSuccess(res, 200, "Wallet balance updated successfully", wallet.balance);
-  }
-  catch (error) {
-    logger.error(`${error.stack}`)
-    return res.status(500).json({ success: false, message: "Internal Server Error" });
-  }
-}
-
-export const getWalletBalance = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const wallet = await WalletModel.findById(id);
-    if (!wallet) {
-      return resFail(res, 404, "Wallet not found");
-    }
-    resSuccess(res, 200, "Wallet found", wallet.balance);
-  }
-  catch (error) {
+  } catch (error) {
     logger.error(`${error.stack}`)
     return res.status(500).json({ success: false, message: "Internal Server Error" });
   }
@@ -126,9 +112,24 @@ export const removeWalletBalance = async (req, res) => {
     if (!wallet) {
       return resFail(res, 404, "Wallet not found");
     }
-    wallet.balance -= amount;
+    // Use BigNumber for subtraction
+    wallet.balance = new BigNumber(wallet.balance).minus(amount).toString();
     await wallet.save();
     resSuccess(res, 200, "Wallet balance updated successfully", wallet.balance);
+  } catch (error) {
+    logger.error(`${error.stack}`)
+    return res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+}
+
+export const getWalletBalance = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const wallet = await WalletModel.findById(id);
+    if (!wallet) {
+      return resFail(res, 404, "Wallet not found");
+    }
+    resSuccess(res, 200, "Wallet found", wallet.balance);
   }
   catch (error) {
     logger.error(`${error.stack}`)
