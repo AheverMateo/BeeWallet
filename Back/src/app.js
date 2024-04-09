@@ -9,6 +9,7 @@ import MongoStore from "connect-mongo";
 
 import usersRouter from "./modules/Users/router.js";
 import authRouter from "./modules/Users/Auth/router.js";
+import walletsRouter from "./modules/Wallet/router.js";
 
 connectDb();
 
@@ -40,6 +41,7 @@ app.use(compression({})); // Enable response compression
 // Routers //
 app.use("/api/users", usersRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/wallets", walletsRouter);
 
 // Error handlers //
 
