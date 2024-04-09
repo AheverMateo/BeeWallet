@@ -3,6 +3,7 @@ import TransactionModel from './schema';
 import WalletModel from '../Wallets/schema';
 import { error } from "winston";
 import { resSuccess, resFail } from "../../config/utils/response.js";
+import { create } from "connect-mongo";
 
 // Preguntar conexion con DB se hace aca o ya esta conectado? == desde app JS
 
@@ -97,7 +98,7 @@ export const transferTypeUpdate = async (req, res) => {
     }
 };
 export const transferById = async (req, res) => {
-    const { transactionId} = req.body;
+    const { transactionId} = req.params;
     try{
         const transfer = await TransactionModel.findById(transactionId);
         if (!transfer) {
@@ -111,15 +112,65 @@ export const transferById = async (req, res) => {
 };
 export const transferByUserId = async (req, res) => {
     const { UserId, page } = req.params;
+    const walletId = findWallet(UserId);
     try {
+        if (!walletId) {
+            return resFail(res, 404, "Wallet not found for user");
+        }
+        const transactions = await TransactionModel.find({
+            $or: [{fromWalletId: walletId},{ toWalletId: walletId}]
+        })
+        .sort({createdAt: -1})
+        .skip((page -1)* 25)
+        .limit(25);
+
+        if (!transactions || transactions.length === 0) {
+            return resSuccess(res, 404, "No transactions found", []);
+        }
+        resSuccess(res, 200, "Transactions retrieved successfully", transactions);
         
     } catch (error) {
+        logger.error(`${error.stack}`)
+        return resFail(res, 500, "Error retrieving transactions");
+    }
+};
+export const allTransfers = async (req, res) => {
+    try {        
+        const { page } = req.params;
+        const transactions = await TransactionModel.find()
+        .sort({createdAt: -1})
+        .skip((page -1)* 25)
+        .limit(25);
+
+        if (!transactions || transactions.length === 0) {
+            return resSuccess(res, 404, "No transactions found", []);
+        }
+        resSuccess(res, 200, "Transactions retrieved successfully", transactions);
         
+    } catch (error) {
+        logger.error(`${error.stack}`)
+        return resFail(res, 500, "Error retrieving transactions");
     }
 };
 export const deleteTransfer = async (req, res) => {
+    const { transactionId } = req.body;
+    try {
+        const transaction = await TransactionModel.findById(transferId);
+        if (!transaction) {
+            return resFail(res, 404, "Transaction not found");
+        }
+        const { fromWalletId, toWalletId } = transaction;
+        const fromWallet = await WalletModel.findById(fromWalletId);
+        const toWallet = await WalletModel.findById(toWalletId);
 
-};
-export const allTransfers = async (req, res) => {
-
+        if (!fromWallet || !toWallet) {
+            return resFail(res, 404, "One or both wallets not found");
+        }
+        transaction.deleted = true;
+        await transaction.save();
+        resSuccess(res, 200, "Transaction deleted successfully", transaction);
+    } catch (error) {
+        logger.error(`${error.stack}`);
+        return resFail(res, 500, "Error deleting transaction");
+    }
 };
