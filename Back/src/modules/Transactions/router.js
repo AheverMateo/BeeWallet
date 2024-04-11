@@ -15,6 +15,6 @@ router.get("/User/:UserId/:page", transferByUserId);
 router.get("/List/:page", allTransfers);
 router.put("/Type",transferTypeUpdate );
 router.post("/",transferBetweenAccounts );
-router.delete("/:transactionId", deleteTransfer);
+router.delete("/", deleteTransfer);
 
 export default router;
