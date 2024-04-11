@@ -10,7 +10,7 @@ export default function Dashboard() {
     <div
       className="size-full min-h-screen
          bg-[#0E0E0E] text-[#FCFFFF]
-         "
+         md:flex md:justify-center" // Add 'flex justify-center' to center horizontally
     >
       <Outlet />
       <main className="flex flex-col gap-3">
@@ -18,8 +18,8 @@ export default function Dashboard() {
             <SideBar />
         </section>
         <section className=" ">
-          <div className="bg-transparent w-[70rem] h-[26.5625rem] flex justify-center">
-            <section className="flex flex-col gap-3 mr-5">
+          <div className="bg-transparent md:gap-5 md:w-[70rem] md:h-[26.5625rem] md:flex md:justify-center">
+            <section className="md:flex md:flex-col md:gap-5">
               <div className="">
                 <AccountData1 />
               </div>
@@ -27,11 +27,11 @@ export default function Dashboard() {
                 <AcData2 />
               </div>
             </section>
-            <section>
+            <section className=" ">
               <AccountData3 />
             </section>
           </div>
-          <div className=" flex justify-center">
+          <div className=" md:flex md:justify-center">
             <Movements />
           </div>
         </section>
