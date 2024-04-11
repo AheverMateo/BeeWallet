@@ -42,7 +42,17 @@ async function createInvestment(req, res) {
  * @param {*} res
  */
 async function getInvestment(req, res) {
-   // TODO: implement get Investment by ID
+   const { id } = req.params;
+   try {
+      const investment = await InvestmentModel.findById(id);
+      if (!investment) {
+         return resFail(res, 404, "Investment not found");
+      }
+      resSuccess(res, 200, "Investment found", investment);
+   } catch (error) {
+      logger.error(`${error.stack}`);
+      return res.status(500).json({ success: false, message: "Internal Server Error" });
+   }
 }
 
 /**
