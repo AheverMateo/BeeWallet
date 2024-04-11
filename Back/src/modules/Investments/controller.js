@@ -75,7 +75,19 @@ async function getAllInvestmentByWallet(req, res) {
  * @param {*} res
  */
 function simulateInvestment(req, res) {
-   // TODO: implement get all Investment by wallet user
+   try {
+      const { amount, days } = req.body;
+
+      const earnedInterests = calculateEarnedInterests();
+      const finishDate = getFinishDate(days);
+
+      const payload = { amount, days, tna: TNA, earnedInterests, finishDate };
+
+      return resSuccess(res, 200, "Investment simulation", payload);
+   } catch (error) {
+      logger.error(`${error.stack}`);
+      return res.status(500).json({ success: false, message: "Internal Server Error" });
+   }
 }
 
 const investmentController = {
