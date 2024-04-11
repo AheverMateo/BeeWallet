@@ -4,6 +4,7 @@ import { resSuccess, resFail } from "../../../config/utils/response.js";
 import MailingService from "../../Mailing/service.js";
 import { logger } from "../../../config/logger.js";
 import generateResetToken from "../../../config/utils/generateResetToken.js";
+import WalletsModel from "../../Wallets/schema.js";
 
 export const getSession = (req, res) => {
    return resSuccess(res, 200, "", req.session);
@@ -50,7 +51,6 @@ export const createUser = async (req, res) => {
          password: hashedPassword,
       });
       await newUser.save();
-
       // Load session data
       req.session.user = {
          fullName: newUser.fullName,

@@ -11,8 +11,16 @@ import { resSuccess, resFail } from "../../config/utils/response.js";
 import { logger } from "../../config/logger.js";
 import BigNumber from "bignumber.js";
 
+export const createWalletWhenUserRegister = async (userId) => {
+  const newWallet = new WalletModel({
+    userId,
+    balance: 0, // Initialize with zero balance
+  });
+  await newWallet.save();
+}
+
 export const createWallet = async (req, res) => {
-  const { userId } = req.params;
+  const { userId } = req.body;
   try {
     const newWallet = new WalletModel({
       userId,
