@@ -12,7 +12,7 @@ import { logger } from "../../config/logger.js";
 import BigNumber from "bignumber.js";
 
 export const createWallet = async (req, res) => {
-  const { userId } = req.body;
+  const { userId } = req.params;
   try {
     const newWallet = new WalletModel({
       userId,
