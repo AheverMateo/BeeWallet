@@ -4,7 +4,7 @@ import { resSuccess, resFail } from "../../../config/utils/response.js";
 import MailingService from "../../Mailing/service.js";
 import { logger } from "../../../config/logger.js";
 import generateResetToken from "../../../config/utils/generateResetToken.js";
-import { createWalletWhenUserRegister } from "../../Wallets/controller.js";
+import { createWalletWhenUserRegister } from "../../Wallets/services.js";
 
 export const getSession = (req, res) => {
    return resSuccess(res, 200, "", req.session);
