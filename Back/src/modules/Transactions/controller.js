@@ -3,6 +3,7 @@ import TransactionModel from "./schema.js";
 import WalletModel from "../Wallets/schema.js";
 import { logger } from "../../config/logger.js";
 import { resSuccess, resFail } from "../../config/utils/response.js";
+import {addWalletBalance,removeWalletBalance} from "../Wallets/services.js";
 
 // pasar validada
 
@@ -46,7 +47,7 @@ export const transferBetweenAccounts = async (req, res) => {
    try {
       const fromWalletId = await findWallet(fromUserId);
       const toWalletId = await findWallet(toUserId);
-      const fromBalance = await updateWalletBalance(fromWalletId, amount, false);
+      const fromBalance = await removeWalletBalance(fromWalletId, amount);
       if (fromBalance < 0) {
          //throw new Error("Insufficient funds for transfer");
          return resFail(res, 400, "Insufficient funds for transfer");
@@ -63,7 +64,7 @@ export const transferBetweenAccounts = async (req, res) => {
          toWalletId: toWalletId,
          status: "pending",
       });
-      await updateWalletBalance(toWalletId, amount, true);
+      await addWalletBalance(toWalletId,amount);
       const savedTransfer = await newTransfer.save({session});
       await session.commitTransaction();
       session.endSession();

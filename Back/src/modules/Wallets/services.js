@@ -73,3 +73,17 @@ export const removeWalletBalance = async (walletId, amount) => {
     throw error;
   }
 }
+
+export const findWallet = async (UserId) => {
+  try {
+     const wallet = WalletModel.findOne({ userId: UserId });
+     if (!wallet) {
+        logger.error(`${error.stack}`);
+        return new Error("Wallet not found");
+     }
+     return wallet;
+  } catch {
+    logger.error(`${error.stack}`);
+     return new Error(`Error fetching wallet ID by user ID: ${error.message}`);
+  }
+};
