@@ -1,6 +1,7 @@
-import { resFail, resSuccess } from "../../config/utils/response";
-import InvestmentModel from "./schema";
-import { TNA, calculateEarnedInterests, getFinishDate } from "./utils";
+import { logger } from "../../config/logger.js";
+import { resFail, resSuccess } from "../../config/utils/response.js";
+import InvestmentModel from "./schema.js";
+import { TNA, calculateEarnedInterests, getFinishDate } from "./utils.js";
 
 /**
  * Allows you to create an investment.
@@ -14,7 +15,7 @@ async function createInvestment(req, res) {
    try {
       const { amount, days, walletId } = req.body;
 
-      const earnedInterests = calculateEarnedInterests();
+      const earnedInterests = calculateEarnedInterests(amount, days);
       const finishDate = getFinishDate(days);
 
       const payload = { amount, days, tna: TNA, earnedInterests, finishDate, walletId };
@@ -78,9 +79,12 @@ function simulateInvestment(req, res) {
    try {
       const { amount, days } = req.body;
 
-      const earnedInterests = calculateEarnedInterests();
+      console.log(req.body);
+
+      const earnedInterests = calculateEarnedInterests(amount, days);
       const finishDate = getFinishDate(days);
 
+      console.log(earnedInterests);
       const payload = { amount, days, tna: TNA, earnedInterests, finishDate };
 
       return resSuccess(res, 200, "Investment simulation", payload);
