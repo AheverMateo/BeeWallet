@@ -20,6 +20,14 @@ async function createInvestment(amount, days, walletId) {
    }
 }
 
+async function getAllInvestmentByWallet(walletId) {
+   try {
+      return await InvestmentModel.find({ walletId });
+   } catch (error) {
+      throw error;
+   }
+}
+
 function getSimulateInvestment(amount, days) {
    const earnedInterests = calculateEarnedInterests(amount, days);
    const finishDate = getFinishDate(days);
@@ -32,6 +40,7 @@ function getSimulateInvestment(amount, days) {
 const investmentService = {
    createInvestment,
    getSimulateInvestment,
+   getAllInvestmentByWallet,
 };
 
 export default investmentService;
