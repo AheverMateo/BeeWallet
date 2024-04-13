@@ -77,7 +77,17 @@ async function getInvestment(req, res) {
  * @param {*} res
  */
 async function getAllInvestmentByWallet(req, res) {
-   // TODO: implement get all Investment by wallet user
+   const { id } = req.params;
+   try {
+      const investments = await investmentService.getAllInvestmentByWallet(id);
+
+      return resSuccess(res, 200, "Data found", investments);
+   } catch (error) {
+      logger.error(`${error.stack}`);
+      if (error instanceof Error)
+         return res.status(400).json({ success: false, message: error.message });
+      return res.status(500).json({ success: false, message: "Internal Server Error" });
+   }
 }
 
 /**
