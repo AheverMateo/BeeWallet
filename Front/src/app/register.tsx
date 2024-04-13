@@ -5,15 +5,26 @@ import { Button } from "@/components/ui/button";
 import { GoogleIcon } from "@/assets/icons/google";
 import { AppleIcon } from "@/assets/icons/apple";
 import { RegisterSteps } from "./ui/register-steps";
+import styles from "./ui/imgMasquerade.module.css";
+
 
 export default function Register() {
     const [values, setValues] = useState<{ email: string }>({ email: "" });
     const [step, setStep] = useState<number>(1);
 
     return (
-        <div className="size-full flex items-center">
+        <div className="size-full container grid grid-cols-[3fr,5fr] mx-auto place-content-center">
+            <div className="size-full border-r border-border/50">
+                <div className='relative flex w-[170px] top-1/2'>
+                    <div className={styles.image} />
+                    <svg className='z-[1]' xmlns="http://www.w3.org/2000/svg" width="184" height="213" viewBox="0 0 184 213" fill="none">
+                        <path d="M0.844701 53.4281L91.7641 0.780001L182.683 53.4281V158.728L91.7641 211.376L0.844701 158.728V53.4281Z" stroke="#FCCF58" strokeWidth="1.35" />
+                    </svg>
+                </div>
+            </div>
+
             {step === 1 ? (
-                <div className="mx-auto w-full max-w-lg space-y-8">
+                <div className="mx-auto w-full max-w-lg space-y-8 pl-8">
                     <div className="flex flex-col gap-4 text-center">
                         <h2 className="font-semibold text-[26px]">Crea tu cuenta</h2>
                         <p className="text-sm">¿Ya tienes una cuenta? <Link to="/login" className="font-semibold ml-2 hover:underline hover:underline-offset-4">Inicia sesión</Link></p>
@@ -50,7 +61,6 @@ export default function Register() {
                                     className="rounded-full"
                                     type="button"
                                 ><GoogleIcon /></Button></li>
-                                <li><Button type="button" variant="outline" className="rounded-full"><img src="/facebookIco.png" alt="facebook icon" className="aspect-square size-6" /></Button></li>
                                 <li><Button type="button" variant="outline" className="rounded-full"><AppleIcon /></Button></li>
                             </ul>
                         </div>

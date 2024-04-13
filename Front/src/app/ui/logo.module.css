@@ -1,0 +1,30 @@
+.logo {
+    width: 58px;
+    height: 58px;
+    flex-shrink: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    &::before {
+        content: "beewallet";
+        position: absolute;
+        left: 0.5rem;
+        font-family: Helvetica;
+        font-size: 39.375px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: -0.394px;
+
+        background: linear-gradient(90deg, #FCCF58 0%, #967B34 100%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}
