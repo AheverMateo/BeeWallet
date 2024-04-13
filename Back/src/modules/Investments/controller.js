@@ -92,10 +92,7 @@ function simulateInvestment(req, res) {
    try {
       const { amount, days } = req.body;
 
-      const earnedInterests = calculateEarnedInterests(amount, days);
-      const finishDate = getFinishDate(days);
-
-      const payload = { amount, days, tna: TNA, earnedInterests, finishDate };
+      const payload = investmentService.getSimulateInvestment(amount, days);
 
       return resSuccess(res, 200, "Investment simulation", payload);
    } catch (error) {
