@@ -11,6 +11,7 @@ import usersRouter from "./modules/Users/router.js";
 import authRouter from "./modules/Users/Auth/router.js";
 import walletsRouter from "./modules/Wallets/router.js";
 import transactionsRouter from "./modules/Transactions/router.js";
+import creditsRouter from "./modules/Credits/router.js";
 
 connectDb();
 
@@ -44,6 +45,7 @@ app.use("/api/users", usersRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/wallets", walletsRouter);
 app.use("/api/transactions", transactionsRouter);
+app.use("/api/credits", creditsRouter);
 
 // Error handlers //
 
