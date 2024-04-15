@@ -3,7 +3,7 @@ import TransactionModel from "./schema.js";
 import WalletModel from "../Wallets/schema.js";
 import { logger } from "../../config/logger.js";
 import { resSuccess, resFail } from "../../config/utils/response.js";
-import {addWalletBalance,removeWalletBalance} from "../Wallets/services.js";
+import { addWalletBalance,removeWalletBalance } from "../Wallets/services.js";
 
 // pasar validada
 

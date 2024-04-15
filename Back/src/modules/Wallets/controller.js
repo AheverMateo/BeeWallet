@@ -153,19 +153,3 @@ export const getWalletTransactions = async (req, res) => {
     return res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 }
-
-export const createWalletTransaction = async (req, res) => {
-  // Waiting Transaction Controller
-}
-
-export const updateWalletTransaction = async (req, res) => {
-  // Waiting Transaction Controller
-}
-
-export const deleteWalletTransaction = async (req, res) => {
-  // Waiting Transaction Controller
-}
-
-export const getWalletTransactionById = async (req, res) => {
-  // Waiting Transaction Controller
-}
