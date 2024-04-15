@@ -5,8 +5,11 @@ import BigNumber from "bignumber.js";
 export const createWalletWhenUserRegister = async (userId) => {
   try {
     const newWallet = new WalletModel({
-      userId,
-      balance: 0, // Initialize with zero balance
+      userId: userId,
+      // Random unique CVU
+      cvu: Math.floor(Math.random() * 1000000),
+      // Initialize with zero balance
+      balance: 0,
     });
     await newWallet.save();
     return newWallet;
@@ -14,11 +17,11 @@ export const createWalletWhenUserRegister = async (userId) => {
     logger.error(`${error.stack}`);
     throw error;
   }
-}
+};
 
-export const getWallet = async (walletId) => {
+export const getWallet = async (userId) => {
   try {
-    const wallet = await WalletModel.findById(walletId);
+    const wallet = await WalletModel.findOne({ userId: userId });
     if (!wallet) {
       return null;
     }
@@ -27,11 +30,11 @@ export const getWallet = async (walletId) => {
     logger.error(`${error.stack}`);
     throw error;
   }
-}
+};
 
-export const getWalletBalance = async (walletId) => {
+export const getWalletBalance = async (userId) => {
   try {
-    const wallet = await WalletModel.findById(walletId);
+    const wallet = await WalletModel.findOne({ userId: userId });
     if (!wallet) {
       return null;
     }
@@ -40,36 +43,38 @@ export const getWalletBalance = async (walletId) => {
     logger.error(`${error.stack}`);
     throw error;
   }
-}
+};
 
-export const addWalletBalance = async (walletId, amount) => {
+export const addWalletBalance = async (userId, amount) => {
   try {
-    const wallet = await WalletModel.findById(walletId);
+    const wallet = await WalletModel.findOne({ userId: userId });
     if (!wallet) {
       return null;
     }
     // Use BigNumber for addition
-    wallet.balance = new BigNumber(wallet.balance).plus(amount).toString();
+    const newBalance = new BigNumber(wallet.balance.toString()).plus(amount);
+    wallet.balance = newBalance.toString();
     await wallet.save();
     return wallet.balance;
   } catch (error) {
     logger.error(`${error.stack}`);
     throw error;
   }
-}
+};
 
-export const removeWalletBalance = async (walletId, amount) => {
+export const removeWalletBalance = async (userId, amount) => {
   try {
-    const wallet = await WalletModel.findById(walletId);
+    const wallet = await WalletModel.findOne({ userId: userId });
     if (!wallet) {
       return null;
     }
     // Use BigNumber for subtraction
-    wallet.balance = new BigNumber(wallet.balance).minus(amount).toString();
+    const newBalance = new BigNumber(wallet.balance.toString()).minus(amount);
+    wallet.balance = newBalance.toString();
     await wallet.save();
     return wallet.balance;
   } catch (error) {
     logger.error(`${error.stack}`);
     throw error;
   }
-}
+};

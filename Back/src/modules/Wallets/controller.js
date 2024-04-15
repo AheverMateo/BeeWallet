@@ -1,12 +1,4 @@
 import WalletModel from "./schema.js";
-import { 
-  transferBetweenAccounts,
-  transferTypeUpdate,
-  transferById,
-  transferByUserId,
-  allTransfers,
-  deleteTransfer
-} from "../Transactions/controller.js";
 import { resSuccess, resFail } from "../../config/utils/response.js";
 import { logger } from "../../config/logger.js";
 import BigNumber from "bignumber.js";
@@ -152,20 +144,4 @@ export const getWalletTransactions = async (req, res) => {
     logger.error(`${error.stack}`)
     return res.status(500).json({ success: false, message: "Internal Server Error" });
   }
-}
-
-export const createWalletTransaction = async (req, res) => {
-  // Waiting Transaction Controller
-}
-
-export const updateWalletTransaction = async (req, res) => {
-  // Waiting Transaction Controller
-}
-
-export const deleteWalletTransaction = async (req, res) => {
-  // Waiting Transaction Controller
-}
-
-export const getWalletTransactionById = async (req, res) => {
-  // Waiting Transaction Controller
 }
