@@ -1,12 +1,4 @@
 import WalletModel from "./schema.js";
-import { 
-  transferBetweenAccounts,
-  transferTypeUpdate,
-  transferById,
-  transferByUserId,
-  allTransfers,
-  deleteTransfer
-} from "../Transactions/controller.js";
 import { resSuccess, resFail } from "../../config/utils/response.js";
 import { logger } from "../../config/logger.js";
 import BigNumber from "bignumber.js";

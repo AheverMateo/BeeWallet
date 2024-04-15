@@ -11,9 +11,9 @@ import {
 const router = express.Router();
 
 router.get("/:transactionId", transferById);
-router.get("/User/:UserId/:page", transferByUserId);
-router.get("/List/:page", allTransfers);
-router.put("/Type",transferTypeUpdate );
+router.get("/user/:userId/:page", transferByUserId);
+router.get("/list/:page", allTransfers);
+router.put("/type",transferTypeUpdate );
 router.post("/",transferBetweenAccounts );
 router.delete("/", deleteTransfer);
 
