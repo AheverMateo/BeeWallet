@@ -1,7 +1,6 @@
 import { logger } from "../../config/logger.js";
 import { resFail, resSuccess } from "../../config/utils/response.js";
 import InvestmentModel from "./schema.js";
-import { TNA, calculateEarnedInterests, getFinishDate } from "./utils.js";
 import { getWallet } from "../Wallets/services.js";
 import investmentService from "./service.js";
 
