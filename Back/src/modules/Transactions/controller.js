@@ -3,44 +3,10 @@ import TransactionModel from "./schema.js";
 import WalletModel from "../Wallets/schema.js";
 import { logger } from "../../config/logger.js";
 import { resSuccess, resFail } from "../../config/utils/response.js";
-import { addWalletBalance,removeWalletBalance } from "../Wallets/services.js";
+import {addWalletBalance,removeWalletBalance, findWallet} from "../Wallets/services.js";
 
 // pasar validada
 
-const updateWalletBalance = async (walletId, amount, isAdd) => {
-   try {
-      const wallet = await WalletModel.findById(walletId);
-      if (!wallet) {
-         return new Error("Wallet not found");
-      }
-
-      if (!isAdd && amount > wallet.balance) {
-         return new Error("Insufficient balance for withdrawal");
-      }
-
-      if (isAdd) {
-         wallet.balance += amount;
-      } else {
-         wallet.balance -= amount;
-      }
-
-      await wallet.save();
-      return wallet.balance;
-   } catch (error) {
-      return new Error(`Error updating wallet balance: ${error.message}`);
-   }
-};
-const findWallet = async (UserId) => {
-   try {
-      const wallet = WalletModel.findOne({ userId: UserId });
-      if (!wallet) {
-         return new Error("Wallet not found");
-      }
-      return wallet;
-   } catch {
-      return new Error(`Error fetching wallet ID by user ID: ${error.message}`);
-   }
-};
 export const transferBetweenAccounts = async (req, res) => {
    const { type, amount, currency, fromUserId, toUserId } = req.body;
    // Revisar JWT y consultar sesión
