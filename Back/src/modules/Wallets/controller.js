@@ -3,21 +3,6 @@ import { resSuccess, resFail } from "../../config/utils/response.js";
 import { logger } from "../../config/logger.js";
 import BigNumber from "bignumber.js";
 
-export const createWallet = async (req, res) => {
-  const { userId } = req.body;
-  try {
-    const newWallet = new WalletModel({
-      userId,
-      balance: 0, // Initialize with zero balance
-    });
-    await newWallet.save();
-    resSuccess(res, 201, "Wallet created successfully", newWallet);
-  } catch (error) {
-    logger.error(`${error.stack}`)
-    res.status(500).send('Server Error');
-  }
-}
-
 export const getWallet = async (req, res) => {
   const { id } = req.params;
   try {
