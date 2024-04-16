@@ -31,7 +31,7 @@ app.use(
    session({
       store: MongoStore.create({
          mongoUrl: process.env.MONGO_URL,
-         ttl: 3600,
+         ttl: 3600, // 1 hour	in seconds
          dbName: "fintech",
          autoRemove: "native" // Automatically remove expired sessions
       }),
@@ -41,7 +41,7 @@ app.use(
       cookie: {
          secure: true, // Secure cookie, only over HTTPS
          httpOnly: true, // Protects against client-side script accessing the cookie data
-         maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
+         maxAge: 3600000 // 1 hour in miliseconds
       }
    })
 );
