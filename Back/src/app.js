@@ -33,10 +33,16 @@ app.use(
          mongoUrl: process.env.MONGO_URL,
          ttl: 3600,
          dbName: "fintech",
+         autoRemove: "native" // Automatically remove expired sessions
       }),
       secret: process.env.SESSION_SECRET,
-      resave: true,
-      saveUninitialized: true,
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+         secure: true, // Secure cookie, only over HTTPS
+         httpOnly: true, // Protects against client-side script accessing the cookie data
+         maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
+      }
    })
 );
 app.use(compression({})); // Enable response compression

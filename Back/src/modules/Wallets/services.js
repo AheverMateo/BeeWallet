@@ -4,15 +4,14 @@ import BigNumber from "bignumber.js";
 
 export const createWalletWhenUserRegister = async (userId) => {
   try {
+    const cvu = await WalletModel.createUniqueCVU(); // Generate a unique CVU
     const newWallet = new WalletModel({
       userId: userId,
-      // Random unique CVU
-      cvu: Math.floor(Math.random() * 1000000),
-      // Initialize with zero balance
-      balance: 0,
+      cvu: cvu, // Assign the generated unique CVU
+      balance: 0, // Initialize with zero balance
     });
     await newWallet.save();
-    return newWallet;
+    return newWallet._id;
   } catch (error) {
     logger.error(`${error.stack}`);
     throw error;

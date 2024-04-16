@@ -1,6 +1,5 @@
 import express from "express";
 import { 
-  createWallet, 
   getWallet, 
   updateWallet, 
   deleteWallet, 
@@ -10,10 +9,10 @@ import {
   removeWalletBalance, 
   getWalletTransactions, 
 } from "./controller.js";
+import { isAdmin, isLoggedIn } from "../../middlewares/auth.js";
 
 const router = express.Router();
 
-router.post("/", createWallet);
 router.get("/:id", getWallet);
 router.put("/:id", updateWallet);
 router.delete("/:id", deleteWallet);

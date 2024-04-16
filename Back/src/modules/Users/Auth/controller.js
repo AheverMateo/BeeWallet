@@ -49,7 +49,11 @@ export const createUser = async (req, res) => {
          fullName: firstName + " " + lastName,
          email: email,
          password: hashedPassword,
+         walletId: {},
       });
+      // Create a wallet for the user
+      newUser.walletId = await createWalletWhenUserRegister(newUser._id);
+      // Save the user
       await newUser.save();
       // Load session data
       req.session.user = {
@@ -60,12 +64,8 @@ export const createUser = async (req, res) => {
       };
       // Send verification email
       // todo: await mailsServices.sendVerificationEmail(service.payload..email, service.payload..vfToken);
-
-      
-      // create a wallet for the user
-      createWalletWhenUserRegister(newUser._id);
       // Respond with success and token
-      return resSuccess(res, 201, "User created successfully");
+      return resSuccess(res, 201, "User created successfully", newUser);
    } catch (error) {
       logger.error(`${error.stack}`);
       return resFail(res, 500, "Internal Server Error");
