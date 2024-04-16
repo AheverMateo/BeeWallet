@@ -4,8 +4,8 @@ import "dotenv/config";
 const transporter = nodemailer.createTransport({
    service: "gmail",
    auth: {
-      user: process.env.MAIL_SENDER, 
-      pass: process.env.MAIL_PASS, 
+      user: process.env.MAIL_SENDER,
+      pass: process.env.MAIL_PASS,
    },
 });
 class MailingService {
@@ -32,5 +32,29 @@ class MailingService {
          logger.error(`${error.stack}`);
       }
    }
+
+   static async sendEmailCodeVerification(email, code) {
+      const mailOptions = {
+         from: process.env.MAIL_SENDER,
+         to: email,
+         subject: "Your Verification Code",
+         html: `
+               <div style="font-family: Arial, sans-serif; padding: 20px;">
+                  <h2 style="color: #3498db;">Email Verification Code</h2>
+                  <p style="font-size: 16px;">Hello!</p>
+                  <p style="font-size: 16px;">Your verification code is: <strong>${code}</strong></p>
+                  <p style="font-size: 16px;">Please enter this code in the form to verify your email address.</p>
+                  <p style="font-size: 14px; color: #777;">This code will expire in 10 minutes.</p>
+               </div>
+            `,
+      };
+      try {
+         await transporter.sendMail(mailOptions);
+         console.log('Verification email sent successfully!');
+      } catch (error) {
+         logger.error(`Error sending verification email: ${error.stack}`);
+      }
+   }
 }
+
 export default MailingService;
