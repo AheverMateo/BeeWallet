@@ -2,8 +2,8 @@ import mongoose, { Types, model } from 'mongoose';
 const { Schema } = mongoose;
 
 const creditSchema = new Schema({
-  userId: String,
-  walletId: String,
+  userId: {type: String, require: true},
+  walletId: {type: String, require: true},
   status: String,
   quantity: {type: Number, require: true},
   currency: {type: String, require: true, default: "ARS"},

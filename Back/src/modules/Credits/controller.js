@@ -9,7 +9,7 @@ export const newCredit = async (req, res) => {
     const { userId, walletId, quantity, billingCycles, taxPercentage, dueDate} = req.body;
     try{
 
-        const wallet = await WalletModel.findById(walletId);
+        const wallet = await WalletModel.find({userId: userId});
 
         if(!wallet){
             return res.status(404).json({success: false, message: "This wallet doesn't exist!"})
@@ -49,7 +49,10 @@ export const updateCredit = async (req, res) => {
             return res.status(404).json({ success: false, message: "This credit doesn't exist!" })
         }
 
-        if(credit.billingCyclesLeft === 1 && parseFloat(credit.leftToPay) === parseFloat(credit.quota)){
+        const leftToPayParsed = new BigNumber(credit.leftToPay);
+        const quotaParsed = new BigNumber(credit.quota);
+
+        if(credit.billingCyclesLeft === 1 && leftToPayParsed === quotaParsed){
             await CreditModel.updateOne({ _id: creditId}, {
                 status: "inactive",
                 leftToPay: 0,
