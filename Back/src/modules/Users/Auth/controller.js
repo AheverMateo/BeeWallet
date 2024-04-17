@@ -118,7 +118,7 @@ export const sendEmailVerification = async (req, res) => {
       if (!emailRegex.test(email)) {
          return resFail(res, 400, "Invalid email address");
       }
-      initiateVerificationProcess(req, email);
+      UsersService.initiateVerificationProcess(req, email);
       return resSuccess(res, 200, "E-Mail verification code sent");
    } catch (error) {
       logger.error(`${error.stack}`);
@@ -128,7 +128,7 @@ export const sendEmailVerification = async (req, res) => {
 export const verifyEmailCode = async (req, res) => {
    const { email, code } = req.body;
    try {
-      const verification = checkVerificationCodeInSession(req, providedCode);
+      const verification = UsersService.checkVerificationCodeInSession(req, providedCode);
       if (!verification) {
          return resFail(res, 400, "Invalid verification code");
       }
