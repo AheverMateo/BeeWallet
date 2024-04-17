@@ -1,15 +1,20 @@
 import express from "express";
 import "dotenv/config";
+import session from "express-session";
 import compression from "compression";
 import { connectDb } from "./config/mongoConnect.js";
 import { addLogger } from "./config/logger.js"; // Import logger and addLogger
 import { logger } from "./config/logger.js";
+import MongoStore from "connect-mongo";
 
 import usersRouter from "./modules/Users/router.js";
 import authRouter from "./modules/Users/Auth/router.js";
-import walletRouter from "./modules/Wallet/router.js";
+import walletsRouter from "./modules/Wallets/router.js";
+import transactionsRouter from "./modules/Transactions/router.js";
+import investmentRouter from "./modules/Investments/router.js";
+import creditsRouter from "./modules/Credits/router.js";
 
-connectDb()
+connectDb();
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -18,17 +23,37 @@ app.listen(PORT, () => {
 });
 
 // Middlewares //
-app.use(express.static('public')); // serve public
+app.use(express.static("public")); // serve public
 app.use(addLogger); // general logging
 app.use(express.json()); // Parse JSON requests
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded requests
-
+app.use(
+   session({
+      store: MongoStore.create({
+         mongoUrl: process.env.MONGO_URL,
+         ttl: 3600, // 1 hour	in seconds
+         dbName: "fintech",
+         autoRemove: "native" // Automatically remove expired sessions
+      }),
+      secret: process.env.SESSION_SECRET,
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+         secure: true, // Secure cookie, only over HTTPS
+         httpOnly: true, // Protects against client-side script accessing the cookie data
+         maxAge: 3600000 // 1 hour in miliseconds
+      }
+   })
+);
 app.use(compression({})); // Enable response compression
 
 // Routers //
 app.use("/api/users", usersRouter);
 app.use("/api/auth", authRouter);
-app.use("/api/wallet", walletRouter);
+app.use("/api/wallets", walletsRouter);
+app.use("/api/transactions", transactionsRouter);
+app.use("/api/investments", investmentRouter);
+app.use("/api/credits", creditsRouter);
 
 // Error handlers //
 
@@ -46,4 +71,3 @@ app.use((err, req, res, next) => {
    logger.error(`${err.stack}`);
    res.status(500).json({ error: "Internal Server Error (Catch all   )" });
 });
-
