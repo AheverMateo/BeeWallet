@@ -4,7 +4,7 @@ import Table from "./HistoryTable";
 const Movements = () => {
   return (
     <main>
-      <section className="md:flex md:justify-between  md:p-3">
+      <section className="md:flex md:justify-between md:p-3">
         <h1 className="md:text-center md:text-3xl">Historial de Movimientos</h1>
         <div className="md:gap-3 md:flex md:justify-between">
           <input

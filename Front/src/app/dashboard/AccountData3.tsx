@@ -2,7 +2,7 @@ import React from "react";
 
 const AccountData3 = () => {
   return (
-    <div className="bg-[#232323] rounded-[1rem] h-fit md:grid md:gap-8 md:text-[0.875rem] md:p-3">
+    <div className="bg-[#232323] hidden rounded-[1rem] h-fit md:grid md:gap-8 md:text-[0.875rem] md:p-3">
       <section>
       <p className=" md:text-[1.625rem]">Límite de gastos</p>
       <div className="md:flex md:w-[30.3125rem] md:gap-3">

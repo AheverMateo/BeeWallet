@@ -9,6 +9,7 @@ import Dashboard from './app/dashboard';
 import Login from './app/login';
 import Register from './app/register';
 import './global.css';
+import CVU from './app/dashboard/CVU';
 
 const router = createBrowserRouter(createRoutesFromElements(<>
   <Route errorElement={<div>not found</div>}>
@@ -17,6 +18,7 @@ const router = createBrowserRouter(createRoutesFromElements(<>
       <Route path='/login' element={<Login/>} />
       <Route path='/register' element={<Register />} />
       <Route path='/dashboard' element={<Dashboard />}>
+        <Route path='/dashboard/CVU' element={<CVU/>}/>
        {/* <Route index element={<div>Dashboard</div>} />*/}        
        <Route path='profile' element={<div>Profile</div>} />
         <Route path='settings' element={<div>Settings</div>} />
