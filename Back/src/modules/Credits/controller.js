@@ -3,7 +3,7 @@ import WalletModel from "../Wallets/schema.js"
 import { logger } from "../../config/logger.js";
 import BigNumber from "bignumber.js";
 import { resSuccess, resFail } from "../../config/utils/response.js";
-import { addWalletBalance } from "../Wallets/services.js";
+import { addUserWalletBalance } from "../Wallets/services.js";
 
 export const newCredit = async (req, res) => {
     const { userId, walletId, quantity, billingCycles, taxPercentage, dueDate} = req.body;
@@ -31,7 +31,7 @@ export const newCredit = async (req, res) => {
         })
 
         await newCredit.save();
-        await addWalletBalance(walletId, quantity);
+        await addUserWalletBalance(walletId, quantity);
 
         return resSuccess(res, 201, "Credit created successfully", newCredit);
     } catch(error){

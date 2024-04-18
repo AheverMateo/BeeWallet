@@ -18,7 +18,7 @@ export const createWalletWhenUserRegister = async (userId) => {
   }
 };
 
-export const getWallet = async (userId) => {
+export const getUserWallet = async (userId) => {
   try {
     const wallet = await WalletModel.findOne({ userId: userId });
     if (!wallet) {
@@ -31,7 +31,7 @@ export const getWallet = async (userId) => {
   }
 };
 
-export const getWalletBalance = async (userId) => {
+export const getUserWalletBalance = async (userId) => {
   try {
     const wallet = await WalletModel.findOne({ userId: userId });
     if (!wallet) {
@@ -44,7 +44,7 @@ export const getWalletBalance = async (userId) => {
   }
 };
 
-export const addWalletBalance = async (userId, amount) => {
+export const addUserWalletBalance = async (userId, amount) => {
   try {
     const wallet = await WalletModel.findOne({ userId: userId });
     if (!wallet) {
@@ -61,7 +61,7 @@ export const addWalletBalance = async (userId, amount) => {
   }
 };
 
-export const removeWalletBalance = async (userId, amount) => {
+export const removeUserWalletBalance = async (userId, amount) => {
   try {
     const wallet = await WalletModel.findOne({ userId: userId });
     if (!wallet) {

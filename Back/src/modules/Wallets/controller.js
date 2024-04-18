@@ -2,12 +2,12 @@ import WalletModel from "./schema.js";
 import { resSuccess, resFail } from "../../config/utils/response.js";
 import { logger } from "../../config/logger.js";
 import BigNumber from "bignumber.js";
-import { getWallet } from "./services.js";
+import { getUserWallet } from "./services.js";
 
 export const getWallet = async (req, res) => {
   const { userId } = req.params;
   try {
-    getWallet(userId);
+    getUserWallet(userId);
   }
   catch (error) {
     logger.error(`${error.stack}`)

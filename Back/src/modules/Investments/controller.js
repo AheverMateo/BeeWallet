@@ -1,7 +1,7 @@
 import { logger } from "../../config/logger.js";
 import { resFail, resSuccess } from "../../config/utils/response.js";
 import InvestmentModel from "./schema.js";
-import { getWallet } from "../Wallets/services.js";
+import { getUserWallet } from "../Wallets/services.js";
 import investmentService from "./service.js";
 
 /**
@@ -20,7 +20,7 @@ async function createInvestment(req, res) {
       if (days < 30 && days > 365)
          return resFail(res, 400, "The term must be at least 30 days and less than 365 days");
 
-      const wallet = await getWallet(walletId);
+      const wallet = await getUserWallet(walletId);
 
       if (!wallet) return resFail(res, 400, "Wallet not found");
 

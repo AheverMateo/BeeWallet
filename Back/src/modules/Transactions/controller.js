@@ -3,16 +3,16 @@ import TransactionModel from "./schema.js";
 import WalletModel from "../Wallets/schema.js";
 import { logger } from "../../config/logger.js";
 import { resSuccess, resFail } from "../../config/utils/response.js";
-import { addWalletBalance, removeWalletBalance, getWallet } from "../Wallets/services.js";
+import { addUserWalletBalance, removeUserWalletBalance, getUserWallet } from "../Wallets/services.js";
 
 // pasar validada
 export const transferBetweenAccounts = async (req, res) => {
    const { type, amount, currency, fromUserId, toUserId } = req.body;
    // Revisar JWT y consultar sesión
    try {
-      const fromWalletId = await getWallet(fromUserId);
-      const toWalletId = await getWallet(toUserId);
-      const fromBalance = await removeWalletBalance(fromWalletId, amount);
+      const fromWalletId = await getUserWallet(fromUserId);
+      const toWalletId = await getUserWallet(toUserId);
+      const fromBalance = await removeUserWalletBalance(fromWalletId, amount);
       if (fromBalance < 0) {
          //throw new Error("Insufficient funds for transfer");
          return resFail(res, 400, "Insufficient funds for transfer");
@@ -29,7 +29,7 @@ export const transferBetweenAccounts = async (req, res) => {
          toWalletId: toWalletId,
          status: "pending",
       });
-      await addWalletBalance(toWalletId,amount);
+      await addUserWalletBalance(toWalletId,amount);
       const savedTransfer = await newTransfer.save({session});
       await session.commitTransaction();
       session.endSession();
@@ -74,7 +74,7 @@ export const transferById = async (req, res) => {
 };//check
 export const transferByUserId = async (req, res) => {
    const { userId, page } = req.params;
-   const walletId =await getWallet(userId);
+   const walletId =await getUserWallet(userId);
    try {
       if (!walletId) {
          return resFail(res, 404, "Wallet not found for user");
