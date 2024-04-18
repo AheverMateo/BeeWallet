@@ -1,17 +1,16 @@
 import express from "express";
 import {
-   getSession,
-   createUser,
-   loginUser,
-   logout,
-   requestPasswordReset,
-   verifyPasswordResetToken,
-   resetPassword,
-   sendEmailVerification,
-   verifyEmailCode,
+  getSession,
+  createUser,
+  loginUser,
+  logout,
+  requestPasswordReset,
+  verifyPasswordResetToken,
+  resetPassword,
+  sendEmailVerification,
+  verifyEmailCode
 } from "./controller.js";
 import { bodyCleaner } from "../../../middlewares/bodyCleaner.js";
-import { isLoggedIn } from "../../../middlewares/auth.js";
 const router = express.Router();
 
 router.get("/session", getSession); // isAdmin,

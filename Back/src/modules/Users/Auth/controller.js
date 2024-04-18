@@ -35,7 +35,7 @@ export const createUser = async (req, res) => {
       return resFail(res, 400, "Invalid email address");
     }
     // Check if email is already in use
-    const findUser = await UsersModel.findOne({ email: email });
+    const findUser = await UsersModel.findOne({ email });
     if (findUser) {
       return resFail(res, 400, "Email already in use");
     }
@@ -43,10 +43,10 @@ export const createUser = async (req, res) => {
     const hashedPassword = await argon2.hash(password);
     // Create a new user
     const newUser = new UsersModel({
-      firstName: newUser.firstName,
-      lastName: newUser.lastName,
-      email: email,
-      password: hashedPassword,
+      firstName,
+      lastName,
+      email,
+      password: hashedPassword
     });
     // Create a wallet for the user
     newUser.walletId = await createWalletWhenUserRegister(newUser._id);
@@ -56,7 +56,7 @@ export const createUser = async (req, res) => {
     req.session.user = {
       fullName: newUser.fullName,
       email: newUser.email,
-      roles: newUser.roles,
+      roles: newUser.roles
     };
     // Send verification email
     // todo: await mailsServices.sendVerificationEmail(service.payload..email, service.payload..vfToken);
@@ -70,11 +70,11 @@ export const createUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
-  if (req.session?.user) {
+  if (req.session || req.session.user) {
     return resFail(res, 400, "You're already logged in");
   }
   try {
-    const user = await UsersModel.findOne({ email: email });
+    const user = await UsersModel.findOne({ email });
     if (!user) {
       return resFail(res, 400, "User or Password do not match");
     }
@@ -85,7 +85,7 @@ export const loginUser = async (req, res) => {
     req.session.user = {
       fullName: user.fullName,
       email: user.email,
-      roles: user.roles,
+      roles: user.roles
     };
     return resSuccess(res, 200, "logged in successfully");
   } catch (error) {
@@ -95,7 +95,7 @@ export const loginUser = async (req, res) => {
 };
 
 export const logout = (req, res) => {
-  if (!req.session?.user) {
+  if (!req.session || !req.session.user) {
     return resFail(res, 500, "You must be logged in to log out");
   }
   req.session.destroy((err) => {
@@ -120,7 +120,7 @@ export const sendEmailVerification = async (req, res) => {
   }
 };
 export const verifyEmailCode = async (req, res) => {
-  const { email, code } = req.body;
+  const { providedCode } = req.body;
   try {
     const verification = UsersService.checkVerificationCodeInSession(req, providedCode);
     if (!verification) {
@@ -140,7 +140,7 @@ export const requestPasswordReset = async (req, res) => {
     if (!emailRegex.test(email)) {
       return resFail(res, 400, "Invalid email address");
     }
-    const user = await UsersModel.findOne({ email: email });
+    const user = await UsersModel.findOne({ email });
     if (!user) {
       return resSuccess(res, 200, "Password reset token sent if email is registered");
     }
@@ -163,8 +163,8 @@ export const verifyPasswordResetToken = async (req, res) => {
   const { email, resetToken } = req.params;
   try {
     const user = await UsersModel.findOne({
-      email: email,
-      pwResetToken: resetToken,
+      email,
+      pwResetToken: resetToken
     });
     if (!user || user.pwResetTokenExpire < new Date()) {
       return resFail(res, 400, "Invalid or expired reset token");
@@ -185,9 +185,9 @@ export const resetPassword = async (req, res) => {
       return resFail(res, 400, "Password must contain at least one letter and one number");
     }
     const user = await UsersModel.findOne({
-      email: email,
+      email,
       pwResetToken: resetToken,
-      pwResetTokenExpire: { $gt: new Date() },
+      pwResetTokenExpire: { $gt: new Date() }
     });
     if (!user || user.pwResetTokenExpire < new Date()) {
       return resFail(res, 400, "Invalid or expired reset token");
