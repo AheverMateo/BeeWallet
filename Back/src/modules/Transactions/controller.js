@@ -2,8 +2,15 @@ import mongoose from "mongoose";
 import TransactionModel from "./schema.js";
 import WalletModel from "../Wallets/schema.js";
 import { logger } from "../../config/logger.js";
-import { resSuccess, resFail } from "../../config/utils/response.js";
-import { addUserWalletBalance, removeUserWalletBalance, getUserWallet } from "../Wallets/services.js";
+import { 
+   resSuccess, 
+   resFail 
+} from "../../config/utils/response.js";
+import { 
+   addUserWalletBalance, 
+   removeUserWalletBalance, 
+   getUserWallet 
+} from "../Wallets/services.js";
 
 // pasar validada
 export const transferBetweenAccounts = async (req, res) => {
@@ -43,6 +50,7 @@ export const transferBetweenAccounts = async (req, res) => {
       return resFail(res, 500, "Error while transferring");
    }
 };//check
+
 export const transferTypeUpdate = async (req, res) => {
    const { type, transactionId } = req.body;
    try {
@@ -59,6 +67,7 @@ export const transferTypeUpdate = async (req, res) => {
       return resFail(res, 500, "Error updating transfer");
    }
 };//check
+
 export const transferById = async (req, res) => {
    const { transactionId } = req.params;
    try {
@@ -72,6 +81,7 @@ export const transferById = async (req, res) => {
       return resFail(res, 500, "Error updating transfer");
    }
 };//check
+
 export const transferByUserId = async (req, res) => {
    const { userId, page } = req.params;
    const walletId =await getUserWallet(userId);
@@ -96,6 +106,7 @@ export const transferByUserId = async (req, res) => {
       return resFail(res, 500, "Error retrieving transactions");
    }
 };//check
+
 export const allTransfers = async (req, res) => {
    try {
       const { page } = req.params;
@@ -115,6 +126,7 @@ export const allTransfers = async (req, res) => {
       return resFail(res, 500, "Error retrieving transactions");
    }
 };//check
+
 export const deleteTransfer = async (req, res) => {
    const { transactionId } = req.body;
    try {

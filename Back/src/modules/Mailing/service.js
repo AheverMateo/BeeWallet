@@ -8,6 +8,7 @@ const transporter = nodemailer.createTransport({
       pass: process.env.MAIL_PASS,
    },
 });
+
 class MailingService {
    static async sendPasswordResetEmail(email, hashedToken) {
       const resetLink = `http://localhost:8080/api/auth/reset-password/verify/${email}/${hashedToken}`; //ajustar
@@ -55,6 +56,6 @@ class MailingService {
          logger.error(`Error sending verification email: ${error.stack}`);
       }
    }
-}
+};
 
 export default MailingService;

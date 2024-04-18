@@ -29,7 +29,7 @@ export const getAllUsersWallets = async () => {
     logger.error(`${error.stack}`);
     throw error;
   }
-}
+};
 
 export const getUserWallet = async (userId) => {
   try {

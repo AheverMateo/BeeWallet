@@ -1,6 +1,12 @@
 import { resSuccess, resFail } from "../../config/utils/response.js";
 import { logger } from "../../config/logger.js";
-import { getUserWallet, getAllUsersWallets, addUserWalletBalance, removeUserWalletBalance, getUserWalletBalance } from "./services.js";
+import { 
+  getUserWallet, 
+  getAllUsersWallets, 
+  addUserWalletBalance, 
+  removeUserWalletBalance, 
+  getUserWalletBalance 
+} from "./services.js";
 
 export const getWallet = async (req, res) => {
   try {
@@ -15,7 +21,7 @@ export const getWallet = async (req, res) => {
     logger.error(`${error.stack}`);
     resFail(res, 500, "Internal Server Error");
   }
-}
+};
 
 export const getAllWallets = async (req, res) => {
   try {
@@ -29,7 +35,7 @@ export const getAllWallets = async (req, res) => {
     logger.error(`${error.stack}`)
     resFail(res, 500, "Internal Server Error");
   }
-}
+};
 
 export const addWalletBalance = async (req, res) => {
   const userId = req.user._id;
@@ -44,7 +50,7 @@ export const addWalletBalance = async (req, res) => {
     logger.error(`${error.stack}`)
     resFail(res, 500, "Internal Server Error");
   }
-}
+};
 
 export const removeWalletBalance = async (req, res) => {
   const userId = req.user._id;
@@ -59,7 +65,7 @@ export const removeWalletBalance = async (req, res) => {
     logger.error(`${error.stack}`)
     resFail(res, 500, "Internal Server Error");
   }
-}
+};
 
 export const getWalletBalance = async (req, res) => {
   const userId = req.user._id;
@@ -74,7 +80,7 @@ export const getWalletBalance = async (req, res) => {
     logger.error(`${error.stack}`)
     resFail(res, 500, "Internal Server Error");
   }
-}
+};
 
 export const getWalletTransactions = async (req, res) => {
   // I suppose that the user can only see his own transactions
@@ -91,4 +97,4 @@ export const getWalletTransactions = async (req, res) => {
     logger.error(`${error.stack}`)
     resFail(res, 500, "Internal Server Error");
   }
-}
+};

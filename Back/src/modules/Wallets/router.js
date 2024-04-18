@@ -1,8 +1,6 @@
 import express from "express";
 import { 
   getWallet, 
-  updateWallet, 
-  deleteWallet, 
   getAllWallets, 
   addWalletBalance, 
   getWalletBalance, 
@@ -13,10 +11,8 @@ import { isAdmin, isLoggedIn } from "../../middlewares/auth.js";
 
 const router = express.Router();
 
-router.get("/:id", getWallet);
-router.put("/:id", updateWallet);
-router.delete("/:id", deleteWallet);
 router.get("/", getAllWallets);
+router.get("/:id", getWallet);
 router.put("/add-balance/:id", addWalletBalance);
 router.get("/balance/:id", getWalletBalance);
 router.put("/remove-balance/:id", removeWalletBalance);
