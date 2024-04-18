@@ -5,6 +5,7 @@ import MailingService from "../../Mailing/service.js";
 import { logger } from "../../../config/logger.js";
 import generateResetToken from "../../../config/utils/generateResetToken.js";
 import { createWalletWhenUserRegister } from "../../Wallets/services.js";
+import UsersService from "../service.js";
 
 export const getSession = (req, res) => {
    return resSuccess(res, 200, "", req.session);
@@ -109,6 +110,33 @@ export const logout = (req, res) => {
       }
       return resSuccess(res, 200, "Logged out");
    });
+};
+export const sendEmailVerification = async (req, res) => {
+   const { email } = req.body;
+   try {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+         return resFail(res, 400, "Invalid email address");
+      }
+      UsersService.initiateVerificationProcess(req, email);
+      return resSuccess(res, 200, "E-Mail verification code sent");
+   } catch (error) {
+      logger.error(`${error.stack}`);
+      return resFail(res, 500, "Internal Server Error");
+   }
+};
+export const verifyEmailCode = async (req, res) => {
+   const { email, code } = req.body;
+   try {
+      const verification = UsersService.checkVerificationCodeInSession(req, providedCode);
+      if (!verification) {
+         return resFail(res, 400, "Invalid verification code");
+      }
+      return resSuccess(res, 200, "User verified successfully");
+   } catch (error) {
+      logger.error(`${error.stack}`);
+      return resFail(res, 500, "Internal Server Error");
+   }
 };
 
 export const requestPasswordReset = async (req, res) => {
