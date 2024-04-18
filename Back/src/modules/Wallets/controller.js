@@ -2,15 +2,12 @@ import WalletModel from "./schema.js";
 import { resSuccess, resFail } from "../../config/utils/response.js";
 import { logger } from "../../config/logger.js";
 import BigNumber from "bignumber.js";
+import { getWallet } from "./services.js";
 
 export const getWallet = async (req, res) => {
-  const { id } = req.params;
+  const { userId } = req.params;
   try {
-    const wallet = await WalletModel.findById(id);
-    if (!wallet) {
-      return resFail(res, 404, "Wallet not found");
-    }
-    resSuccess(res, 200, "Wallet found", wallet);
+    getWallet(userId);
   }
   catch (error) {
     logger.error(`${error.stack}`)

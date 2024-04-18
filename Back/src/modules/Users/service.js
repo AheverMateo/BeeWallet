@@ -21,8 +21,8 @@ class UsersService {
    }
 
    static async initiateVerificationProcess(req, email) {
-      const code = UserService.generateVerificationCode();
-      UserService.storeVerificationCodeInSession(req, code);
+      const code = UsersService.generateVerificationCode();
+      UsersService.storeVerificationCodeInSession(req, code);
       await MailingService.sendEmailCodeVerification(email, code);
    }
    static async getUsers() {
