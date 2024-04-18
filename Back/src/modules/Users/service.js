@@ -25,6 +25,109 @@ class UsersService {
       UserService.storeVerificationCodeInSession(req, code);
       await MailingService.sendEmailCodeVerification(email, code);
    }
+   static async getUsers() {
+      try {
+         const users = await UsersModel.find({});
+         return resSuccess(200, "Displaying all Users", { users });
+      } catch (error) {
+         logger.error(`${error.stack}`);
+         return resFail(500, "Internal Server Error");
+      }
+   }
+   static async getUser(id) {
+      try {
+         if (!mongoose.Types.ObjectId.isValid(id)) {
+            return resFail(400, "Invalid user ID");
+         }
+         const user = await UsersModel.findOne({ _id: id }).populate({
+            path: "wishlist.product",
+            model: "products",
+         });
+         if (!user) {
+            return resFail(400, "User Not Found");
+         }
+         return resSuccess(200, "Displaying User: " + id, { user });
+      } catch (error) {
+         logger.error(`${error.stack}`);
+         return resFail(500, "Internal Server Error");
+      }
+   }
+   static async deleteUser(id) {
+      try {
+         if (!mongoose.Types.ObjectId.isValid(id)) {
+            return resFail(400, "Invalid user ID");
+         }
+         const user = await UsersModel.findOne({ _id: id });
+         if (!user) {
+            return resFail(400, "User Not Found");
+         }
+         await UsersModel.deleteOne({ _id: id });
+         return resSuccess(200, "User " + id + " Deleted");
+      } catch (error) {
+         logger.error(`${error.stack}`);
+         return resFail(500, "Internal Server Error");
+      }
+   }
+   static async updateUser(id, updatedProperties) {
+      try {
+         if (!mongoose.Types.ObjectId.isValid(id)) {
+            return resFail(400, "Invalid user ID");
+         }
+         const user = await UsersModel.findOne({ _id: id });
+         if (!user) {
+            return resFail(400, "User Not Found");
+         }
+         if ("password" in updatedProperties) {
+            return resFail(400, "Password cannot be updated");
+         }
+         const propertiesToUpdate = Object.keys(updatedProperties).filter(
+            (key) => key !== "_id" && key !== "password" && user[key] !== undefined
+         );
+         propertiesToUpdate.forEach((key) => {
+            user[key] = updatedProperties[key];
+         });
+         await user.save({ new: true });
+
+         return resSuccess(200, "User " + id + " Updated Successfully", {
+            updatedUser: user,
+         });
+      } catch (error) {
+         logger.error(`${error.stack}`);
+         return resFail(500, "Internal Server Error");
+      }
+   }
+   static async blockUser(id) {
+      try {
+         if (!mongoose.Types.ObjectId.isValid(id)) {
+            return resFail(400, "Invalid user ID");
+         }
+         const user = await UsersModel.findOne({ _id: id });
+         if (!user) {
+            return resFail(400, "User Not Found");
+         }
+         await UsersModel.findByIdAndUpdate(id, { isBlocked: true }, { new: true });
+         return resSuccess(200, "User " + id + " Blocked");
+      } catch (error) {
+         logger.error(`${error.stack}`);
+         return resFail(500, "Internal Server Error");
+      }
+   }
+   static async unblockUser(id) {
+      try {
+         if (!mongoose.Types.ObjectId.isValid(id)) {
+            return resFail(400, "Invalid user ID");
+         }
+         const user = await UsersModel.findOne({ _id: id });
+         if (!user) {
+            return resFail(400, "User Not Found");
+         }
+         await UsersModel.findByIdAndUpdate(id, { isBlocked: false }, { new: true });
+         return resSuccess(200, "User " + id + " unBlocked");
+      } catch (error) {
+         logger.error(`${error.stack}`);
+         return resFail(500, "Internal Server Error");
+      }
+   }
 }
 
 export default UsersService;
