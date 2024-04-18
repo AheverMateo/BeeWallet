@@ -21,4 +21,3 @@ export const isLoggedIn = (req, res, next) => {
    // User is logged in, proceed to the next middleware/route
    next();
 };
-
