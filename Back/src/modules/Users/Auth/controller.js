@@ -54,7 +54,9 @@ export const createUser = async (req, res) => {
     await newUser.save();
     // Load session data
     req.session.user = {
-      fullName: newUser.fullName,
+      _id: newUser._id,
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
       email: newUser.email,
       roles: newUser.roles
     };
@@ -83,9 +85,11 @@ export const loginUser = async (req, res) => {
       return resFail(res, 400, "User or Password do not match");
     }
     req.session.user = {
-      fullName: user.fullName,
-      email: user.email,
-      roles: user.roles
+      _id: newUser._id,
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
+      email: newUser.email,
+      roles: newUser.roles
     };
     return resSuccess(res, 200, "logged in successfully");
   } catch (error) {
