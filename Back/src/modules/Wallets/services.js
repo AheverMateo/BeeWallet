@@ -18,6 +18,19 @@ export const createWalletWhenUserRegister = async (userId) => {
   }
 };
 
+export const getAllUsersWallets = async () => {
+  try {
+    const wallets = await WalletModel.find();
+    if (!wallets) {
+      return null;
+    }
+    return wallets;
+  } catch (error) {
+    logger.error(`${error.stack}`);
+    throw error;
+  }
+}
+
 export const getUserWallet = async (userId) => {
   try {
     const wallet = await WalletModel.findOne({ userId: userId });
