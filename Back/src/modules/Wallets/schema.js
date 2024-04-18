@@ -8,11 +8,11 @@ const walletSchema = new Schema({
   balance: { type: Types.Decimal128, required: true },
   transactions: [{ type: Schema.Types.ObjectId, ref: "Transaction" }],
   createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now }
 });
 
 // Function to generate a random 22-digit CVU
-function generateRandomCVU() {
+function generateRandomCVU () {
   let cvu = "";
   for (let i = 0; i < 22; i++) {
     cvu += Math.floor(Math.random() * 10); // Generates a random digit from 0 to 9
@@ -21,7 +21,7 @@ function generateRandomCVU() {
 }
 
 // Function to create a unique CVU
-async function createUniqueCVU() {
+async function createUniqueCVU () {
   let unique = false;
   let newCVU;
   while (!unique) {
@@ -38,6 +38,6 @@ async function createUniqueCVU() {
 // Add the static method to the Wallet schema to use elsewhere
 walletSchema.statics.createUniqueCVU = createUniqueCVU;
 
-const Wallet = model('Wallet', walletSchema);
+const Wallet = model("Wallet", walletSchema);
 
 export default Wallet;
