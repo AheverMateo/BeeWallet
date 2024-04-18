@@ -14,7 +14,7 @@ const schema = new mongoose.Schema(
          zipCode: { type: String, max: 150 },
       },
       roles: { type: String, required: true, enum: ["User", "Admin"], default: "User" },
-      walletId: { type: mongoose.Schema.Types.ObjectId, ref: "Wallet", required: true, unique: trusted },
+      walletId: { type: mongoose.Schema.Types.ObjectId, ref: "Wallet", required: true, unique: true, default: null },
       isBlocked: { type: Boolean, required: true, default: false },
       loginType: { type: String, default: "Normal" },
       isVerified: { type: Boolean, default: false, required: true },
