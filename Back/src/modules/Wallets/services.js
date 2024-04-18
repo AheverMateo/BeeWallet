@@ -6,9 +6,9 @@ export const createWalletWhenUserRegister = async (userId) => {
   try {
     const cvu = await WalletModel.createUniqueCVU(); // Generate a unique CVU
     const newWallet = new WalletModel({
-      userId: userId,
-      cvu: cvu, // Assign the generated unique CVU
-      balance: 0, // Initialize with zero balance
+      userId,
+      cvu, // Assign the generated unique CVU
+      balance: 0 // Initialize with zero balance
     });
     await newWallet.save();
     return newWallet._id;
@@ -33,7 +33,7 @@ export const getAllUsersWallets = async () => {
 
 export const getUserWallet = async (userId) => {
   try {
-    const wallet = await WalletModel.findOne({ userId: userId });
+    const wallet = await WalletModel.findOne({ userId });
     if (!wallet) {
       return null;
     }
@@ -46,7 +46,7 @@ export const getUserWallet = async (userId) => {
 
 export const getUserWalletBalance = async (userId) => {
   try {
-    const wallet = await WalletModel.findOne({ userId: userId });
+    const wallet = await WalletModel.findOne({ userId });
     if (!wallet) {
       return null;
     }
@@ -59,7 +59,7 @@ export const getUserWalletBalance = async (userId) => {
 
 export const addUserWalletBalance = async (userId, amount) => {
   try {
-    const wallet = await WalletModel.findOne({ userId: userId });
+    const wallet = await WalletModel.findOne({ userId });
     if (!wallet) {
       return null;
     }
@@ -76,7 +76,7 @@ export const addUserWalletBalance = async (userId, amount) => {
 
 export const removeUserWalletBalance = async (userId, amount) => {
   try {
-    const wallet = await WalletModel.findOne({ userId: userId });
+    const wallet = await WalletModel.findOne({ userId });
     if (!wallet) {
       return null;
     }

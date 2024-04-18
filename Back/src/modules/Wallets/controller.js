@@ -1,11 +1,11 @@
 import { resSuccess, resFail } from "../../config/utils/response.js";
 import { logger } from "../../config/logger.js";
-import { 
-  getUserWallet, 
-  getAllUsersWallets, 
-  addUserWalletBalance, 
-  removeUserWalletBalance, 
-  getUserWalletBalance 
+import {
+  getUserWallet,
+  getAllUsersWallets,
+  addUserWalletBalance,
+  removeUserWalletBalance,
+  getUserWalletBalance
 } from "./services.js";
 
 export const getWallet = async (req, res) => {
@@ -16,8 +16,7 @@ export const getWallet = async (req, res) => {
       return resFail(res, 404, "Wallet not found");
     }
     resSuccess(res, 200, "Wallet found", wallet);
-  }
-  catch (error) {
+  } catch (error) {
     logger.error(`${error.stack}`);
     resFail(res, 500, "Internal Server Error");
   }
@@ -30,9 +29,8 @@ export const getAllWallets = async (req, res) => {
       return resFail(res, 404, "Wallets not found");
     }
     resSuccess(res, 200, "Wallets found", wallets);
-  }
-  catch (error) {
-    logger.error(`${error.stack}`)
+  } catch (error) {
+    logger.error(`${error.stack}`);
     resFail(res, 500, "Internal Server Error");
   }
 };
@@ -47,7 +45,7 @@ export const addWalletBalance = async (req, res) => {
     }
     resSuccess(res, 200, "Wallet balance updated successfully", wallet.balance);
   } catch (error) {
-    logger.error(`${error.stack}`)
+    logger.error(`${error.stack}`);
     resFail(res, 500, "Internal Server Error");
   }
 };
@@ -62,7 +60,7 @@ export const removeWalletBalance = async (req, res) => {
     }
     resSuccess(res, 200, "Wallet balance updated successfully", wallet.balance);
   } catch (error) {
-    logger.error(`${error.stack}`)
+    logger.error(`${error.stack}`);
     resFail(res, 500, "Internal Server Error");
   }
 };
@@ -75,9 +73,8 @@ export const getWalletBalance = async (req, res) => {
       return resFail(res, 404, "Wallet not found");
     }
     resSuccess(res, 200, "Wallet found", wallet.balance);
-  }
-  catch (error) {
-    logger.error(`${error.stack}`)
+  } catch (error) {
+    logger.error(`${error.stack}`);
     resFail(res, 500, "Internal Server Error");
   }
 };
@@ -90,11 +87,10 @@ export const getWalletTransactions = async (req, res) => {
     if (!wallet) {
       return resFail(res, 404, "Wallet not found");
     }
-    const transactions = await TransactionController.getTransactionsByWalletId(id);
-    resSuccess(res, 200, "Wallet transactions found", transactions);
-  }
-  catch (error) {
-    logger.error(`${error.stack}`)
+    // const transactions = await TransactionController.getTransactionsByWalletId(id);
+    // resSuccess(res, 200, "Wallet transactions found", transactions);
+  } catch (error) {
+    logger.error(`${error.stack}`);
     resFail(res, 500, "Internal Server Error");
   }
 };
