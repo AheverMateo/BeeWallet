@@ -4,10 +4,10 @@ import AcData2 from "./dashboard/AccountData2";
 import AccountData3 from "./dashboard/AccountData3";
 import Movements from "./dashboard/Movements";
 import SideBar from "./dashboard/SideBar";
-import React, { useState } from "react";
 import SideBarHeader1 from "./dashboard/SideBarHeader1";
 import SideBarHeader2 from "./dashboard/SideBarHeader2";
 import SideBarFooter from "./dashboard/SideBarFooter";
+import HeadR from "./dashboard/HeadR";
 
 
 export default function Dashboard( ) {
@@ -22,56 +22,12 @@ export default function Dashboard( ) {
           <SideBar />
         </section>
         <div>
-          <section className="p-3 relative w-[100%] flex justify-center">
+          <section className="p-3 relative w-[100%] flex justify-between">
             <div className=" md:hidden">
               <SideBarHeader1 />
             </div>
-            <div className="absolute inset-y-0 right-0 flex items-center gap-3">
-              <div className="bg-[#232323]  p-2 rounded-full">
-                <img
-                  src="/icons/Message 28.svg"
-                  alt="Message"
-                  className="w-2rem h-2rem object-cover"
-                />
-              </div>
-              <div className="size-[2rem]">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="2rem"
-                  height="2rem"
-                  viewBox="0 0 41 41"
-                  fill="none"
-                >
-                  <circle
-                    cx="20.5"
-                    cy="20.5"
-                    r="19"
-                    stroke="url(#paint0_linear_413_4258)"
-                    strokeWidth="1"
-                  />
-                  <defs>
-                    <linearGradient
-                      id="paint0_linear_413_4258"
-                      x1="20.5"
-                      y1="0"
-                      x2="20.5"
-                      y2="41"
-                      gradientUnits="userSpaceOnUse"
-                    >
-                      <stop stopColor="#FCCF58" />
-                      <stop offset="1" stopColor="#6F5308" />
-                    </linearGradient>
-                  </defs>
-                  <image
-                    href="/unsplash_ZXfUUM_LR0k.png"
-                    x="10"
-                    y="10"
-                    width="20"
-                    height="20"
-                  />
-                </svg>
-              </div>
-            </div>
+            <br />
+            <HeadR />
           </section>
           <section className=" max-md:flex max-md:justify-center max-md:flex-col">
             <div
