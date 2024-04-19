@@ -12,7 +12,8 @@ export default {
     extend: {
       screens:{
         xs: "480px",
-        xxs: "360px"
+        xxs: "360px",
+        backdrop: "backdrop-filter",
       },
       colors: {
         border: "hsl(var(--border))",
