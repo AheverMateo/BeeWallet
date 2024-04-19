@@ -1,12 +1,12 @@
 import express from "express";
 import {
-    newCredit,
-    updateCredit,
-    getCredit,
-    getAllUserCredits,
-    getUserDebt,
-    deleteCredit
-} from './controller.js';
+  newCredit,
+  updateCredit,
+  getCredit,
+  getAllUserCredits,
+  getUserDebt,
+  deleteCredit
+} from "./controller.js";
 
 const router = express.Router();
 

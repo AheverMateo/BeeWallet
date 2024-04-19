@@ -1,11 +1,11 @@
-import { removeWalletBalance } from "../Wallets/services.js";
+import { removeUserWalletBalance } from "../Wallets/services.js";
 import InvestmentModel from "./schema.js";
 import { TNA, calculateEarnedInterests, getFinishDate } from "./utils.js";
 
 async function createInvestment(amount, days, walletId) {
    try {
       // actualizo el balance de la wallet, restando el valor a invertir
-      const balanceUpdated = await removeWalletBalance(walletId, amount);
+      const balanceUpdated = await removeUserWalletBalance(walletId, amount);
 
       if (!balanceUpdated) throw new Error("The investment could not be made");
 
