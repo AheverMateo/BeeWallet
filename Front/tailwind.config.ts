@@ -14,7 +14,8 @@ export default {
     extend: {
       screens:{
         xs: "480px",
-        xxs: "360px"
+        xxs: "360px",
+        backdrop: "backdrop-filter",
       },
       boxShadow: {
         // light

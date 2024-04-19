@@ -1,12 +1,13 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 const CVU = () => {
 
   return (
-    <main className='bg-[#0E0E0E] z-15 w-[43.75rem] h-[46.9375rem] min-h-screen '>
+    <main className='bg-[#0E0E0E] z-20 w-[43.75rem] h-[46.9375rem] rounded-[1rem] fixed p-3'>
       <>
-        <section className="flex justify-between ">
-          <div>Datos de cuenta</div> 
-          <button>x</button>
+        <section className="flex relative justify-between ">
+          <div className="relative inset-0">Datos de cuenta</div> 
+          <div className="relative end-0"><Link  to={'/dashboard'}>x</Link></div>
         </section>
         <section className="p-5 ">
           <p>Para ingresar y recibir dinero desde cuentas digitales</p>

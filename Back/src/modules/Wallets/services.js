@@ -6,9 +6,9 @@ export const createWalletWhenUserRegister = async (userId) => {
   try {
     const cvu = await WalletModel.createUniqueCVU(); // Generate a unique CVU
     const newWallet = new WalletModel({
-      userId: userId,
-      cvu: cvu, // Assign the generated unique CVU
-      balance: 0, // Initialize with zero balance
+      userId,
+      cvu, // Assign the generated unique CVU
+      balance: 0 // Initialize with zero balance
     });
     await newWallet.save();
     return newWallet._id;
@@ -18,9 +18,22 @@ export const createWalletWhenUserRegister = async (userId) => {
   }
 };
 
-export const getWallet = async (userId) => {
+export const getAllUsersWallets = async () => {
   try {
-    const wallet = await WalletModel.findOne({ userId: userId });
+    const wallets = await WalletModel.find();
+    if (!wallets) {
+      return null;
+    }
+    return wallets;
+  } catch (error) {
+    logger.error(`${error.stack}`);
+    throw error;
+  }
+};
+
+export const getUserWallet = async (userId) => {
+  try {
+    const wallet = await WalletModel.findOne({ userId });
     if (!wallet) {
       return null;
     }
@@ -31,9 +44,9 @@ export const getWallet = async (userId) => {
   }
 };
 
-export const getWalletBalance = async (userId) => {
+export const getUserWalletBalance = async (userId) => {
   try {
-    const wallet = await WalletModel.findOne({ userId: userId });
+    const wallet = await WalletModel.findOne({ userId });
     if (!wallet) {
       return null;
     }
@@ -44,9 +57,9 @@ export const getWalletBalance = async (userId) => {
   }
 };
 
-export const addWalletBalance = async (userId, amount) => {
+export const addUserWalletBalance = async (userId, amount) => {
   try {
-    const wallet = await WalletModel.findOne({ userId: userId });
+    const wallet = await WalletModel.findOne({ userId });
     if (!wallet) {
       return null;
     }
@@ -61,9 +74,9 @@ export const addWalletBalance = async (userId, amount) => {
   }
 };
 
-export const removeWalletBalance = async (userId, amount) => {
+export const removeUserWalletBalance = async (userId, amount) => {
   try {
-    const wallet = await WalletModel.findOne({ userId: userId });
+    const wallet = await WalletModel.findOne({ userId });
     if (!wallet) {
       return null;
     }

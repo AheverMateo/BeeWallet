@@ -1,5 +1,6 @@
 import express from "express";
-import { } from "./controller.js";
+import { getUsers, getUser, deleteUser, updateUser, blockUser, unblockUser } from "./controller.js";
+import { isAdmin } from "../../middlewares/auth.js";
 
 const router = express.Router();
 
@@ -10,5 +11,4 @@ router.put("/:id", isAdmin, updateUser);
 router.put("/block/:id", isAdmin, blockUser);
 router.put("/unblock/:id", isAdmin, unblockUser);
 
-   
 export default router;
