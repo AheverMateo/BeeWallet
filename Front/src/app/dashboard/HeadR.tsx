@@ -2,7 +2,7 @@ import React from 'react'
 
 const HeadR = () => {
   return (
-    <div className="absolute inset-y-0 right-0 flex items-center gap-3">
+    <div className=" flex items-center gap-3">
               <div className="bg-[#232323]  p-2 rounded-full">
                 <img
                   src="/icons/Message 28.svg"

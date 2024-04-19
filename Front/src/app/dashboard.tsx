@@ -4,10 +4,10 @@ import AcData2 from "./dashboard/AccountData2";
 import AccountData3 from "./dashboard/AccountData3";
 import Movements from "./dashboard/Movements";
 import SideBar from "./dashboard/SideBar";
-import React, { useState } from "react";
 import SideBarHeader1 from "./dashboard/SideBarHeader1";
 import SideBarHeader2 from "./dashboard/SideBarHeader2";
 import SideBarFooter from "./dashboard/SideBarFooter";
+import HeadR from "./dashboard/HeadR";
 
 
 export default function Dashboard( ) {
@@ -22,11 +22,12 @@ export default function Dashboard( ) {
           <SideBar />
         </section>
         <div>
-          <section className="p-3 relative w-[100%] flex justify-center">
+          <section className="p-3 relative w-[100%] flex justify-between">
             <div className=" md:hidden">
               <SideBarHeader1 />
             </div>
-            
+            <br />
+            <HeadR />
           </section>
           <section className=" max-md:flex max-md:justify-center max-md:flex-col">
             <div
