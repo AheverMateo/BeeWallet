@@ -9,7 +9,6 @@ import SideBarHeader2 from "./dashboard/SideBarHeader2";
 import SideBarFooter from "./dashboard/SideBarFooter";
 import HeadR from "./dashboard/HeadR";
 
-
 export default function Dashboard( ) {
   
   return (
