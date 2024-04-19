@@ -44,7 +44,7 @@ export default function Dashboard( ) {
                       <div className="relative right-0">
                         <Link to={"/dashboard/CVU"}
                           className="border-[#FCFFFF] border-[1px] text-[0.875rem]
-                 w-[7.125rem] h-[2.3125rem] bg-[#323131] rounded-[1.15625rem]"
+                  w-[7.125rem] h-[2.3125rem] bg-[#323131] rounded-[1.15625rem]"
                         >
                           {" "}
                           Tu CVU{" "}

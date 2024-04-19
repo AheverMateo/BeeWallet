@@ -2,7 +2,9 @@ import SideBar from "../dashboard/SideBar"
 import imgUser from "../../assets/icons/unsplash_ZXfUUM_LR0k.png"
 import download from "../../assets/icons/download.svg"
 import discard from "../../assets/icons/discard.svg"
+import visto from "../../assets/icons/visto.svg"
 import logo from "../../assets/icons/Logo.svg"
+import HeaderR from "../../app/dashboard/HeadR"
 const user = () => {
 
     return (
@@ -10,8 +12,8 @@ const user = () => {
             <div className="w-[10%] ml-10 mt-24 fixed">
                 <SideBar/>
             </div>
-            <div className="flex justify-end w-[100%]">
-                    <section className="mt-12 w-[65%] mr-[10%]">
+            <div className="flex justify-end w-[100%] ml-28">
+                    <section className="mt-28 w-[65%] mr-[10%]">
                                 <h1 className="text-2xl font-bold text-white">Personal</h1>
                                 <div className=" flex w-full rounded-xl px-6 py-4 mt-8 bg-zinc-900">
                                     <img className="ml-2" src={imgUser} alt="" />
@@ -22,16 +24,18 @@ const user = () => {
                                 </div>
 
                                 <div className=" flex flex-col w-full rounded-xl px-8 py-6 mt-10 bg-zinc-900">
-                                    <div>
                                     <h4 className="text-gray-400 text-sm mb-2">Telefono</h4>
+                                    <div className="flex justify-between">
                                     <p className="text-gray-300 text-xl mb-2">+54******0552</p>
-                                    <hr className="border-gray-400" />
+                                    <img className="rounded-full py-1 px-1 h-5 mt-2 bg-green-900" src={visto} alt="" />
                                     </div>
-                                    <div>
+                                    <hr className="border-gray-400" />
                                     <h4 className="text-gray-400 text-sm mt-4 mb-2">Correo electrónico</h4>
+                                    <div className="flex justify-between">
                                     <p className="text-gray-300 text-xl mb-2">janedoe.2024@outlook.com</p>
-                                    <hr className="border-gray-400" />
+                                    <img className="rounded-full py-1 px-1 h-5 mt-2 bg-green-900" src={visto} alt="" />
                                     </div>
+                                    <hr className="border-gray-400" />
                                     <h4 className="text-gray-400 text-sm mt-4 mb-2">Fecha de Nacimiento</h4>
                                     <p className="text-gray-300 text-xl mb-2">00/00/0000</p>
                                 </div>
@@ -87,11 +91,11 @@ const user = () => {
                             <div className=" mt-20">
                                 <h1 className="text-2xl font-bold text-white mb-8">Configuracion</h1>
                                 <div className="  flex flex-col w-full rounded-xl  px-6 py-10  mt-5 bg-zinc-900">
-                                <h4 className="text-gray-400 text-sm mt-4 mb-2">AAAAAAAAAAA</h4>
-                                    <p className="text-gray-300 text-xl mb-2">aAAAAAAAAAAAAAA</p>
+                                <h4 className="text-gray-400 text-sm mt-4 mb-2"></h4>
+                                    <p className="text-gray-300 text-xl mb-2"></p>
                                     <hr className="border-gray-400" />
-                                    <h4 className="text-gray-400 text-sm mt-4 mb-2">AAAAAAAAAAAAA</h4>
-                                    <p className="text-gray-300 text-xl mb-2">AAAAAAAAAAAAAAAAAAA</p>
+                                    <h4 className="text-gray-400 text-sm mt-4 mb-2"></h4>
+                                    <p className="text-gray-300 text-xl mb-2"></p>
                                     <hr />
                                 </div>
                             </div>
@@ -110,7 +114,9 @@ const user = () => {
                                 Sitio web diseñado y desarrollado por Beewalle.</p>
                             </footer>
                     </section>
-
+                    <div className="mr-9 mt-6">
+                    <HeaderR/>
+                    </div>
         </div>
     </div>
     )
