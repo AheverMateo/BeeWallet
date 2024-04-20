@@ -14,8 +14,8 @@ const schema = new mongoose.Schema(
       country: { type: String, max: 150 },
       zipCode: { type: String, max: 150 }
     },
-    dni: { type: Number, required: true, max: 50 },
-    cuil: { type: Number, required: true, max: 50 },
+    dni: { type: Number, required: true },
+    cuil: { type: Number, required: true },
     phoneNumber: { type: String, required: true, max: 50 },
     roles: { type: [String], required: true, default: ["User"] },
     walletId: {

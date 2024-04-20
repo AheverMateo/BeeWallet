@@ -12,7 +12,7 @@ export const getSession = (req, res) => {
 };
 
 export const createUser = async (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
+  const { firstName, lastName, email, password, phoneNumber, cuil, dni } = req.body;
   try {
     // Check if user is already logged in
     if (req.user) {
@@ -46,6 +46,9 @@ export const createUser = async (req, res) => {
       firstName,
       lastName,
       email,
+      phoneNumber,
+      dni,
+      cuil,
       password: hashedPassword
     });
     // Create a wallet for the user
@@ -66,7 +69,7 @@ export const createUser = async (req, res) => {
     return resSuccess(res, 201, "User created successfully", newUser);
   } catch (error) {
     logger.error(`${error.stack}`);
-    return resFail(res, 500, "Internal Server Error");
+    return resFail(res, 500, "Internal Server Error", error.stack);
   }
 };
 

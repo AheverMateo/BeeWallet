@@ -31,7 +31,7 @@ app.use(
     store: MongoStore.create({
       mongoUrl: process.env.MONGO_URL,
       ttl: 3600, // 1 hour in seconds
-      dbName: "fintech",
+      dbName: "beewalletdb",
       autoRemove: "native" // Automatically remove expired sessions
     }),
     secret: process.env.SESSION_SECRET,
