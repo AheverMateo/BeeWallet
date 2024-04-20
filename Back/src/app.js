@@ -5,6 +5,7 @@ import compression from "compression";
 import { connectDb } from "./config/mongoConnect.js";
 import { addLogger, logger } from "./config/logger.js"; // Import logger and addLogger
 import MongoStore from "connect-mongo";
+import passport from "passport";
 
 import usersRouter from "./modules/Users/router.js";
 import authRouter from "./modules/Users/Auth/router.js";
@@ -12,6 +13,7 @@ import walletsRouter from "./modules/Wallets/router.js";
 import transactionsRouter from "./modules/Transactions/router.js";
 import investmentRouter from "./modules/Investments/router.js";
 import creditsRouter from "./modules/Credits/router.js";
+import "./config/passport.google.js";
 
 connectDb();
 
@@ -32,7 +34,7 @@ app.use(
       mongoUrl: process.env.MONGO_URL,
       ttl: 3600, // 1 hour in seconds
       dbName: "fintech",
-      autoRemove: "native" // Automatically remove expired sessions
+      autoRemove: "native", // Automatically remove expired sessions
     }),
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -40,11 +42,15 @@ app.use(
     cookie: {
       secure: true, // Secure cookie, only over HTTPS
       httpOnly: true, // Protects against client-side script accessing the cookie data
-      maxAge: 3600000 // 1 hour in miliseconds
-    }
+      maxAge: 3600000, // 1 hour in miliseconds
+    },
   })
 );
 app.use(compression({})); // Enable response compression
+
+//  Middlewares OAuth Google
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Routers //
 app.use("/api/users", usersRouter);
