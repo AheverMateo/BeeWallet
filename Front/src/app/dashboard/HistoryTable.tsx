@@ -4,10 +4,11 @@ const Table = () => {
   return (
     
 
-<div className="relative overflow-x-auto shadow-md sm:rounded-lg overflow-y-auto max-h-80">
+<div className="relative overflow-x-auto shadow-md sm:rounded-lg w-[76.6875rem]">
+    <div className='overflow-y-auto max-h-80'>
     <table className="w-full text-sm text-left rtl:text-right
-     bg-[#232323] text-gray-500 dark:text-gray-400 overflow-hidden">
-        <thead className="text-xs uppercase">
+     bg-[#232323] text-gray-500 dark:text-gray-400 realative ">
+        <thead className="text-xs uppercase sticky top-0 z-10 bg-[#232323]">
             <tr>
                 <th scope="col" className="px-6 py-3">
                     Nombre
@@ -26,7 +27,7 @@ const Table = () => {
                 </th>
             </tr>
         </thead>
-        <tbody className=''>
+        <tbody>
             <tr className="bg-[#232323] border-b  dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     Jane Doe
@@ -41,7 +42,7 @@ const Table = () => {
                     11 Mar 2023
                 </td>
                 <td className="px-6 py-4 text-right">
-                    -50.000
+                    -501.000
                 </td>
             </tr>
             <tr className="bg-[#232323] border-b  dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -166,6 +167,7 @@ const Table = () => {
             
         </tbody>
     </table>
+    </div>
 </div>
 
   )

@@ -19,10 +19,10 @@ const AccountData3 = () => {
             <h3 className="text-xs relative bottom-0">de $10.000</h3>
           </div>
         </div>
-        <div className="flex gap-5">
-        <button onClick={() => setShowRBLimit(prevShow => !prevShow)}>Establecer el limite</button>
+        <div className="flex gap-5 ">
+        <button className="bg-[#323131] w-[10.75rem] h-[2.5625rem]" onClick={() => setShowRBLimit(prevShow => !prevShow)}>Establecer el limite</button>
       {showRBLimit && <RBLimit />}
-          <button onClick={() => setShowRBMonth(prevShow => !prevShow)}>Este mes</button>
+          <button className="bg-[#323131] w-[8.8125] h-[2.5625rem]:" onClick={() => setShowRBMonth(prevShow => !prevShow)}>Este mes</button>
           {showRBMonth && <RBMonth />}
         </div>
       </section>
