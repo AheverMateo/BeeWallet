@@ -20,8 +20,8 @@ const AccountData1 = () => {
   return (
     <main
       className=" flex flex-col relative
-    w-[27.0625rem] h-[15.625rem]
-    rounded-[1rem] mt-2 gap-2 pl-1"
+    sm:w-[27.0625rem] sm:h-[15.625rem]
+    rounded-[1rem] gap-2 pl-1 bg-[#161616]"
     >
       <h1 className="md:text-[1.625rem] text-[1.5rem] text-[#B5B5B5]">
         Disponible
@@ -46,8 +46,7 @@ const AccountData1 = () => {
           </svg>
         </button>
       </div>
-      <h2 className="mt-6 hidden md:block">**** **** **** 1076</h2>
-      <section className="flex justify-center gap-2  max-sm:bottom-4">
+      <section className="flex justify-center gap-2  ">
         <button 
         className="h-[2rem] w-[8.2rem] bg-[#FCCF58] rounded-[1.15625rem] border border-solid border-[#FCFFFF]">
         <Link to={'/dashboard/transference'}>
