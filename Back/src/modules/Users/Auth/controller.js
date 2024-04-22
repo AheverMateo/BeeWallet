@@ -12,10 +12,10 @@ export const getSession = (req, res) => {
 };
 
 export const createUser = async (req, res) => {
-  const { firstName, lastName, email, password, phoneNumber, cuil, dni } = req.body;
+  const { firstName, lastName, email, password, phoneNumber } = req.body;
   try {
     // Check if user is already logged in
-    if (req.session.user) {
+    if (req.session && req.session.user) {
       return resFail(res, 400, "You're already logged in, log out before trying to sign up", null);
     }
     // Validate input fields
@@ -47,8 +47,6 @@ export const createUser = async (req, res) => {
       lastName,
       email,
       phoneNumber,
-      dni,
-      cuil,
       password: hashedPassword
     });
     // Create a wallet for the user
