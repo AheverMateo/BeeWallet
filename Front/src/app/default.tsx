@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { text } from "stream/consumers";
+// import { text } from "stream/consumers";
 
 const AbrirCuentaButton = () => {
   const navigate = useNavigate();
@@ -53,8 +53,6 @@ const ComenzarButton = () => {
 };
 
 export default function LandingPage() {
-  const navigate = useNavigate();
-
   const style = {
     // Bienvenidos a beeWallet
     position: "absolute",
