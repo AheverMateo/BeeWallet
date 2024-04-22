@@ -1,14 +1,15 @@
 import React from "react";
 import Table from "./HistoryTable";
+import MobileTable from "./MobileTable";
 
 const Movements = () => {
   return (
     <main>
-      <section className="md:flex md:justify-between md:p-3">
+      <section className="md:p-3 flex justify-between ">
         <h1 className="md:text-center md:text-3xl">Historial de Movimientos</h1>
         <div className="md:gap-3 md:flex md:justify-between">
           <input
-            className="md:rounded-[3.0625rem] md:p-1"
+            className="md:rounded-[3.0625rem] md:p-1 hidden md:block"
             type="text"
             placeholder="Search"
           />
@@ -17,8 +18,14 @@ const Movements = () => {
           </button>
         </div>
       </section>
-      <section className="md:w-[70rem]"> <Table/></section>
-      
+      <section className="md:w-[70rem]">
+        <div className="hidden sm:block">
+          <Table />
+        </div>
+        <div className=" sm:hidden">
+          <MobileTable />
+        </div>
+      </section>
     </main>
   );
 };
