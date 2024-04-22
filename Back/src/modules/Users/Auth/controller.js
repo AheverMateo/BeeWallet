@@ -75,8 +75,11 @@ export const createUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
-  if (req.session || req.session.user) {
-    return resFail(res, 400, "You're already logged in");
+  if (!email || !password) {
+    return resFail(res, 400, "All fields are required");
+  }
+  if (req.session && req.session.user) {
+    return resFail(res, 400, "You're already logged in, log out before trying to log in");
   }
   try {
     const user = await UsersModel.findOne({ email });
