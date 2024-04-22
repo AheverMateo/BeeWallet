@@ -15,7 +15,7 @@ export const createUser = async (req, res) => {
   const { firstName, lastName, email, password, phoneNumber, cuil, dni } = req.body;
   try {
     // Check if user is already logged in
-    if (req.user) {
+    if (req.session.user) {
       return resFail(res, 400, "You're already logged in, log out before trying to sign up");
     }
     // Validate input fields
@@ -105,7 +105,7 @@ export const loginUser = async (req, res) => {
 };
 
 export const logout = (req, res) => {
-  if (!req.session || !req.session.user) {
+  if (!req.session && !req.session.user) {
     return resFail(res, 500, "You must be logged in to log out");
   }
   req.session.destroy((err) => {
