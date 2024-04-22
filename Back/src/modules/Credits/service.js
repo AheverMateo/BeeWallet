@@ -9,7 +9,7 @@ export const createCredit = async (userId, walletId, quantity, billingCycles, ta
     const wallet = await WalletModel.find({ userId });
 
     if (!wallet) {
-      throw new Error("This wallet does not exist!", {sucsess: false, statusCode: 404});
+      throw new Error("This wallet does not exist!", { sucsess: false, statusCode: 404 });
     }
     const total = (quantity + ((taxPercentage / 100) * quantity));
     const totalQuota = total / billingCycles;
@@ -40,7 +40,7 @@ export const updateCreditDebt = async (creditId, totalCharged) => {
     const credit = await CreditModel.findOne({ _id: creditId });
 
     if (!credit) {
-      throw new Error("This credit does not exist!", {sucsess: false, statusCode: 404});
+      throw new Error("This credit does not exist!", { sucsess: false, statusCode: 404 });
     }
 
     const leftToPayParsed = new BigNumber(credit.leftToPay);
@@ -75,7 +75,7 @@ export const getUserTotalDebt = async (id) => {
     const userCredits = await CreditModel.countDocuments({ userId: id });
 
     if (userCredits === 0) {
-      throw new Error("This user doesn't have debts!", {sucsess: false, statusCode: 404});
+      throw new Error("This user doesn't have debts!", { sucsess: false, statusCode: 404 });
     }
 
     const credits = await CreditModel.find({ userId: id }, "leftToPay");
