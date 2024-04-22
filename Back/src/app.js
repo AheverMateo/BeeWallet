@@ -13,6 +13,7 @@ import walletsRouter from "./modules/Wallets/router.js";
 import transactionsRouter from "./modules/Transactions/router.js";
 import investmentRouter from "./modules/Investments/router.js";
 import creditsRouter from "./modules/Credits/router.js";
+import googleAuthRouter from "./modules/Users/GoogleAuth/router.js";
 import "./config/passport.google.js";
 
 connectDb();
@@ -59,6 +60,7 @@ app.use("/api/wallets", walletsRouter);
 app.use("/api/transactions", transactionsRouter);
 app.use("/api/investments", investmentRouter);
 app.use("/api/credits", creditsRouter);
+app.use("/api/auth/google", googleAuthRouter);
 
 // Error handlers //
 
