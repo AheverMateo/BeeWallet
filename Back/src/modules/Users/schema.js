@@ -17,7 +17,7 @@ const schema = new mongoose.Schema(
     dni: { type: Number, required: true },
     cuil: { type: Number, required: true },
     phoneNumber: { type: String, required: true, max: 50 },
-    roles: { type: [String], required: true, default: ["User"], enum: ["User", "Admin"] },
+    roles: { type: [String], required: true, default: ["User"] },
     walletId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Wallet",
