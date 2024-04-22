@@ -14,7 +14,7 @@ const schema = new mongoose.Schema(
       country: { type: String, max: 150 },
       zipCode: { type: String, max: 150 }
     },
-    phoneNumber: { type: String, required: true, max: 50 },
+    phoneNumber: { type: String, max: 50 },
     roles: { type: [String], required: true, default: ["User"] },
     walletId: {
       type: mongoose.Schema.Types.ObjectId,
