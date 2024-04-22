@@ -22,7 +22,7 @@ const AbrirCuentaButton = () => {
 
     return (
         <Button 
-            onClick={() => navigate('/login')}
+            onClick={() => navigate('/register')}
             style={buttonStyle}
         >
             Abrir mi cuenta

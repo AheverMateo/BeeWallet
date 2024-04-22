@@ -5,6 +5,7 @@ import {
   RouterProvider
 } from 'react-router-dom';
 import Home from './app/home';
+import LandingPage from './app/default';
 import Dashboard from './app/dashboard';
 import Login from './app/login';
 import Register from './app/register';
@@ -18,7 +19,7 @@ import Exitosa from './app/dashboard/Transferencia/Exitosa';
 const router = createBrowserRouter(createRoutesFromElements(<>
   <Route errorElement={<div>not found</div>}>
     <Route path='/' element={<Home />} errorElement={<div>404</div>}>
-      <Route index element={<div>default page</div>} />
+      <Route index element={<LandingPage />} />
       <Route path='/login' element={<Login/>} />
       <Route path='/user' element={<User/>}/>
       <Route path='/register' element={<Register />} />
