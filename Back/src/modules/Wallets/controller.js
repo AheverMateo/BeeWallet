@@ -18,7 +18,7 @@ export const getWallet = async (req, res) => {
     resSuccess(res, 200, "Wallet found", wallet);
   } catch (error) {
     logger.error(`${error.stack}`);
-    resFail(res, 500, "Internal Server Error");
+    resFail(res, 500, "Internal Server Error", error.stack);
   }
 };
 
