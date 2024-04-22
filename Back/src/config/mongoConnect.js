@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const connectMongoose = async () => {
   await mongoose.connect(process.env.MONGO_URL, {
-    dbName: "fintech"
+    dbName: "beewalletdb"
   });
 };
 

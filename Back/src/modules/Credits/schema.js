@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const creditSchema = new Schema({
   userId: { type: String, require: true },
   walletId: { type: String, require: true },
-  status: String,
+  status: { type: String, enum: ["active", "inactive"], default: "active" },
   quantity: { type: Number, require: true },
   currency: { type: String, require: true, default: "ARS" },
   quota: { type: Types.Decimal128, require: true },
