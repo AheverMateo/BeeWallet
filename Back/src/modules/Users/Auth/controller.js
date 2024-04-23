@@ -95,6 +95,7 @@ export const loginUser = async (req, res) => {
     if (!isPasswordValid) {
       return resFail(res, 400, "User or Password do not match");
     }
+    // Load session data
     req.session.user = {
       _id: user._id,
       firstName: user.firstName,
@@ -123,6 +124,7 @@ export const logout = (req, res) => {
     return resSuccess(res, 200, "Logged out");
   });
 };
+
 export const sendEmailVerification = async (req, res) => {
   const { email } = req.body;
   try {
@@ -137,6 +139,7 @@ export const sendEmailVerification = async (req, res) => {
     return resFail(res, 500, "Internal Server Error", error.stack);
   }
 };
+
 export const verifyEmailCode = async (req, res) => {
   const { providedCode } = req.body;
   try {

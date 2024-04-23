@@ -7,6 +7,7 @@ import {
   removeUserWalletBalance,
   getUserWalletBalance,
 } from "./services.js";
+import { transferByUserIdService } from "../Transactions/services.js";
 
 export const getWallet = async (req, res) => {
   try {
@@ -82,14 +83,15 @@ export const getWalletBalance = async (req, res) => {
 export const getWalletTransactions = async (req, res) => {
   // I suppose that the user can only see his own transactions
   const userId = req.session.user._id;
+  const { page } = req.params;
   try {
     const wallet = await getUserWallet(userId);
     if (!wallet) {
       return resFail(res, 404, "Wallet not found");
     }
     // Transactions services not implemented yet
-    // const transactions = await transferByUserIdService(userId, req.query.page);
-    // resSuccess(res, 200, "Wallet found", transactions);
+    const transactions = await transferByUserIdService(userId, page);
+    resSuccess(res, 200, "Wallet found", transactions);
   } catch (error) {
     logger.error(`${error.stack}`);
     resFail(res, 500, "Internal Server Error", error.stack);
