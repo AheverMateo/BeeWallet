@@ -96,14 +96,14 @@ export const loginUser = async (req, res) => {
       return resFail(res, 400, "User or Password do not match");
     }
     req.session.user = {
-      _id: newUser._id,
-      firstName: newUser.firstName,
-      lastName: newUser.lastName,
-      email: newUser.email,
-      roles: newUser.roles,
-      dateOfBirth: newUser.dateOfBirth,
-      phoneNumber: newUser.phoneNumber,
-      address: newUser.address,
+      _id: user._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      roles: user.roles,
+      dateOfBirth: user.dateOfBirth,
+      phoneNumber: user.phoneNumber,
+      address: user.address,
     };
     return resSuccess(res, 200, "logged in successfully");
   } catch (error) {

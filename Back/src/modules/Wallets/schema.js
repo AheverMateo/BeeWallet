@@ -8,7 +8,7 @@ const walletSchema = new Schema({
   balance: { type: Types.Decimal128, required: true },
   transactions: [{ type: Schema.Types.ObjectId, ref: "Transaction" }],
   createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now }
+  updatedAt: { type: Date, default: Date.now },
 });
 
 // Function to generate a random 22-digit CVU

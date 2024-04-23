@@ -5,7 +5,7 @@ import {
   getCredit,
   getAllUserCredits,
   getUserDebt,
-  deleteCredit
+  deleteCredit,
 } from "./controller.js";
 import { isAdmin, isLoggedIn } from "../../middlewares/auth.js";
 

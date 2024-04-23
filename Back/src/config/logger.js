@@ -12,7 +12,7 @@ const myCustomLevels = {
     info: 3,
     warn: 2,
     error: 1,
-    fatal: 0
+    fatal: 0,
   },
   colors: {
     debug: "green",
@@ -20,8 +20,8 @@ const myCustomLevels = {
     info: "gray",
     warn: "yellow",
     error: "red",
-    fatal: "redBG grey"
-  }
+    fatal: "redBG grey",
+  },
 };
 
 /* // Time Only //
@@ -46,7 +46,7 @@ const myFormat = printf(({ level, message }) => {
     year: "numeric",
     hour: "numeric",
     minute: "numeric",
-    second: "numeric"
+    second: "numeric",
   };
   const formattedDate = now.toLocaleString("en-GB", options);
   return `[${formattedDate}] [${level}]: ${message}`;
@@ -61,7 +61,7 @@ const myFormatFile = printf(({ level, message }) => {
     year: "numeric",
     hour: "numeric",
     minute: "numeric",
-    second: "numeric"
+    second: "numeric",
   };
   const formattedDate = now.toLocaleString("en-GB", options);
   return `[${formattedDate}] [${level.toLocaleUpperCase()}]: ${message}`;
@@ -76,16 +76,16 @@ switch (process.env.ENVIRONMENT) {
       transports: [
         new transports.Console({
           level: "debug",
-          format: combine(format.colorize({ all: true }), myFormat)
+          format: combine(format.colorize({ all: true }), myFormat),
         }),
         new transports.File({
           filename: "./dev.errors.logs",
           level: "error",
           format: myFormatFile,
           maxsize: 5242880, // 5MB
-          maxFiles: 5
-        })
-      ]
+          maxFiles: 5,
+        }),
+      ],
     });
     break;
   case "PRODUCTION":
@@ -94,7 +94,7 @@ switch (process.env.ENVIRONMENT) {
       transports: [
         new transports.Console({
           level: "info",
-          format: combine(format.colorize({ all: true }), myFormat)
+          format: combine(format.colorize({ all: true }), myFormat),
         }),
 
         new transports.File({
@@ -102,9 +102,9 @@ switch (process.env.ENVIRONMENT) {
           level: "error",
           format: myFormatFile,
           maxsize: 5242880, // 5MB
-          maxFiles: 5
-        })
-      ]
+          maxFiles: 5,
+        }),
+      ],
     });
     break;
   default:
@@ -120,7 +120,7 @@ export const addLogger = (req, res, next) => {
     const end = Date.now(); // Record the end time
     const duration = end - start; // Calculate the duration
     req.logger.http(
-      `${req.method} Method hit on ${req.originalUrl} from [${ipClient}] - ${duration}ms`
+      `${req.method} Method hit on ${req.originalUrl} from [${ipClient}] - ${duration}ms`,
     );
   });
 

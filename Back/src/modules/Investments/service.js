@@ -1,6 +1,7 @@
 import { removeUserWalletBalance } from "../Wallets/services.js";
 import InvestmentModel from "./schema.js";
 import { TNA, calculateEarnedInterests, getFinishDate } from "./utils.js";
+import { logger } from "../../config/logger.js";
 
 async function createInvestment (amount, days, walletId) {
   try {
@@ -16,6 +17,7 @@ async function createInvestment (amount, days, walletId) {
 
     return await investment.save();
   } catch (error) {
+    logger.error(`${error.stack}`);
     throw error;
   }
 }
@@ -24,6 +26,7 @@ async function getAllInvestmentByWallet (walletId) {
   try {
     return await InvestmentModel.find({ walletId });
   } catch (error) {
+    logger.error(`${error.stack}`);
     throw error;
   }
 }
@@ -40,7 +43,7 @@ function getSimulateInvestment (amount, days) {
 const investmentService = {
   createInvestment,
   getSimulateInvestment,
-  getAllInvestmentByWallet
+  getAllInvestmentByWallet,
 };
 
 export default investmentService;

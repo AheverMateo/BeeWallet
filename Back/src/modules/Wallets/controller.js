@@ -5,7 +5,7 @@ import {
   getAllUsersWallets,
   addUserWalletBalance,
   removeUserWalletBalance,
-  getUserWalletBalance
+  getUserWalletBalance,
 } from "./services.js";
 
 export const getWallet = async (req, res) => {

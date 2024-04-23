@@ -16,7 +16,7 @@ const creditSchema = new Schema({
   nextBillingDate: { type: Date },
   dueDate: { type: Date },
   createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now }
+  updatedAt: { type: Date, default: Date.now },
 });
 
 export default model("Credit", creditSchema);

@@ -43,7 +43,7 @@ class UsersService {
       }
       const user = await UsersModel.findOne({ _id: id }).populate({
         path: "wishlist.product",
-        model: "products"
+        model: "products",
       });
       if (!user) {
         return [400, "User Not Found"];
@@ -85,7 +85,7 @@ class UsersService {
         return [400, "Password cannot be updated"];
       }
       const propertiesToUpdate = Object.keys(updatedProperties).filter(
-        (key) => key !== "_id" && key !== "password" && user[key] !== undefined
+        (key) => key !== "_id" && key !== "password" && user[key] !== undefined,
       );
       propertiesToUpdate.forEach((key) => {
         user[key] = updatedProperties[key];
@@ -96,8 +96,8 @@ class UsersService {
         200,
         "User " + id + " Updated Successfully",
         {
-          updatedUser: user
-        }
+          updatedUser: user,
+        },
       ];
     } catch (error) {
       logger.error(`${error.stack}`);
