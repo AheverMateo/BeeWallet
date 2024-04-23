@@ -8,7 +8,7 @@ import {
   verifyPasswordResetToken,
   resetPassword,
   sendEmailVerification,
-  verifyEmailCode
+  verifyEmailCode,
 } from "./controller.js";
 import { bodyCleaner } from "../../../middlewares/bodyCleaner.js";
 

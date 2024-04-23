@@ -27,17 +27,17 @@ router.get("/", passport.authenticate("google", ["profile", "email"]));
 router.get(
   "/callback",
   passport.authenticate("google", {
-    //successRedirect: process.env.CLIENT_URL,
+    // successRedirect: process.env.CLIENT_URL,
     failureRedirect: "/api/auth/google/login/failed",
   }),
   (req, res) => {
     console.log(req.session);
     console.log(req.user);
     res.redirect(process.env.CLIENT_URL);
-  }
+  },
 );
 
-router.get("/logout", (req, res) => {
+router.get("/logout", (req, res, next) => {
   req.logout(function (err) {
     if (err) {
       return next(err);

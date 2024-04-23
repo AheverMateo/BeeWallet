@@ -12,7 +12,7 @@ const schema = new mongoose.Schema(
       city: { type: String, max: 150 },
       state: { type: String, max: 150 },
       country: { type: String, max: 150 },
-      zipCode: { type: String, max: 150 }
+      zipCode: { type: String, max: 150 },
     },
     phoneNumber: { type: String, max: 50 },
     roles: { type: [String], required: true, default: ["User"] },
@@ -21,17 +21,17 @@ const schema = new mongoose.Schema(
       ref: "Wallet",
       required: true,
       unique: true,
-      default: null
+      default: null,
     },
     isBlocked: { type: Boolean, required: true, default: false },
     loginType: { type: String, default: "Normal" },
     pwResetToken: { type: String, default: null },
-    pwResetTokenExpire: { type: Date, default: null }
+    pwResetTokenExpire: { type: Date, default: null },
   },
   {
     timestamps: true,
-    versionKey: false
-  }
+    versionKey: false,
+  },
 );
 
 const UsersModel = mongoose.model("users", schema);

@@ -57,7 +57,7 @@ export const allTransfers = async (req, res) => {
   try {
     const { page } = req.params;
     const transactions = await TransactionModel.find({
-      deleted: false
+      deleted: false,
     })
       .sort({ createdAt: -1 })
       .skip((page - 1) * 25)

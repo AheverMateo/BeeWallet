@@ -35,7 +35,7 @@ app.use(
       mongoUrl: process.env.MONGO_URL,
       ttl: 3600, // 1 hour in seconds
       dbName: "beewalletdb",
-      autoRemove: "native" // Automatically remove expired sessions
+      autoRemove: "native", // Automatically remove expired sessions
     }),
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -44,7 +44,7 @@ app.use(
       httpOnly: true, // Protects against client-side script accessing the cookie data
       maxAge: 3600000, // 1 hour in miliseconds
     },
-  })
+  }),
 );
 app.use(compression({})); // Enable response compression
 

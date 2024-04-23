@@ -23,7 +23,7 @@ export const createCredit = async (userId, walletId, quantity, billingCycles, ta
       nextBillingDate: new Date(Date.now() + 2592000000),
       leftToPay: total,
       taxPercentage,
-      dueDate
+      dueDate,
     });
 
     await newCredit.save();
@@ -51,7 +51,7 @@ export const updateCreditDebt = async (creditId, totalCharged) => {
         status: "inactive",
         leftToPay: 0,
         billingCyclesLeft: 0,
-        updatedAt: new Date(Date.now())
+        updatedAt: new Date(Date.now()),
       });
       await credit.save();
     } else {
@@ -59,7 +59,7 @@ export const updateCreditDebt = async (creditId, totalCharged) => {
         leftToPay: credit.leftToPay - totalCharged,
         nextBillingDate: new Date(Date.now() + 2592000000),
         billingCyclesLeft: credit.billingCyclesLeft - 1,
-        updatedAt: new Date(Date.now())
+        updatedAt: new Date(Date.now()),
       });
       await credit.save();
     }
