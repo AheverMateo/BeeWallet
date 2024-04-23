@@ -87,8 +87,9 @@ export const getWalletTransactions = async (req, res) => {
     if (!wallet) {
       return resFail(res, 404, "Wallet not found");
     }
-    // const transactions = await TransactionController.getTransactionsByWalletId(id);
-    // resSuccess(res, 200, "Wallet transactions found", transactions);
+    // Transactions services not implemented yet
+    // const transactions = await transferByUserIdService(userId, req.query.page);
+    // resSuccess(res, 200, "Wallet found", transactions);
   } catch (error) {
     logger.error(`${error.stack}`);
     resFail(res, 500, "Internal Server Error", error.stack);
