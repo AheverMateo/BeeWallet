@@ -1,5 +1,0 @@
-MONGO_URL=mongodb+srv://beewalletinfo:ylMQEiy2GZYkKOgf@beewalletdb.rvlasiy.mongodb.net/?retryWrites=true&w=majority&appName=beewalletdb
-ENVIRONMENT=DEVELOPMENT
-MAIL_SENDER=beewalletinfo@gmail.com
-MAIL_PASS=urrg egbm bmyo ycta
-SESSION_SECRET=efae9fc233bac2ff6695f24325ec2d36d9965eba32b215bed37338412345ee91fc436c91ccdca4fe6be941225160465ff7f7a43c1c48a2872f57cfb8db284c93
