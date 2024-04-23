@@ -3,7 +3,8 @@ import React from "react";
 const SideBarHeader = () => {
   return (
     <main>
-       <section className="size-[4.6875rem] bg-[#232323] rounded-full flex items-center justify-center">
+       <section className="size-[2.98831rem] rounded-full 
+       flex items-center justify-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="42"

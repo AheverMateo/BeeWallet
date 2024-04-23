@@ -5,20 +5,17 @@ import SideBarHeader2 from "./SideBarHeader2";
 
 const SideBar = () => {
   return (
-    <div className="">
-     <section className="md:flex hidden md:flex-col justify-between gap-20 p-1 pt-2">
+    <div className="flex flex-col h-screen justify-between py-5
+     bg-[#161616] rounded-[0.5625rem]">
+     <section className="flex items-center justify-center">
       <SideBarHeader1/>
      </section>
      <section>
       <SideBarFooter/>
      </section>
-     <section>
+     <section className="flex items-center justify-center">
         <SideBarHeader2/>
      </section>
-
-      
-    
-      
     </div>
   );
 };
