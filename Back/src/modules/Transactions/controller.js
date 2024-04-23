@@ -43,7 +43,8 @@ export const transferById = async (req, res) => {
 };// check
 
 export const transferByUserId = async (req, res) => {
-  const { userId, page } = req.params;
+  const { page } = req.params;
+  const { userId} = req.user._id
   try {
     const transactions = await transferByUserIdService(userId, page);
     resSuccess(res, 200, "Transactions retrieved successfully", transactions);
