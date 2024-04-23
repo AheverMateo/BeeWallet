@@ -7,13 +7,31 @@ import logo from "../../assets/icons/Logo.svg"
 import HeaderR from "../../app/dashboard/HeadR"
 const user = () => {
 
+    async function fetchSessionData() {
+        try {
+        const response = await fetch('/api/auth/session', {
+            credentials: 'include'
+        });
+        const data = await response.json();
+        if (data.success) {
+            console.log('User data:', data.user);
+        } else {
+            console.log('No active session:', data.message);
+        }
+        } catch (error) {
+        console.error('Error fetching session data:', error);
+        }
+    }
+    fetchSessionData();
+
+
     return (
-        <div className="flex">
-            <div className="w-[10%] ml-10 mt-24 fixed">
+        <div className="flex ">
+            <div className="ml-6 fixed">
                 <SideBar/>
             </div>
             <div className="flex justify-end w-[100%] ml-28">
-                    <section className="mt-28 w-[65%] mr-[10%]">
+                    <section className="mt-28 w-[65%] mr-[6%]">
                                 <h1 className="text-2xl font-bold text-white">Personal</h1>
                                 <div className=" flex w-full rounded-xl px-6 py-4 mt-8 bg-zinc-900">
                                     <img className="ml-2" src={imgUser} alt="" />
