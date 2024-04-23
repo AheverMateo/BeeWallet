@@ -12,12 +12,10 @@ passport.use(
       scope: ["profile", "email"],
     },
     async function (accessToken, refreshToken, profile, callback) {
-      // todo: agregar código para buscar el usuario en la BD
-      console.log(profile);
       const email = profile.emails[0].value;
 
       try {
-        const user = await UsersModel.findOne({ email });
+        let user = await UsersModel.findOne({ email });
 
         // si no hay un usuario registrado con ese email, tengo que crearlo
         if (!user) {
@@ -25,16 +23,14 @@ passport.use(
             firstName: profile.name.givenName,
             lastName: profile.name.familyName,
             email,
-            password: "",
+            password: "SECRET",
+            loginType: "google",
           });
 
           newUser.walletId = await createWalletWhenUserRegister(newUser._id);
 
           user = await newUser.save();
-          console.log(user);
         }
-
-        console.log(user);
 
         const sessionData = {
           _id: user._id,
