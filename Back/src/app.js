@@ -41,7 +41,6 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: true, // Secure cookie, only over HTTPS
       httpOnly: true, // Protects against client-side script accessing the cookie data
       maxAge: 3600000, // 1 hour in miliseconds
     },
