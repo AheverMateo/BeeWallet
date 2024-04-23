@@ -1,34 +1,32 @@
-import mongoose from "mongoose";
 import TransactionModel from "./schema.js";
 import WalletModel from "../Wallets/schema.js";
 import { logger } from "../../config/logger.js";
 import { resSuccess, resFail } from "../../config/utils/response.js";
-import { getUserWallet } from "../Wallets/services.js";
-import {NewTransfer,transferUpdate, transferByUserId} from "./services.js";
+import { NewTransfer, transferUpdate, transferByUserIdService } from "./services.js";
 
 // pasar validada
 export const transferBetweenAccounts = async (req, res) => {
-   const { type, amount, currency, fromUserId, toUserId } = req.body;
-   // Revisar JWT y consultar sesión
-   try {
-      savedTransfer = await NewTransfer(type, amount, currency, fromUserId, toUserId );
-      resSuccess(res, 200, "Transfer completed successfully", savedTransfer);
-   } catch (error) {
-      logger.error(`${error.stack}`);
-      return resFail(res, 500, "Error while transferring");
-   }
-};//check
+  const { type, amount, currency, fromUserId, toUserId } = req.body;
+  // Revisar JWT y consultar sesión
+  try {
+    const savedTransfer = await NewTransfer(type, amount, currency, fromUserId, toUserId);
+    resSuccess(res, 200, "Transfer completed successfully", savedTransfer);
+  } catch (error) {
+    logger.error(`${error.stack}`);
+    return resFail(res, 500, "Error while transferring");
+  }
+};// check
 
 export const transferTypeUpdate = async (req, res) => {
-   const { type, transactionId } = req.body;
-   try {
-      transferupdate = transferUpdate(type, transactionId);
-      resSuccess(res, 200, "Successful update", transferupdate);
-   } catch (error) {
-      logger.error(`${error.stack}`);
-      return resFail(res, 500, "Error updating transfer");
-   }
-};//check
+  const { type, transactionId } = req.body;
+  try {
+    const transferupdate = transferUpdate(type, transactionId);
+    resSuccess(res, 200, "Successful update", transferupdate);
+  } catch (error) {
+    logger.error(`${error.stack}`);
+    return resFail(res, 500, "Error updating transfer");
+  }
+};// check
 
 export const transferById = async (req, res) => {
   const { transactionId } = req.params;
@@ -45,15 +43,15 @@ export const transferById = async (req, res) => {
 };// check
 
 export const transferByUserId = async (req, res) => {
-   const { userId, page } = req.params;
-   try {
-      transactions = await transferByUserId(userId, page);
-      resSuccess(res, 200, "Transactions retrieved successfully", transactions);
-   } catch (error) {
-      logger.error(`${error.stack}`);
-      return resFail(res, 500, "Error retrieving transactions");
-   }
-};//check
+  const { userId, page } = req.params;
+  try {
+    const transactions = await transferByUserIdService(userId, page);
+    resSuccess(res, 200, "Transactions retrieved successfully", transactions);
+  } catch (error) {
+    logger.error(`${error.stack}`);
+    return resFail(res, 500, "Error retrieving transactions");
+  }
+};// check
 
 export const allTransfers = async (req, res) => {
   try {
