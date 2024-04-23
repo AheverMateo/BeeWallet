@@ -8,14 +8,18 @@ import { createWalletWhenUserRegister } from "../../Wallets/services.js";
 import UsersService from "../service.js";
 
 export const getSession = (req, res) => {
-  return resSuccess(res, 200, "", req.session);
+  if (req.session && req.session.user) {
+    return res.json({ success: true, user: req.session.user });
+  } else {
+    return resFail(res, 401, "No active session found");
+  }
 };
 
 export const createUser = async (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
+  const { firstName, lastName, email, password, phoneNumber } = req.body;
   try {
     // Check if user is already logged in
-    if (req.user) {
+    if (req.session && req.session.user) {
       return resFail(res, 400, "You're already logged in, log out before trying to sign up");
     }
     // Validate input fields
@@ -46,6 +50,7 @@ export const createUser = async (req, res) => {
       firstName,
       lastName,
       email,
+      phoneNumber,
       password: hashedPassword
     });
     // Create a wallet for the user
@@ -66,14 +71,17 @@ export const createUser = async (req, res) => {
     return resSuccess(res, 201, "User created successfully", newUser);
   } catch (error) {
     logger.error(`${error.stack}`);
-    return resFail(res, 500, "Internal Server Error");
+    return resFail(res, 500, "Internal Server Error", error.stack);
   }
 };
 
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
-  if (req.session || req.session.user) {
-    return resFail(res, 400, "You're already logged in");
+  if (!email || !password) {
+    return resFail(res, 400, "All fields are required");
+  }
+  if (req.session && req.session.user) {
+    return resFail(res, 400, "You're already logged in, log out before trying to log in");
   }
   try {
     const user = await UsersModel.findOne({ email });
@@ -85,21 +93,21 @@ export const loginUser = async (req, res) => {
       return resFail(res, 400, "User or Password do not match");
     }
     req.session.user = {
-      _id: newUser._id,
-      firstName: newUser.firstName,
-      lastName: newUser.lastName,
-      email: newUser.email,
-      roles: newUser.roles
+      _id: user._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      roles: user.roles
     };
     return resSuccess(res, 200, "logged in successfully");
   } catch (error) {
     logger.error(`${error.stack}`);
-    return resFail(res, 500, "Internal Server Error");
+    return resFail(res, 500, "Internal Server Error", error.stack);
   }
 };
 
 export const logout = (req, res) => {
-  if (!req.session || !req.session.user) {
+  if (!req.session && !req.session.user) {
     return resFail(res, 500, "You must be logged in to log out");
   }
   req.session.destroy((err) => {
@@ -120,7 +128,7 @@ export const sendEmailVerification = async (req, res) => {
     return resSuccess(res, 200, "E-Mail verification code sent");
   } catch (error) {
     logger.error(`${error.stack}`);
-    return resFail(res, 500, "Internal Server Error");
+    return resFail(res, 500, "Internal Server Error", error.stack);
   }
 };
 export const verifyEmailCode = async (req, res) => {
@@ -133,7 +141,7 @@ export const verifyEmailCode = async (req, res) => {
     return resSuccess(res, 200, "User verified successfully");
   } catch (error) {
     logger.error(`${error.stack}`);
-    return resFail(res, 500, "Internal Server Error");
+    return resFail(res, 500, "Internal Server Error", error.stack);
   }
 };
 
@@ -159,7 +167,7 @@ export const requestPasswordReset = async (req, res) => {
     return resSuccess(res, 200, "Password reset token sent if email is registered");
   } catch (error) {
     logger.error(`${error.stack}`);
-    return resFail(res, 500, "Internal Server Error");
+    return resFail(res, 500, "Internal Server Error", error.stack);
   }
 };
 
@@ -177,7 +185,7 @@ export const verifyPasswordResetToken = async (req, res) => {
     return resSuccess(res, 200, "Reset token verified successfully");
   } catch (error) {
     logger.error(`${error.stack}`);
-    return resFail(res, 500, "Internal Server Error");
+    return resFail(res, 500, "Internal Server Error", error.stack);
   }
 };
 
@@ -205,6 +213,6 @@ export const resetPassword = async (req, res) => {
     return resSuccess(res, 200, "Password reset successfully");
   } catch (error) {
     logger.error(`${error.stack}`);
-    return resFail(res, 500, "Internal Server Error");
+    return resFail(res, 500, "Internal Server Error", error.stack);
   }
 };

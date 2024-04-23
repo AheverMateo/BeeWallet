@@ -1,51 +1,17 @@
-import mongoose from "mongoose";
 import TransactionModel from "./schema.js";
 import WalletModel from "../Wallets/schema.js";
 import { logger } from "../../config/logger.js";
-import {
-  resSuccess,
-  resFail
-} from "../../config/utils/response.js";
-import {
-  addUserWalletBalance,
-  removeUserWalletBalance,
-  getUserWallet
-} from "../Wallets/services.js";
+import { resSuccess, resFail } from "../../config/utils/response.js";
+import { NewTransfer, transferUpdate, transferByUserIdService } from "./services.js";
 
 // pasar validada
 export const transferBetweenAccounts = async (req, res) => {
   const { type, amount, currency, fromUserId, toUserId } = req.body;
   // Revisar JWT y consultar sesión
   try {
-    const fromWalletId = await getUserWallet(fromUserId);
-    const toWalletId = await getUserWallet(toUserId);
-    const fromBalance = await removeUserWalletBalance(fromWalletId, amount);
-    if (fromBalance < 0) {
-      // throw new Error("Insufficient funds for transfer");
-      return resFail(res, 400, "Insufficient funds for transfer");
-    }
-
-    const session = await mongoose.startSession();
-    session.startTransaction();
-
-    const newTransfer = new TransactionModel({
-      type,
-      amount,
-      currency,
-      fromWalletId,
-      toWalletId,
-      status: "pending"
-    });
-    await addUserWalletBalance(toWalletId, amount);
-    const savedTransfer = await newTransfer.save({ session });
-    await session.commitTransaction();
-    session.endSession();
-    // res.status(200).json({ message: 'Transfer completed successfully', transfer: savedTransfer });
+    const savedTransfer = await NewTransfer(type, amount, currency, fromUserId, toUserId);
     resSuccess(res, 200, "Transfer completed successfully", savedTransfer);
   } catch (error) {
-    // await session.abortTransaction();
-    // session.endSession();
-    // res.status(500).json({ message: 'Error while transferring', error: error.message });
     logger.error(`${error.stack}`);
     return resFail(res, 500, "Error while transferring");
   }
@@ -54,15 +20,9 @@ export const transferBetweenAccounts = async (req, res) => {
 export const transferTypeUpdate = async (req, res) => {
   const { type, transactionId } = req.body;
   try {
-    const transferUpdate = await TransactionModel.findByIdAndUpdate(
-      transactionId,
-      { $set: { type } },
-      { new: true }
-    );
-      // res.status(200).json({transferUpdate});
-    resSuccess(res, 200, "Successful update", transferUpdate);
+    const transferupdate = transferUpdate(type, transactionId);
+    resSuccess(res, 200, "Successful update", transferupdate);
   } catch (error) {
-    // res.status(500).json({ message: 'Error updating transfer' });
     logger.error(`${error.stack}`);
     return resFail(res, 500, "Error updating transfer");
   }
@@ -84,22 +44,8 @@ export const transferById = async (req, res) => {
 
 export const transferByUserId = async (req, res) => {
   const { userId, page } = req.params;
-  const walletId = await getUserWallet(userId);
   try {
-    if (!walletId) {
-      return resFail(res, 404, "Wallet not found for user");
-    }
-    const transactions = await TransactionModel.find({
-      $or: [{ fromWalletId: walletId }, { toWalletId: walletId }],
-      deleted: false
-    })
-      .sort({ createdAt: -1 })
-      .skip((page - 1) * 25)
-      .limit(25);
-
-    if (!transactions || transactions.length === 0) {
-      return resSuccess(res, 404, "No transactions found", []);
-    }
+    const transactions = await transferByUserIdService(userId, page);
     resSuccess(res, 200, "Transactions retrieved successfully", transactions);
   } catch (error) {
     logger.error(`${error.stack}`);

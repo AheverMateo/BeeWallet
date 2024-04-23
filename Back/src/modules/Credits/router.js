@@ -7,14 +7,17 @@ import {
   getUserDebt,
   deleteCredit
 } from "./controller.js";
+import { isAdmin, isLoggedIn } from "../../middlewares/auth.js";
 
 const router = express.Router();
 
-router.post("/", newCredit);
-router.put("/update", updateCredit);
-router.get("/:id", getCredit);
-router.get("/debt/:id", getUserDebt);
-router.get("/user/:id", getAllUserCredits);
-router.delete("/:id", deleteCredit);
+router.post("/", isLoggedIn, newCredit);
+router.put("/update", isLoggedIn, updateCredit);
+router.get("/:id", isLoggedIn, getCredit);
+router.get("/debt/:id", isLoggedIn, getUserDebt);
+router.get("/user/:id", isLoggedIn, getAllUserCredits);
+
+// Just for admins
+router.delete("/:id", isAdmin, deleteCredit);
 
 export default router;
