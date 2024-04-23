@@ -1,6 +1,7 @@
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import passport from "passport";
-import UsersModel from "../modules/Users/schema";
+import UsersModel from "../modules/Users/schema.js";
+import { createWalletWhenUserRegister } from "../modules/Wallets/services.js";
 
 passport.use(
   new GoogleStrategy(
@@ -20,8 +21,30 @@ passport.use(
 
         // si no hay un usuario registrado con ese email, tengo que crearlo
         if (!user) {
-          
+          const newUser = new UsersModel({
+            firstName: profile.name.givenName,
+            lastName: profile.name.familyName,
+            email,
+            password: "",
+          });
+
+          newUser.walletId = await createWalletWhenUserRegister(newUser._id);
+
+          user = await newUser.save();
+          console.log(user);
         }
+
+        console.log(user);
+
+        const sessionData = {
+          _id: user._id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          roles: user.roles,
+        };
+
+        callback(null, sessionData);
       } catch (error) {
         return callback(error);
       }
