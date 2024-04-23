@@ -51,7 +51,7 @@ export const createUser = async (req, res) => {
       lastName,
       email,
       phoneNumber,
-      password: hashedPassword
+      password: hashedPassword,
     });
     // Create a wallet for the user
     newUser.walletId = await createWalletWhenUserRegister(newUser._id);
@@ -63,7 +63,10 @@ export const createUser = async (req, res) => {
       firstName: newUser.firstName,
       lastName: newUser.lastName,
       email: newUser.email,
-      roles: newUser.roles
+      roles: newUser.roles,
+      dateOfBirth: newUser.dateOfBirth,
+      phoneNumber: newUser.phoneNumber,
+      address: newUser.address,
     };
     // Send verification email
     // todo: await mailsServices.sendVerificationEmail(service.payload..email, service.payload..vfToken);
@@ -93,11 +96,14 @@ export const loginUser = async (req, res) => {
       return resFail(res, 400, "User or Password do not match");
     }
     req.session.user = {
-      _id: user._id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      roles: user.roles
+      _id: newUser._id,
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
+      email: newUser.email,
+      roles: newUser.roles,
+      dateOfBirth: newUser.dateOfBirth,
+      phoneNumber: newUser.phoneNumber,
+      address: newUser.address,
     };
     return resSuccess(res, 200, "logged in successfully");
   } catch (error) {
@@ -176,7 +182,7 @@ export const verifyPasswordResetToken = async (req, res) => {
   try {
     const user = await UsersModel.findOne({
       email,
-      pwResetToken: resetToken
+      pwResetToken: resetToken,
     });
     if (!user || user.pwResetTokenExpire < new Date()) {
       return resFail(res, 400, "Invalid or expired reset token");
@@ -199,7 +205,7 @@ export const resetPassword = async (req, res) => {
     const user = await UsersModel.findOne({
       email,
       pwResetToken: resetToken,
-      pwResetTokenExpire: { $gt: new Date() }
+      pwResetTokenExpire: { $gt: new Date() },
     });
     if (!user || user.pwResetTokenExpire < new Date()) {
       return resFail(res, 400, "Invalid or expired reset token");
