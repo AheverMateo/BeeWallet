@@ -3,9 +3,92 @@ import Table from "./HistoryTable";
 import MobileTable from "./MobileTable";
 
 const Movements = () => {
+  const movements = [
+    {
+      id: 1,
+      name: "Compra de zapatos",
+      typeOf: "Gasto",
+      status: "Enviada",
+      date: "12/12/2021",
+      amount: 100,
+    },
+    {
+      id: 2,
+      name: "venta de zapatos",
+      typeOf: "Gasto",
+      status: "Recibido",
+      date: "11/12/2021",
+      amount: 100,
+    },
+    {
+      id: 3,
+      name: "tranferencia de dinero",
+      typeOf: "Transferencia",
+      status: "Pendiente",
+      date: "10/12/2021",
+      amount: 100,
+    },
+    {
+      id: 4,
+      name: "venta de zapatos",
+      typeOf: "Recepccion de dinero",
+      status: "Recibido",
+      date: "09/12/2021",
+      amount: 100,
+    },
+    {
+      id: 5,
+      name: "Netflix",
+      typeOf: "Gasto",
+      status: "Enviada",
+      date: "08/12/2021",
+      amount: 200,
+    },
+    {
+      id: 6,
+      name: "Pan",
+      typeOf: "Gasto",
+      status: "Enviada",
+      date: "08/12/2021",
+      amount: 20,
+    },
+    {
+      id: 7,
+      name: "Agua",
+      typeOf: "Gasto",
+      status: "Enviada",
+      date: "08/12/2021",
+      amount: 200,
+    }
+
+  ];
+  const getStatusClass = (status:string) => {
+    switch (status) {
+      case 'Enviada':
+        return 'text-[#1CC719]';
+      case 'Pendiente':
+        return 'text-yellow-500';
+      case 'Recibido':
+        return 'text-[#B90707]';
+      default:
+        return '';
+    }
+  };
+  const getPointClass = (status:string) => {
+    switch (status) {
+      case 'Enviada':
+        return 'bg-[#1CC719]';
+      case 'Pendiente':
+        return 'bg-yellow-500';
+      case 'Recibido':
+        return 'bg-[#B90707]';
+      default:
+        return '';
+    }
+  };
   return (
-    <main>
-      <section className="md:p-3 flex justify-between ">
+    <main className="mt-8 max-sm:flex max-sm:flex-col max-sm:gap-5">
+      <section className="md:p-3 flex justify-between">
         <h1 className="md:text-center md:text-3xl">Historial de Movimientos</h1>
         <div className="md:gap-3 md:flex md:justify-between">
           <input
@@ -20,10 +103,10 @@ const Movements = () => {
       </section>
       <section className="md:w-[70rem]">
         <div className="hidden sm:block">
-          <Table />
+          <Table movements={movements} getStatusClass={getStatusClass} getStatusPointClass={getPointClass} />
         </div>
         <div className=" sm:hidden">
-          <MobileTable />
+          <MobileTable movements={movements} getStatusClass={getStatusClass} />
         </div>
       </section>
     </main>
