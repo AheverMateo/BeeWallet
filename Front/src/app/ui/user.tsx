@@ -1,28 +1,17 @@
 import SideBar from "../dashboard/SideBar"
 import imgUser from "../../assets/icons/unsplash_ZXfUUM_LR0k.png"
-import download from "../../assets/icons/download.svg"
 import discard from "../../assets/icons/discard.svg"
 import visto from "../../assets/icons/visto.svg"
 import logo from "../../assets/icons/Logo.svg"
+import { userStore } from "../../store/userStore"
 import HeaderR from "../../app/dashboard/HeadR"
+import { useEffect } from "react"
+
 const user = () => {
 
-    async function fetchSessionData() {
-        try {
-        const response = await fetch('/api/auth/session', {
-            credentials: 'include'
-        });
-        const data = await response.json();
-        if (data.success) {
-            console.log('User data:', data.user);
-        } else {
-            console.log('No active session:', data.message);
-        }
-        } catch (error) {
-        console.error('Error fetching session data:', error);
-        }
-    }
-    fetchSessionData();
+    useEffect (() =>{
+        console.log(userStore())
+    },[])
 
 
     return (
@@ -68,44 +57,6 @@ const user = () => {
                                     <h4 className="text-gray-400 text-sm mt-4 mb-2">Ciudad y País</h4>
                                     <p className="text-gray-300 text-xl mb-2">Buenos Aires, Argentina.</p>
                                 </div>
-                            <div className=" mt-20">
-                                <h1 className="text-2xl font-bold text-white mb-8">Privacidad</h1>
-                                <div className=" flex flex-col w-full rounded-xl px-6 py-4 mt-5 bg-zinc-900">
-                                    <h4 className="text-gray-400 text-sm mt-4 mb-2">Contraseña</h4>
-                                    <p className="text-gray-300 text-xl mb-2">Cal123456#</p>
-                                    <hr className="border-gray-400" />
-                                    <h4 className="text-gray-400 text-sm mt-4 mb-2">PIN</h4>
-                                    <p className="text-gray-300 text-xl mb-2">0000</p>
-                                </div>
-
-                                <div className=" flex flex-col w-full rounded-xl px-6 py-4 mt-5 bg-zinc-900">
-                                    <h4 className="text-gray-400 text-sm mt-4 mb-2">Tipo de empleo </h4>
-                                    <p className="text-gray-300 text-xl mb-2">Autónomo - Full time</p>
-                                    <hr className="border-gray-400" />
-                                    <h4 className="text-gray-400 text-sm mt-4 mb-2">Experiencia</h4>
-                                    <p className="text-gray-300 text-xl mb-2">1-3 años</p>
-                                </div>
-                            </div>
-
-                            <div className=" mt-20">
-                                <h1 className="text-2xl font-bold text-white mb-8">Documentos</h1>
-                                <div className="  flex flex-col w-full rounded-xl px-6  mt-5 bg-zinc-900">
-                                    <h4 className="text-gray-400 text-sm mt-4 mb-2">Número de documento</h4>
-                                    <p className="text-gray-300 text-xl mb-2">00.000.000</p>
-                                    <hr className="border-gray-400" />
-                                    <h4 className="text-gray-400 text-sm mt-4 mb-2">CUIL/CUIT </h4>
-                                    <p className="text-gray-300 text-xl mb-2">00-00000000-0</p>
-                                </div>
-
-                                <div className="flex w-full rounded-xl px-6  mt-5 bg-zinc-900">
-                                    <img className="w-6 h-6 mt-3" src={download} alt="" />
-                                    <div className=" flex flex-col ml-6 justify-center">
-                                    <h4 className=" text-gray-400 text-sm">Documento</h4>
-                                    <p className="text-gray-300 text-xl font-bold">PDF, JPEG, PNG</p>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div className=" mt-20">
                                 <h1 className="text-2xl font-bold text-white mb-8">Configuracion</h1>
                                 <div className="  flex flex-col w-full rounded-xl  px-6 py-10  mt-5 bg-zinc-900">
