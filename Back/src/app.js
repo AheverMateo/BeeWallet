@@ -6,6 +6,7 @@ import { connectDb } from "./config/mongoConnect.js";
 import { addLogger, logger } from "./config/logger.js"; // Import logger and addLogger
 import MongoStore from "connect-mongo";
 import passport from "passport";
+import cors from "cors";
 
 import usersRouter from "./modules/Users/router.js";
 import authRouter from "./modules/Users/Auth/router.js";
@@ -29,6 +30,7 @@ app.use(express.static("public")); // serve public
 app.use(addLogger); // general logging
 app.use(express.json()); // Parse JSON requests
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded requests
+app.use(cors());
 app.use(
   session({
     store: MongoStore.create({
