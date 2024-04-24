@@ -12,23 +12,24 @@ import HeadR from "./dashboard/HeadR";
 export default function Dashboard( ) {
   
   return (
-    <main className=" absolute min-h-screen md:w-screen bg-[#0E0E0E] text-[#FCFFFF] md:flex md:justify-center p-3 md:gap-5">
+    <main className=" absolute min-h-screen md:w-screen bg-[#0E0E0E] text-[#FCFFFF] font-inter
+    md:flex md:justify-center p-3 md:gap-5">
       <Outlet/>
-      <main className="flex justify-between">
-      <section className="hidden p-5 sm:block h-full">
+      <main className="flex flex-col md:flex-row md:justify-between">
+      <section className="hidden p-5 md:block h-full">
         <SideBar />  
       </section>
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-2">
         
       <section className="flex justify-between gap-5 p-1">
-        <div className="sm:hidden">
+        <div className="md:hidden">
           <SideBarHeader1/>
         </div>
-        <br className=" hidden sm:block" />
+        <br className=" hidden md:block" />
         <HeadR/>
       </section>
-      <section className="flex justify-between pt-4 pl-4">
-        <p>Hola Juana</p>
+      <section className="flex justify-between pl-4">
+        <p className="text-[1.625rem]">Hola Juana</p>
         <br />
       </section>
       <section className="flex gap-5">
@@ -40,10 +41,13 @@ export default function Dashboard( ) {
           <AccountData3/>
         </div>
       </section>
-      <section className="absolute bottom-0 pb-5">
+      <section className="md:absolute md:bottom-0 lg:pb-5">
         <Movements/>
       </section>
       </div>
+      <section className="max-sm:block md:hidden">
+        <SideBarFooter/>
+      </section>
       </main>
     </main>
   );

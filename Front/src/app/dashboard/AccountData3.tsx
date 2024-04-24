@@ -20,8 +20,6 @@ const AccountData3 = () => {
           </div>
         </div>
         <div className="flex gap-5 ">
-        <button className="bg-[#323131] w-[10.75rem] h-[2.5625rem]" onClick={() => setShowRBLimit(prevShow => !prevShow)}>Establecer el limite</button>
-      {showRBLimit && <RBLimit />}
           <button className="bg-[#323131] w-[8.8125] h-[2.5625rem]:" onClick={() => setShowRBMonth(prevShow => !prevShow)}>Este mes</button>
           {showRBMonth && <RBMonth />}
         </div>
