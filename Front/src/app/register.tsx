@@ -6,6 +6,8 @@ import { GoogleIcon } from "@/assets/icons/google";
 import { AppleIcon } from "@/assets/icons/apple";
 import panel from "../assets/icons/Imagen_Panal_contorno.svg"
 
+// Connect to the backend
+
 
 export default function Register() {
     const [values, setValues] = useState<{ email: string }>({ email: "" });
