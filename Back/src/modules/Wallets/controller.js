@@ -5,12 +5,13 @@ import {
   getAllUsersWallets,
   addUserWalletBalance,
   removeUserWalletBalance,
-  getUserWalletBalance
+  getUserWalletBalance,
 } from "./services.js";
+import { transferByUserIdService } from "../Transactions/services.js";
 
 export const getWallet = async (req, res) => {
   try {
-    const userId = req.user._id;
+    const userId = req.session.user._id;
     const wallet = await getUserWallet(userId);
     if (!wallet) {
       return resFail(res, 404, "Wallet not found");
@@ -18,7 +19,7 @@ export const getWallet = async (req, res) => {
     resSuccess(res, 200, "Wallet found", wallet);
   } catch (error) {
     logger.error(`${error.stack}`);
-    resFail(res, 500, "Internal Server Error");
+    resFail(res, 500, "Internal Server Error", error.stack);
   }
 };
 
@@ -31,12 +32,12 @@ export const getAllWallets = async (req, res) => {
     resSuccess(res, 200, "Wallets found", wallets);
   } catch (error) {
     logger.error(`${error.stack}`);
-    resFail(res, 500, "Internal Server Error");
+    resFail(res, 500, "Internal Server Error", error.stack);
   }
 };
 
 export const addWalletBalance = async (req, res) => {
-  const userId = req.user._id;
+  const userId = req.session.user._id;
   const { amount } = req.body;
   try {
     const wallet = await addUserWalletBalance(userId, amount);
@@ -46,12 +47,12 @@ export const addWalletBalance = async (req, res) => {
     resSuccess(res, 200, "Wallet balance updated successfully", wallet.balance);
   } catch (error) {
     logger.error(`${error.stack}`);
-    resFail(res, 500, "Internal Server Error");
+    resFail(res, 500, "Internal Server Error", error.stack);
   }
 };
 
 export const removeWalletBalance = async (req, res) => {
-  const userId = req.user._id;
+  const userId = req.session.user._id;
   const { amount } = req.body;
   try {
     const wallet = await removeUserWalletBalance(userId, amount);
@@ -61,12 +62,12 @@ export const removeWalletBalance = async (req, res) => {
     resSuccess(res, 200, "Wallet balance updated successfully", wallet.balance);
   } catch (error) {
     logger.error(`${error.stack}`);
-    resFail(res, 500, "Internal Server Error");
+    resFail(res, 500, "Internal Server Error", error.stack);
   }
 };
 
 export const getWalletBalance = async (req, res) => {
-  const userId = req.user._id;
+  const userId = req.session.user._id;
   try {
     const wallet = await getUserWalletBalance(userId);
     if (!wallet) {
@@ -75,22 +76,24 @@ export const getWalletBalance = async (req, res) => {
     resSuccess(res, 200, "Wallet found", wallet.balance);
   } catch (error) {
     logger.error(`${error.stack}`);
-    resFail(res, 500, "Internal Server Error");
+    resFail(res, 500, "Internal Server Error", error.stack);
   }
 };
 
 export const getWalletTransactions = async (req, res) => {
   // I suppose that the user can only see his own transactions
-  const userId = req.user._id;
+  const userId = req.session.user._id;
+  const { page } = req.params;
   try {
     const wallet = await getUserWallet(userId);
     if (!wallet) {
       return resFail(res, 404, "Wallet not found");
     }
-    // const transactions = await TransactionController.getTransactionsByWalletId(id);
-    // resSuccess(res, 200, "Wallet transactions found", transactions);
+    // Transactions services not implemented yet
+    const transactions = await transferByUserIdService(userId, page);
+    resSuccess(res, 200, "Wallet found", transactions);
   } catch (error) {
     logger.error(`${error.stack}`);
-    resFail(res, 500, "Internal Server Error");
+    resFail(res, 500, "Internal Server Error", error.stack);
   }
 };

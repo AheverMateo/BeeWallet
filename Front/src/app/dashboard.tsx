@@ -5,10 +5,9 @@ import AccountData3 from "./dashboard/AccountData3";
 import Movements from "./dashboard/Movements";
 import SideBar from "./dashboard/SideBar";
 import SideBarHeader1 from "./dashboard/SideBarHeader1";
-import SideBarHeader2 from "./dashboard/SideBarHeader2";
+// import SideBarHeader2 from "./dashboard/SideBarHeader2";
 import SideBarFooter from "./dashboard/SideBarFooter";
 import HeadR from "./dashboard/HeadR";
-
 
 export default function Dashboard( ) {
   

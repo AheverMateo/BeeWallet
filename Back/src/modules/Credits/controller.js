@@ -1,75 +1,35 @@
 import CreditModel from "./schema.js";
-import WalletModel from "../Wallets/schema.js";
 import { logger } from "../../config/logger.js";
-import BigNumber from "bignumber.js";
+import { createCredit, updateCreditDebt, getUserTotalDebt } from "./service.js";
 import { resSuccess, resFail } from "../../config/utils/response.js";
-import { addUserWalletBalance } from "../Wallets/services.js";
 
 export const newCredit = async (req, res) => {
   const { userId, walletId, quantity, billingCycles, taxPercentage, dueDate } = req.body;
   try {
-    const wallet = await WalletModel.find({ userId });
-
-    if (!wallet) {
-      return res.status(404).json({ success: false, message: "This wallet doesn't exist!" });
-    }
-    const total = (quantity + ((taxPercentage / 100) * quantity));
-    const totalQuota = total / billingCycles;
-
-    const newCredit = new CreditModel({
-      userId,
-      walletId,
-      quantity,
-      status: "active",
-      quota: totalQuota,
-      billingCyclesLeft: billingCycles,
-      nextBillingDate: new Date(Date.now() + 2592000000),
-      leftToPay: total,
-      taxPercentage,
-      dueDate
-    });
-
-    await newCredit.save();
-    await addUserWalletBalance(walletId, quantity);
+    const newCredit = await createCredit(userId, walletId, quantity, billingCycles, taxPercentage, dueDate);
 
     return resSuccess(res, 201, "Credit created successfully", newCredit);
   } catch (error) {
-    return res.status(500).json({ success: false, message: "Internal Server Error" });
+    if (error.statuscode === 404) {
+      return resFail(res, 404, error.message, error);
+    }
+    logger.error(`${error.stack}`);
+    return resFail(res, 500, "Internal server error", error.stack);
   }
 };
 
 export const updateCredit = async (req, res) => {
   const { creditId, totalCharged } = req.body;
   try {
-    const credit = await CreditModel.findOne({ _id: creditId });
-
-    if (!credit) {
-      return res.status(404).json({ success: false, message: "This credit doesn't exist!" });
-    }
-
-    const leftToPayParsed = new BigNumber(credit.leftToPay);
-    const quotaParsed = new BigNumber(credit.quota);
-
-    if (credit.billingCyclesLeft === 1 && leftToPayParsed === quotaParsed) {
-      await CreditModel.updateOne({ _id: creditId }, {
-        status: "inactive",
-        leftToPay: 0,
-        billingCyclesLeft: 0,
-        updatedAt: new Date(Date.now())
-      });
-    } else {
-      await CreditModel.updateOne({ _id: creditId }, {
-        leftToPay: credit.leftToPay - totalCharged,
-        nextBillingDate: new Date(Date.now() + 2592000000),
-        billingCyclesLeft: credit.billingCyclesLeft - 1,
-        updatedAt: new Date(Date.now())
-      });
-    }
+    const credit = await updateCreditDebt(creditId, totalCharged);
 
     return resSuccess(res, 204, "Credit updated!", credit);
   } catch (error) {
+    if (error.statuscode === 404) {
+      return resFail(res, 404, error.message, error);
+    }
     logger.error(`${error.stack}`);
-    return res.status(500).json({ success: false, message: "Internal Server Error" });
+    return resFail(res, 500, "Internal server error", error.stack);
   }
 };
 
@@ -86,6 +46,7 @@ export const getCredit = async (req, res) => {
 
     return resSuccess(res, 200, "Credit found!", credit);
   } catch (error) {
+    logger.error(`${error.stack}`);
     return res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 };
@@ -96,20 +57,13 @@ export const getUserDebt = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const userCredits = await CreditModel.countDocuments({ userId: id });
+    const totalDebt = await getUserTotalDebt(id);
 
-    if (userCredits === 0) {
-      return res.status(404).json({ success: true, message: "This user doesn't have debts." });
-    }
-    const credits = await CreditModel.find({ userId: id }, "leftToPay");
-
-    const debtValues = credits.map((obj) => {
-      return parseFloat(obj.leftToPay);
-    });
-
-    const totalDebt = debtValues.reduce((a, b) => a + b);
     return resSuccess(res, 200, "Debt found!", totalDebt);
   } catch (error) {
+    if (error.statuscode === 404) {
+      return resFail(res, 404, error.message, error);
+    }
     return res.status(500).json({ success: false, message: error.stack });
   }
 };

@@ -5,6 +5,8 @@ import compression from "compression";
 import { connectDb } from "./config/mongoConnect.js";
 import { addLogger, logger } from "./config/logger.js"; // Import logger and addLogger
 import MongoStore from "connect-mongo";
+import passport from "passport";
+import cors from "cors";
 
 import usersRouter from "./modules/Users/router.js";
 import authRouter from "./modules/Users/Auth/router.js";
@@ -12,6 +14,8 @@ import walletsRouter from "./modules/Wallets/router.js";
 import transactionsRouter from "./modules/Transactions/router.js";
 import investmentRouter from "./modules/Investments/router.js";
 import creditsRouter from "./modules/Credits/router.js";
+import googleAuthRouter from "./modules/Users/GoogleAuth/router.js";
+import "./config/passport.google.js";
 
 connectDb();
 
@@ -26,25 +30,38 @@ app.use(express.static("public")); // serve public
 app.use(addLogger); // general logging
 app.use(express.json()); // Parse JSON requests
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded requests
+app.use(cors(
+  {
+    origin: "http://localhost:5173",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    exposedHeaders: ["Authorization"],
+    optionsSuccessStatus: 200,
+  },
+));
 app.use(
   session({
     store: MongoStore.create({
       mongoUrl: process.env.MONGO_URL,
       ttl: 3600, // 1 hour in seconds
-      dbName: "fintech",
-      autoRemove: "native" // Automatically remove expired sessions
+      dbName: "beewalletdb",
+      autoRemove: "native", // Automatically remove expired sessions
     }),
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: true, // Secure cookie, only over HTTPS
       httpOnly: true, // Protects against client-side script accessing the cookie data
-      maxAge: 3600000 // 1 hour in miliseconds
-    }
-  })
+      maxAge: 3600000, // 1 hour in miliseconds
+    },
+  }),
 );
 app.use(compression({})); // Enable response compression
+
+//  Middlewares OAuth Google
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Routers //
 app.use("/api/users", usersRouter);
@@ -53,6 +70,7 @@ app.use("/api/wallets", walletsRouter);
 app.use("/api/transactions", transactionsRouter);
 app.use("/api/investments", investmentRouter);
 app.use("/api/credits", creditsRouter);
+app.use("/api/auth/google", googleAuthRouter);
 
 // Error handlers //
 

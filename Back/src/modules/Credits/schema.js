@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const creditSchema = new Schema({
   userId: { type: String, require: true },
   walletId: { type: String, require: true },
-  status: String,
+  status: { type: String, enum: ["active", "inactive"], default: "active" },
   quantity: { type: Number, require: true },
   currency: { type: String, require: true, default: "ARS" },
   quota: { type: Types.Decimal128, require: true },
@@ -16,7 +16,7 @@ const creditSchema = new Schema({
   nextBillingDate: { type: Date },
   dueDate: { type: Date },
   createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now }
+  updatedAt: { type: Date, default: Date.now },
 });
 
 export default model("Credit", creditSchema);
