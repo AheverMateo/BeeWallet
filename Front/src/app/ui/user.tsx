@@ -3,8 +3,8 @@ import imgUser from "../../assets/icons/unsplash_ZXfUUM_LR0k.png"
 import discard from "../../assets/icons/discard.svg"
 import visto from "../../assets/icons/visto.svg"
 import logo from "../../assets/icons/Logo.svg"
-import { userStore } from "../../store/userStore"
 import HeaderR from "../../app/dashboard/HeadR"
+import { userStore } from "../../store/userStore"
 import { useEffect } from "react"
 
 const user = () => {

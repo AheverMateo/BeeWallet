@@ -8,16 +8,19 @@ export default function Home() {
     const { pathname } = useLocation()
 
     return pathname.startsWith('/dashboard') ? (
-        <Outlet />
+            <Outlet />
     ) : <>
         {/* <Bg /> */}
-        <div className="size-full bg-background min-h-screen grid grid-rows-[auto,1fr,auto] text-foreground">
-            <Header />
+        <div className="">
+            
+            {
+                //<Header />
+            }
             <div>
                 <Outlet />
             </div>
             {
-                <Footer />
+                //<Footer />
             }
         </div>
     </>
