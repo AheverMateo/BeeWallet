@@ -12,7 +12,7 @@ import { isAdmin, isLoggedIn } from "../../middlewares/auth.js";
 const router = express.Router();
 
 router.get("/", isAdmin, getAllWallets);
-router.get("/:id", isLoggedIn, getWallet);
+router.get("/me", isLoggedIn, getWallet);
 router.put("/add-balance/", isLoggedIn, addWalletBalance);
 router.get("/balance/", isLoggedIn, getWalletBalance);
 router.put("/remove-balance/", isLoggedIn, removeWalletBalance);
