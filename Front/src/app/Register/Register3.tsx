@@ -23,10 +23,7 @@ const Register3 = () => {
       </div>
 
       <div className=" md:w-[50.68%] p-5">
-        <main
-          className="md:border-l-[#323231cc]
-       md:border-l-[3px] flex flex-col items-center gap-10 h-full"
-        >
+        <main className="md:border-l-[#323231cc] md:border-l-[3px] flex flex-col items-center gap-10 h-full">
           <section className="flex justify-between p-2 w-full ">
             <div>
               <br className="max-sm:hidden" />
