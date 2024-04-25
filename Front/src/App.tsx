@@ -15,6 +15,9 @@ import CVU from "./app/dashboard/CVU";
 import Transferencia from "./app/dashboard/Transferencia";
 import Cantidad from "./app/dashboard/Transferencia/Cantidad";
 import Exitosa from "./app/dashboard/Transferencia/Exitosa";
+import Register5 from "./app/Register/Register5";
+import Register3 from "./app/Register/Register3";
+import Register18 from "./app/Register/Register18";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,6 +28,9 @@ const router = createBrowserRouter(
           <Route path="/login" element={<Login />} />
           <Route path="/user" element={<User />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/register/auth" element={<Register3 />} />
+          <Route path="/register/1" element={<Register5 />} />
+          <Route path="/register/5" element={<Register18 />} />
           <Route path="/dashboard" element={<Dashboard />}>
             <Route path="/dashboard/CVU" element={<CVU />} />
             <Route path="/dashboard/transference" element={<Transferencia />} />
