@@ -35,7 +35,8 @@ app.use(
     origin: "http://localhost:5173",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: ["Content-Type"],
+    optionsSuccessStatus: 200,
   }),
 );
 app.use(
@@ -49,7 +50,7 @@ app.use(
     }),
     cookie: {
       httpOnly: true,
-      secure: true,
+      // secure: true,
       maxAge: 1000 * 60 * 60 * 24, // 24 hours
       sameSite: "Lax",
     },
