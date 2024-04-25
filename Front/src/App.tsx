@@ -5,7 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Home from "./app/home";
-import LandingPage from "./app/default";
+import LandingPage from "./app/LandingPage";
 import Dashboard from "./app/dashboard";
 import Login from "./app/login";
 import Register from "./app/register";
