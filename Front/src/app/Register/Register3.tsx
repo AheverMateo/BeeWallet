@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { useRef } from "react";
 
-const Register3 = () => {
-  const inputRefs = Array(6)
-    .fill(null)
-    .map(() => useRef<HTMLInputElement>(null));
+const inputRefs = Array(6)
+  .fill(null)
+  .map(() => useRef<HTMLInputElement>(null));
 
+const Register3 = () => {
   const handleKeyUp = (index: number) => {
     if (index < 5 && inputRefs[index + 1].current) {
       (inputRefs[index + 1].current as HTMLInputElement).focus();
