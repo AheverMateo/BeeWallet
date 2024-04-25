@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import React, { useRef } from "react";
+import { useRef } from "react";
 
 const Register3 = () => {
   const inputRefs = Array(6)
@@ -90,4 +90,5 @@ const Register3 = () => {
     </main>
   );
 };
+
 export default Register3;

@@ -54,7 +54,7 @@ const LandingPc = () => {
       </Button>
     );
   };
-  const style = {
+  const style: React.CSSProperties = {
     // Bienvenidos a beeWallet
     position: "absolute",
     top: "204px",
@@ -68,7 +68,7 @@ const LandingPc = () => {
     letterSpacing: "0.4px",
   };
 
-  const beeWalletStyle = {
+  const beeWalletStyle: React.CSSProperties = {
     // Bienvenidos a Beewallet
     fontFamily: "Helvetica",
     fontSize: "48px",
@@ -82,7 +82,7 @@ const LandingPc = () => {
     WebkitTextFillColor: "transparent",
   };
 
-  const descriptionStyle = {
+  const descriptionStyle: React.CSSProperties = {
     // Tu colmena financiera...
     position: "absolute",
     top: "285px",
@@ -98,7 +98,7 @@ const LandingPc = () => {
     marginBottom: "10px",
   };
 
-  const colmenaStyle = {
+  const colmenaStyle: React.CSSProperties = {
     // Descrubre una nueva forma de gestionar...
     position: "absolute",
     top: "370px",
@@ -112,7 +112,7 @@ const LandingPc = () => {
     letterSpacing: "-0.48px",
   };
 
-  const imagenStyle = {
+  const imagenStyle: React.CSSProperties = {
     // Imagen FrenteLapton
     position: "absolute",
     top: "500px",
@@ -120,7 +120,7 @@ const LandingPc = () => {
     height: "auto",
   };
 
-  const ImagenStyle2 = {
+  const ImagenStyle2: React.CSSProperties = {
     // Imagen PibeBtexto
     position: "absolute",
     left: "5px",
@@ -129,7 +129,7 @@ const LandingPc = () => {
     height: "auto",
   };
 
-  const ImagenStyle3 = {
+  const ImagenStyle3: React.CSSProperties = {
     // Imagen TipoCuenta
     position: "absolute",
     top: "1950px",
@@ -137,7 +137,7 @@ const LandingPc = () => {
     height: "auto",
   };
 
-  const ImagenStyle4 = {
+  const ImagenStyle4: React.CSSProperties = {
     // Imagen ComoFunciona
     position: "absolute",
     top: "2450px",
@@ -147,7 +147,7 @@ const LandingPc = () => {
     height: "auto",
   };
 
-  const ImagenStyle5 = {
+  const ImagenStyle5: React.CSSProperties = {
     // Imagen TresMobiles
     position: "absolute",
     top: "2700px",
@@ -157,7 +157,7 @@ const LandingPc = () => {
     height: "auto",
   };
 
-  const ImagenStyle6 = {
+  const ImagenStyle6: React.CSSProperties = {
     // Imagen PorqueElegirnos
     position: "absolute",
     top: "3200px",
@@ -165,7 +165,7 @@ const LandingPc = () => {
     height: "auto",
   };
 
-  const ImagenStyle7 = {
+  const ImagenStyle7: React.CSSProperties = {
     // Imagen JoinUs
     position: "absolute",
     top: "4534px",

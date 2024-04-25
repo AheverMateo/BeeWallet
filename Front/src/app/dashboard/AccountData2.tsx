@@ -1,5 +1,3 @@
-import React from "react";
-
 const AccountData2 = () => {
   return (
     <section className="flex  sm:w-[27.12rem]  
