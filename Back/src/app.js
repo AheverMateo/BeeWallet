@@ -53,7 +53,7 @@ app.use(
     saveUninitialized: false,
     cookie: {
       httpOnly: true, // Protects against client-side script accessing the cookie data
-      secure: process.env.NODE_ENV === "production",
+      secure: true,
       maxAge: 3600000, // 1 hour in miliseconds
       sameSite: "None",
     },
