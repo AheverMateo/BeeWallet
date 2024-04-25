@@ -7,9 +7,9 @@ const investmentSchema = new Schema(
     tna: { type: Number, required: true },
     earnedInterests: { type: Types.Decimal128 },
     finishDate: { type: Date },
-    walletId: { type: Types.ObjectId, ref: "Wallet", required: true }
+    walletId: { type: Types.ObjectId, ref: "Wallet", required: true },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const InvestmentModel = model("Investment", investmentSchema);

@@ -28,7 +28,7 @@ async function createInvestment (req, res) {
       return resFail(
         res,
         400,
-        "The amount to be invested must be less than the available amount"
+        "The amount to be invested must be less than the available amount",
       );
     }
 
@@ -112,7 +112,7 @@ const investmentController = {
   createInvestment,
   getAllInvestmentByWallet,
   getInvestment,
-  simulateInvestment
+  simulateInvestment,
 };
 
 export default investmentController;

@@ -6,8 +6,8 @@ const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: process.env.MAIL_SENDER,
-    pass: process.env.MAIL_PASS
-  }
+    pass: process.env.MAIL_PASS,
+  },
 });
 
 class MailingService {
@@ -26,7 +26,7 @@ class MailingService {
             <p style="font-size: 14px; color: #777;">If you didn't request a password reset, you can ignore this email.</p>
             <p style="font-size: 14px; color: #777;">The link will expire in one hour.</p>
          </div>
-      `
+      `,
     };
     try {
       await transporter.sendMail(mailOptions);
@@ -48,7 +48,7 @@ class MailingService {
                   <p style="font-size: 16px;">Please enter this code in the form to verify your email address.</p>
                   <p style="font-size: 14px; color: #777;">This code will expire in 10 minutes.</p>
                </div>
-            `
+            `,
     };
     try {
       await transporter.sendMail(mailOptions);

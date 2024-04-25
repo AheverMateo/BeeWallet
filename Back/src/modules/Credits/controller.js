@@ -10,7 +10,7 @@ export const newCredit = async (req, res) => {
 
     return resSuccess(res, 201, "Credit created successfully", newCredit);
   } catch (error) {
-    if(error.statuscode === 404){
+    if (error.statuscode === 404) {
       return resFail(res, 404, error.message, error);
     }
     logger.error(`${error.stack}`);
@@ -25,7 +25,7 @@ export const updateCredit = async (req, res) => {
 
     return resSuccess(res, 204, "Credit updated!", credit);
   } catch (error) {
-    if(error.statuscode === 404){
+    if (error.statuscode === 404) {
       return resFail(res, 404, error.message, error);
     }
     logger.error(`${error.stack}`);
@@ -61,7 +61,7 @@ export const getUserDebt = async (req, res) => {
 
     return resSuccess(res, 200, "Debt found!", totalDebt);
   } catch (error) {
-    if(error.statuscode === 404){
+    if (error.statuscode === 404) {
       return resFail(res, 404, error.message, error);
     }
     return res.status(500).json({ success: false, message: error.stack });

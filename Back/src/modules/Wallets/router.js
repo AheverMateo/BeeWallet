@@ -5,7 +5,7 @@ import {
   addWalletBalance,
   getWalletBalance,
   removeWalletBalance,
-  getWalletTransactions
+  getWalletTransactions,
 } from "./controller.js";
 import { isAdmin, isLoggedIn } from "../../middlewares/auth.js";
 

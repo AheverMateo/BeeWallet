@@ -8,7 +8,7 @@ export const createWalletWhenUserRegister = async (userId) => {
     const newWallet = new WalletModel({
       userId,
       cvu, // Assign the generated unique CVU
-      balance: 0 // Initialize with zero balance
+      balance: 0, // Initialize with zero balance
     });
     await newWallet.save();
     return newWallet._id;

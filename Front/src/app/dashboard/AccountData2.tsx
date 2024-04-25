@@ -2,9 +2,10 @@ import React from "react";
 
 const AccountData2 = () => {
   return (
-    <section className="flex h-full w-[27.5rem] justify-center gap-7 ">
+    <section className="flex  sm:w-[27.12rem]  
+    justify-center gap-5 ">
       <div className="flex object-center justify-center 
-      bg-[#232323] rounded-[1rem] p-6">
+      bg-[#161616] rounded-[1rem] p-4 h-[4.69rem] w-[12.94rem]">
         <img
           src="/icons/UpCircle1.svg"
           alt="GastosTotales"
@@ -15,8 +16,8 @@ const AccountData2 = () => {
           <h2>$7.321,5</h2>
         </div>
       </div>
-      <div className="flex object-center justify-center 
-      bg-[#232323] rounded-[1rem] p-6">
+      <div className="flex item-center justify-center 
+      bg-[#161616] h-[4.69rem] w-[12.94rem] rounded-[1rem] p-4">
         <img
           src="/icons/UpCircle1.svg"
           alt="GastosTotales"
