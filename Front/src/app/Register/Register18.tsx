@@ -7,10 +7,10 @@ const Register18 = () => {
 
   const handleSubmit = (data) => {
     setFormData(data);
-
+    console.log(formData);
     // Aquí puedes hacer algo con los datos del formulario, como enviarlos a un servidor
   };
-  console.log(formData);
+
   return (
     <main className="bg-[#E2E2E2] min-h-screen flex items-center flex-col gap-5">
       <br />

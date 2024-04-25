@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom";
-import React, { useRef } from "react";
+import { useRef } from "react";
+
+const inputRefs = Array(6)
+  .fill(null)
+  .map(() => useRef<HTMLInputElement>(null));
+
+const handleKeyUp = (index: number) => {
+  if (index < 5 && inputRefs[index + 1].current) {
+    (inputRefs[index + 1].current as HTMLInputElement).focus();
+  }
+};
 
 const Register3 = () => {
-  const inputRefs = Array(6)
-    .fill(null)
-    .map(() => useRef<HTMLInputElement>(null));
-
-  const handleKeyUp = (index: number) => {
-    if (index < 5 && inputRefs[index + 1].current) {
-      (inputRefs[index + 1].current as HTMLInputElement).focus();
-    }
-  };
-
   return (
     <main className="bg-[#0E0E0E] min-h-svh font-inter text-[#E2E2E2] md:flex">
       <div className="relative md:w-[49.32%] hidden md:block">
