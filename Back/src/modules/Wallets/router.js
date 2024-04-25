@@ -13,9 +13,9 @@ const router = express.Router();
 
 router.get("/", isAdmin, getAllWallets);
 router.get("/:id", isLoggedIn, getWallet);
-router.put("/add-balance/:id", isLoggedIn, addWalletBalance);
-router.get("/balance/:id", isLoggedIn, getWalletBalance);
-router.put("/remove-balance/:id", isLoggedIn, removeWalletBalance);
-router.get("/transactions/:id", isLoggedIn, getWalletTransactions);
+router.put("/add-balance/", isLoggedIn, addWalletBalance);
+router.get("/balance/", isLoggedIn, getWalletBalance);
+router.put("/remove-balance/", isLoggedIn, removeWalletBalance);
+router.get("/transactions/:page", isLoggedIn, getWalletTransactions);
 
 export default router;
