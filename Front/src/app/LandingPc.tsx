@@ -1,60 +1,59 @@
-import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { text } from "stream/consumers";
+import { useNavigate } from "react-router-dom";
 
-const AbrirCuentaButton = () => {
-  const navigate = useNavigate();
 
-  const buttonStyle = {
-    display: "flex",
-    width: "350px",
-    height: "40px",
-    padding: "12px 150px",
-    justifyContent: "center",
-    alignItems: "center",
-    alignContent: "space-between",
-    flexShrink: 0,
-    borderRadius: "30px",
-    background: "#FCCF58",
-    boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-    color: "rgba(0, 0, 0, 1.25)",
+
+const LandingPc = () => {
+  const AbrirCuentaButton = () => {
+    const navigate = useNavigate();
+  
+    const buttonStyle = {
+      display: "flex",
+      width: "350px",
+      height: "40px",
+      padding: "12px 150px",
+      justifyContent: "center",
+      alignItems: "center",
+      alignContent: "space-between",
+      flexShrink: 0,
+      borderRadius: "30px",
+      background: "#FCCF58",
+      boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+      color: "rgba(0, 0, 0, 1.25)",
+    };
+  
+    return (
+      <Button onClick={() => navigate("/register")} style={buttonStyle}>
+        Abrir mi cuenta
+      </Button>
+    );
   };
-
-  return (
-    <Button onClick={() => navigate("/register")} style={buttonStyle}>
-      Abrir mi cuenta
-    </Button>
-  );
-};
-
-const ComenzarButton = () => {
-  const navigate = useNavigate();
-
-  const buttonStyle = {
-    display: "flex",
-    width: "370px",
-    height: "60px",
-    padding: "20px 170px",
-    justifyContent: "center",
-    alignItems: "center",
-    alignContent: "space-between",
-    flexShrink: 0,
-    borderRadius: "40px",
-    background: "#FCCF58",
-    boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-    color: "rgba(0, 0, 0, 1.25)",
+  
+  const ComenzarButton = () => {
+  
+    const navigate = useNavigate();
+  
+    const buttonStyle = {
+      display: "flex",
+      width: "370px",
+      height: "60px",
+      padding: "20px 170px",
+      justifyContent: "center",
+      alignItems: "center",
+      alignContent: "space-between",
+      flexShrink: 0,
+      borderRadius: "40px",
+      background: "#FCCF58",
+      boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+      color: "rgba(0, 0, 0, 1.25)",
+    };
+  
+    return (
+      <Button onClick={() => navigate("/register")} style={buttonStyle}>
+        Comenzar
+      </Button>
+    );
   };
-
-  return (
-    <Button onClick={() => navigate("/register")} style={buttonStyle}>
-      Comenzar
-    </Button>
-  );
-};
-
-export default function LandingPage() {
-  const navigate = useNavigate();
-
   const style = {
     // Bienvenidos a beeWallet
     position: "absolute",
@@ -173,14 +172,6 @@ export default function LandingPage() {
     width: "50%",
     height: "auto",
   };
-
-  //const ImagenStyle8 = { // Imagen Banderas
-  //position: 'absolute',
-  //top: '4685px',
-  //width: '50%',
-  //height: 'auto'
-  //};
-
   return (
     <div
       style={{
@@ -269,5 +260,7 @@ export default function LandingPage() {
         <ComenzarButton />
       </div>
     </div>
-  );
+  )
 }
+
+export default LandingPc
