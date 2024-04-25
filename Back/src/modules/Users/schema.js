@@ -15,7 +15,7 @@ const schema = new mongoose.Schema(
       zipCode: { type: String, max: 150 },
     },
     phoneNumber: { type: String, max: 50 },
-    roles: { type: [String], required: true, default: ["User"] },
+    roles: { type: String, required: true, enum: ["User", "Admin"], default: "User" },
     walletId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Wallet",

@@ -5,7 +5,7 @@ export const isAdmin = (req, res, next) => {
     return res.status(401).json({ success: false, message: "Unauthorized - Login required" });
   }
   // Check if the user has the 'admin' role
-  if (!req.session.user.roles && !req.session.user.roles.includes(["Admin"])) {
+  if (!req.session.user.roles && !req.session.user.roles.includes("Admin")) {
     return res.status(403).json({ success: false, message: "Forbidden - Admin access required" });
   }
   // User is an admin, proceed to the next middleware/route
