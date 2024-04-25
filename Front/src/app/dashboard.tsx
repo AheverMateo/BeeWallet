@@ -16,11 +16,8 @@ export default function Dashboard() {
 
   useEffect(() => {
     const fetchSessionData = async () => {
-      const response = await fetch("http://localhost:3000/api/auth/session", {
+      const response = await fetch("https://beewalletback.onrender.com/api/auth/session", {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
         credentials: "include",
       });
 
@@ -28,9 +25,11 @@ export default function Dashboard() {
         const data = await response.json();
         setUserData(data.user);
       } else if (response.status === 401) {
+        console.error("Session not valid, redirecting to login.");
         navigate("/login");
       } else {
         console.error("Error fetching session data:", response.statusText);
+        alert("Error fetching data. Please try again later.");
       }
     };
 

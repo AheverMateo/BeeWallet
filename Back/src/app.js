@@ -30,30 +30,30 @@ app.use(express.static("public")); // serve public
 app.use(addLogger); // general logging
 app.use(express.json()); // Parse JSON requests
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded requests
-app.use(cors(
-  {
+app.use(
+  cors({
     origin: "http://localhost:5173",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    exposedHeaders: ["Authorization"],
+    allowedHeaders: ["Content-Type"],
     optionsSuccessStatus: 200,
-  },
-));
+  }),
+);
 app.use(
   session({
-    store: MongoStore.create({
-      mongoUrl: process.env.MONGO_URL,
-      ttl: 3600, // 1 hour in seconds
-      dbName: "beewalletdb",
-      autoRemove: "native", // Automatically remove expired sessions
-    }),
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_URL,
+      dbName: "beewalletdb",
+      autoRemove: "native",
+    }),
     cookie: {
-      httpOnly: true, // Protects against client-side script accessing the cookie data
-      maxAge: 3600000, // 1 hour in miliseconds
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+      maxAge: 1000 * 60 * 60 * 24, // 24 hours
     },
   }),
 );

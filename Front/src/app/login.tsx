@@ -8,9 +8,7 @@ import { GoogleIcon } from "@/assets/icons/google";
 import { AppleIcon } from "@/assets/icons/apple";
 import panel from "../assets/icons/Imagen_Panal_contorno.svg";
 
-interface LoginProps {
-  onLogin: (email: string, password: string) => void;
-}
+type LoginProps = unknown;
 
 const Login: React.FC<LoginProps> = function Login() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -23,8 +21,9 @@ const Login: React.FC<LoginProps> = function Login() {
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const response = await fetch("http://localhost:3000/api/auth/login", {
+    const response = await fetch("https://beewalletback.onrender.com/api/auth/login", {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },

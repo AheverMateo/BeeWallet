@@ -46,7 +46,7 @@ const LandingMobile = () => {
       );
     };
 
-  const style = {
+  const style: React.CSSProperties = {
     textAlign: "center",
     color: "#E2E2E2",
     fontFamily: "Inter",
@@ -57,7 +57,7 @@ const LandingMobile = () => {
     margin: "140px 0 -30px",
   };
 
-  const beeWalletStyle = {
+  const beeWalletStyle: React.CSSProperties = {
     fontFamily: "Helvetica",
     fontSize: "24px",
     fontWeight: 700,
@@ -68,7 +68,7 @@ const LandingMobile = () => {
     WebkitTextFillColor: "transparent",
   };
 
-  const beeWalletStyle2 = {
+  const beeWalletStyle2: React.CSSProperties = {
     fontFamily: "Helvetica",
     fontSize: "24px",
     fontWeight: 700,
@@ -80,7 +80,7 @@ const LandingMobile = () => {
     marginTop: "20px", // Ajuste del margen superior
   };
 
-  const descriptionStyle = {
+  const descriptionStyle: React.CSSProperties = {
     color: "#FCCF58",
     fontFamily: "Inter",
     fontSize: "16px",
@@ -90,7 +90,7 @@ const LandingMobile = () => {
     margin: "50px",
   };
 
-  const descriptionStyle2 = {
+  const descriptionStyle2: React.CSSProperties = {
     color: "#FCCF58",
     fontFamily: "Inter",
     fontSize: "16px",
@@ -100,7 +100,7 @@ const LandingMobile = () => {
     margin: "-70px",
   };
 
-  const colmenaStyle = {
+  const colmenaStyle: React.CSSProperties = {
     color: "#E2E2E2",
     fontFamily: "Inter",
     fontSize: "16px",
@@ -110,13 +110,13 @@ const LandingMobile = () => {
     margin: "10px 0",
   };
 
-  const imagenStyle = {
+  const imagenStyle: React.CSSProperties = {
     width: "100%",
     height: "auto",
     margin: "20px 0",
   };
 
-  const buttonContainerStyle = {
+  const buttonContainerStyle: React.CSSProperties = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -124,14 +124,14 @@ const LandingMobile = () => {
     margin: "20px 0",
   };
 
-  const lineStyle = {
+  const lineStyle: React.CSSProperties = {
     width: "216px",
     height: "1px",
     background: "#FCCF58",
     margin: "20px 0",
   };
 
-  const additionalTextStyle = {
+  const additionalTextStyle: React.CSSProperties = {
     textAlign: "center",
     color: "#E2E2E2",
     fontFamily: "Inter",
@@ -142,7 +142,7 @@ const LandingMobile = () => {
     margin: "20px 0",
   };
 
-  const highlightedWordsStyle = {
+  const highlightedWordsStyle: React.CSSProperties = {
     color: "#FCCF58",
     fontFamily: "Inter",
     fontSize: "12px",
@@ -151,7 +151,7 @@ const LandingMobile = () => {
     lineHeight: "22px",
   };
 
-  const boxTextStyle = {
+  const boxTextStyle: React.CSSProperties = {
     color: "#AFAFAF",
     textAlign: "center",
     fontFamily: "Inter",

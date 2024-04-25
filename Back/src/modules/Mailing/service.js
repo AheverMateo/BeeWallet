@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
 
 class MailingService {
   static async sendPasswordResetEmail (email, hashedToken) {
-    const resetLink = `http://localhost:8080/api/auth/reset-password/verify/${email}/${hashedToken}`; // ajustar
+    const resetLink = `https://beewalletback.onrender.com/api/auth/reset-password/verify/${email}/${hashedToken}`; // ajustar
     const mailOptions = {
       from: process.env.MAIL_SENDER,
       to: email,
