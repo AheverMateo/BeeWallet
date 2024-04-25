@@ -7,7 +7,7 @@ import HeaderR from "../../app/dashboard/HeadR"
 import { userStore } from "../../store/userStore"
 import { useEffect } from "react"
 
-const user = () => {
+const User = () => {
 
     useEffect (() =>{
         console.log(userStore())
@@ -91,4 +91,4 @@ const user = () => {
     )
 }
 
-export default user
+export default User;

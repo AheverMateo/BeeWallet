@@ -1,6 +1,11 @@
 import WalletModel from "./schema.js";
 import { logger } from "../../config/logger.js";
 import BigNumber from "bignumber.js";
+import {
+  validateBigNumber,
+  validateBigNumberZero,
+  validateBigNumberNegative,
+} from "../../config/utils/bigNumberValidations.js";
 
 export const createWalletWhenUserRegister = async (userId) => {
   try {
@@ -63,6 +68,25 @@ export const addUserWalletBalance = async (userId, amount) => {
     if (!wallet) {
       return null;
     }
+    // BigNumber validations
+    if (!validateBigNumber(amount)) {
+      throw new Error("Amount must be a type Number", {
+        sucsess: false,
+        statusCode: 400,
+      });
+    }
+    if (validateBigNumberZero(amount)) {
+      throw new Error("Amount must be greater than zero", {
+        sucsess: false,
+        statusCode: 400,
+      });
+    }
+    if (validateBigNumberNegative(amount)) {
+      throw new Error("Amount must be a positive number", {
+        sucsess: false,
+        statusCode: 400,
+      });
+    }
     // Use BigNumber for addition
     const newBalance = new BigNumber(wallet.balance.toString()).plus(amount);
     wallet.balance = newBalance.toString();
@@ -79,6 +103,25 @@ export const removeUserWalletBalance = async (userId, amount) => {
     const wallet = await WalletModel.findOne({ userId });
     if (!wallet) {
       return null;
+    }
+    // BigNumber validations
+    if (!validateBigNumber(amount)) {
+      throw new Error("Amount must be a type Number", {
+        sucsess: false,
+        statusCode: 400,
+      });
+    }
+    if (validateBigNumberZero(amount)) {
+      throw new Error("Amount must be greater than zero", {
+        sucsess: false,
+        statusCode: 400,
+      });
+    }
+    if (validateBigNumberNegative(amount)) {
+      throw new Error("Amount must be a positive number", {
+        sucsess: false,
+        statusCode: 400,
+      });
     }
     // Use BigNumber for subtraction
     const newBalance = new BigNumber(wallet.balance.toString()).minus(amount);
