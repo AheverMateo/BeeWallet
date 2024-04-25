@@ -50,7 +50,7 @@ app.use(
     }),
     cookie: {
       httpOnly: true,
-      secure: "auto",
+      secure: false,
       maxAge: 1000 * 60 * 60 * 24, // 24 hours
       sameSite: "None",
     },
