@@ -8,9 +8,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Navigate to Project folder
-        run: cd /home/ubuntu/c17-30-ft-node-react-
-      - name: Pull changes
-        run: git pull origin main
+        run: cd /home/ubuntu/c17-30-ft-node-react- && git pull origin main
       - name: Kill Back proccess
         run: sudo killall node
       - name: Move to back folder, install new dependencies and run Nodejs app again
