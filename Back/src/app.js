@@ -47,12 +47,11 @@ app.use(
     store: MongoStore.create({
       mongoUrl: process.env.MONGO_URL,
       dbName: "beewalletdb",
+      autoRemove: "native",
     }),
     cookie: {
       httpOnly: true,
-      secure: false,
       maxAge: 1000 * 60 * 60 * 24, // 24 hours
-      sameSite: "None",
     },
   }),
 );
