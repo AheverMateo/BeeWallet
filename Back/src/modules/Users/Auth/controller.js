@@ -106,7 +106,7 @@ export const loginUser = async (req, res) => {
       phoneNumber: user.phoneNumber,
       address: user.address,
     };
-    return resSuccess(res, 200, "logged in successfully");
+    return resSuccess(res, 200, "logged in successfully", user);
   } catch (error) {
     logger.error(`${error.stack}`);
     return resFail(res, 500, "Internal Server Error", error.stack);

@@ -54,6 +54,7 @@ app.use(
     cookie: {
       httpOnly: true, // Protects against client-side script accessing the cookie data
       maxAge: 3600000, // 1 hour in miliseconds
+      sameSite: "None",
     },
   }),
 );
