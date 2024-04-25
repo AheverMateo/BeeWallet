@@ -12,5 +12,5 @@ jobs:
       - name: Kill Back proccess
         run: sudo killall node
       - name: Move to back folder, install new dependencies and run Nodejs app again
-        run: cd Back/ && npm i && npm run start
+        run: cd /home/ubuntu/c17-30-ft-node-react-/Back && npm i && npm run start
           
