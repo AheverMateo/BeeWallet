@@ -1,5 +1,3 @@
-import React from 'react'
-
 const HeadR = () => {
   return (
     <div className=" flex items-center gap-3">

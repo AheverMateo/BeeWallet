@@ -19,9 +19,6 @@ export default function Dashboard() {
       const response = await fetch("https://beewalletback.onrender.com/api/auth/session", {
         method: "GET",
         credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
       });
 
       if (response.ok) {
@@ -32,8 +29,6 @@ export default function Dashboard() {
         navigate("/login");
       } else {
         console.error("Error fetching session data:", response.statusText);
-        // Handle other types of errors (like network issues or server errors)
-        // Optionally provide a message to the user
         alert("Error fetching data. Please try again later.");
       }
     };

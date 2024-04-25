@@ -1,8 +1,5 @@
-import React from 'react'
 import LandingMobile from './LandingMobile'
 import LandingPc from './LandingPc'
-
-
 
 const LandingPage = () => {
   return (

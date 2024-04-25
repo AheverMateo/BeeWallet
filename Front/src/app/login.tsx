@@ -8,9 +8,7 @@ import { GoogleIcon } from "@/assets/icons/google";
 import { AppleIcon } from "@/assets/icons/apple";
 import panel from "../assets/icons/Imagen_Panal_contorno.svg";
 
-interface LoginProps {
-  onLogin: (email: string, password: string) => void;
-}
+type LoginProps = unknown;
 
 const Login: React.FC<LoginProps> = function Login() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
