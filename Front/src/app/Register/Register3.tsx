@@ -1,17 +1,18 @@
 import { Link } from "react-router-dom";
 import { useRef } from "react";
 
-const inputRefs = Array(6)
-  .fill(null)
-  .map(() => useRef<HTMLInputElement>(null));
-
-const handleKeyUp = (index: number) => {
-  if (index < 5 && inputRefs[index + 1].current) {
-    (inputRefs[index + 1].current as HTMLInputElement).focus();
-  }
-};
-
 const Register3 = () => {
+  // Create an array of refs at the component level, not inside any callback
+// eslint-disable-next-line react-hooks/rules-of-hooks
+  const inputRefs = Array.from({ length: 6 }, () => useRef<HTMLInputElement>(null));
+
+  const handleKeyUp = (index: number) => {
+    // Check if the next input exists and focus it if possible
+    if (index < 5 && inputRefs[index + 1].current) {
+      inputRefs[index + 1].current?.focus();
+    }
+  };
+
   return (
     <main className="bg-[#0E0E0E] min-h-svh font-inter text-[#E2E2E2] md:flex">
       <div className="relative md:w-[49.32%] hidden md:block">
