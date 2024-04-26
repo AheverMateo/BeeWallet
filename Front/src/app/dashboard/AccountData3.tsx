@@ -12,7 +12,7 @@ const AccountData3 = () => {
       className="bg-[#161616] hidden rounded-[1rem]
     h-[21.13rem] w-[48.31rem] sm:grid sm:gap-8 sm:text-[0.875rem] sm:p-3"
     >
-      <section className="flex gap-5">
+      <section className="flex relative gap-5">
         <div>
           <p className=" md:text-[1.625rem]">Límite de gastos</p>
           <div className="md:flex md:w-[30.3125rem] md:gap-3">
@@ -20,8 +20,9 @@ const AccountData3 = () => {
             <h3 className="text-xs relative bottom-0">de $10.000</h3>
           </div>
         </div>
-        <div className="flex gap-5 ">
-          <button className="bg-[#323131] w-[8.8125] h-[2.5625rem]:" onClick={() => setShowRBMonth(prevShow => !prevShow)}>Este mes</button>
+        <div className="flex gap-5 absolute right-0">
+          <button className="bg-[#323131] w-[8.8125] h-[2.5625rem] p-3 rounded-[3.0625rem]" onClick={() => setShowRBMonth(prevShow => !prevShow)}>
+              Este mes</button>
           {showRBMonth && <RBMonth />}
         </div>
       </section>
