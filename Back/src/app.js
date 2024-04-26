@@ -32,18 +32,17 @@ app.use(express.json()); // Parse JSON requests
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded requests
 app.use(
   cors({
-    origin: "https://c17-30-ft-node-react.vercel.app",
+    origin: "https://c17-30-ft-node-react.vercel.app", // Adjust this to match your front-end domain
     credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"],
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type"],
-    optionsSuccessStatus: 200,
   }),
 );
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
+    resave: true,
+    saveUninitialized: true,
     store: MongoStore.create({
       mongoUrl: process.env.MONGO_URL,
       dbName: "beewalletdb",
@@ -51,7 +50,8 @@ app.use(
     }),
     cookie: {
       httpOnly: true,
-      secure: false,
+      secure: true,
+      sameSite: "none",
       maxAge: 1000 * 60 * 60 * 24,
     },
   }),
