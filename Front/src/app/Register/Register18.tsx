@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+// import { useState } from "react";
 import { Link } from "react-router-dom";
 import Form from "./components/Form";
 
 const Register18 = () => {
-  const [formData, setFormData] = useState(null);
+  // const [formData, setFormData] = useState(null);
 
-  const handleSubmit = (data) => {
-    setFormData(data);
-    console.log(formData);
-    // Aquí puedes hacer algo con los datos del formulario, como enviarlos a un servidor
-  };
+  // const handleSubmit = (data) => {
+  //   setFormData(data);
+  //   console.log(formData);
+  //   // Aquí puedes hacer algo con los datos del formulario, como enviarlos a un servidor
+  // };
 
   return (
     <main className="bg-[#E2E2E2] min-h-screen flex items-center flex-col gap-5">
