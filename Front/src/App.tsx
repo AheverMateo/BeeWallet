@@ -13,8 +13,11 @@ import User from "./app/ui/user";
 import "./global.css";
 import CVU from "./app/dashboard/CVU";
 import Transferencia from "./app/dashboard/Transferencia";
+import Register7 from "./app/Register/Register7";
 import Cantidad from "./app/dashboard/Transferencia/Cantidad";
 import Exitosa from "./app/dashboard/Transferencia/Exitosa";
+import Register8 from "./app/Register/Register8";
+import Register9 from "./app/Register/Register9";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +26,9 @@ const router = createBrowserRouter(
         <Route path="/" element={<Home />} errorElement={<div>404</div>}>
           <Route index element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/Register7" element={<Register7/>} />
+          <Route path="/Register8" element={<Register8/>} />
+          <Route path="/Register9" element={<Register9/>} />
           <Route path="/user" element={<User />} />
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />}>

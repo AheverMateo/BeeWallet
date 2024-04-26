@@ -1,6 +1,15 @@
 import { create } from 'zustand'
 
 
+export const useGlobalStoreForm = create((set) => ({
+    formData: {
+        nombre: "",
+        direccion: "",
+        localidad: "",
+        codigo: ""
+    },
+    setFormData: (data:any) => set((state:any) => ({ formData: { ...state.formData, ...data } })),
+    }));
 
 export const userStore = create(() => {
 

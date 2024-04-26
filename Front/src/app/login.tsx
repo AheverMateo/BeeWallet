@@ -20,7 +20,7 @@ export default function Login() {
                     <img src={panel} alt="" />
                 </div>
             </div>
-
+            
             <div className="mx-auto w-full space-y-8 pl-8">
                 <div className="flex flex-col text-center mt-10">
                     <h2 className="font-semibold text-3xl text-white mb-14">Te damos la bienvenida <br /> nuevamente.</h2>
