@@ -41,17 +41,16 @@ app.use(
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
     store: MongoStore.create({
       mongoUrl: process.env.MONGO_URL,
       dbName: "beewalletdb",
-      autoRemove: "native",
     }),
     cookie: {
       httpOnly: true,
       secure: true,
-      sameSite: "none",
+      sameSite: "None",
       maxAge: 1000 * 60 * 60 * 24,
     },
   }),
