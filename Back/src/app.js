@@ -47,10 +47,11 @@ app.use(
     }),
     cookie: {
       // secure: true,
+      httpOnly: true,
       secure: false,
       maxAge: 1000 * 60 * 60 * 24, // 24 hours
-      // sameSite: "none",
-      sameSite: "lax",
+      sameSite: "none",
+      // sameSite: "lax",
     },
   }),
 );
