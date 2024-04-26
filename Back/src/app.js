@@ -32,7 +32,7 @@ app.use(express.json()); // Parse JSON requests
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded requests
 app.use(
   cors({
-    origin: "https://c17-30-ft-node-react.vercel.app", // Adjust this to match your front-end domain
+    origin: "https://c17-30-ft-node-react.onrender.com", // Adjust this to match your front-end domain
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"],
     methods: ["GET", "POST", "PUT", "DELETE"],
@@ -52,7 +52,7 @@ app.use(
       secure: true,
       sameSite: "None",
       maxAge: 1000 * 60 * 60 * 24,
-      domain: ".vercel.app",
+      domain: ".onrender.com",
       path: "/",
     },
   }),
