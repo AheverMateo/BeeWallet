@@ -11,7 +11,7 @@ const SideBarFooter = () => {
         >
           <br />
           <button className="flex items-center md:h-[9.37rem] md:border-t-2 border-[#323131]">
-            <Link to={"/dashborard"} className="size-[2rem] ">
+            <Link to={"/dashboard"} className="size-[2rem] ">
               <img
                 src="/icons/Home 3.svg"
                 alt="Home"

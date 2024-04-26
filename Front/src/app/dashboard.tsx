@@ -16,7 +16,6 @@ type UserData = {
   firstName: string;
   lastName: string;
   email: string;
-  roles: string[];
   phoneNumber: string;
 };
 
@@ -116,7 +115,6 @@ export default function Dashboard() {
           <section className="flex gap-5">
             <div className="flex flex-col gap-5">
               <AccountData1
-                roles={userData.roles}
                 cvu={walletData.cvu}
                 balance={walletData.balance}
               />

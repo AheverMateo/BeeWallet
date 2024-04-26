@@ -16,13 +16,17 @@ const AccountData3 = () => {
         <div>
           <p className=" md:text-[1.625rem]">Límite de gastos</p>
           <div className="md:flex md:w-[30.3125rem] md:gap-3">
-            <h2 className="md:text-[3rem]">$7.321,5</h2>
-            <h3 className="text-xs relative bottom-0">de $10.000</h3>
+            <h2 className="md:text-[3rem]">$28200</h2>
+            <h3 className="relative top-9 text-base">de $46400</h3>
           </div>
         </div>
         <div className="flex gap-5 absolute right-0">
-          <button className="bg-[#323131] w-[8.8125] h-[2.5625rem] p-3 rounded-[3.0625rem]" onClick={() => setShowRBMonth(prevShow => !prevShow)}>
-              Este mes</button>
+          <button
+            className="bg-[#323131] w-[8.8125] h-[2.5625rem] p-3 rounded-[3.0625rem]"
+            onClick={() => setShowRBMonth((prevShow) => !prevShow)}
+          >
+            Este mes
+          </button>
           {showRBMonth && <RBMonth />}
         </div>
       </section>
@@ -39,7 +43,7 @@ const AccountData3 = () => {
         </section>
         <section className="md:flex md:flex-col md:gap-3">
           <div className="md:w-[6rem] md:h-2.5 bg-[#DCA12F] rounded-full"></div>
-          <p className="text-xs">Facturas</p>
+          <p className="text-xs">Servicios</p>
         </section>
         <section className="md:flex md:flex-col md:gap-3">
           <div className="md:w-[8rem] md:h-2.5 bg-[#EC7D17] rounded-full"></div>
