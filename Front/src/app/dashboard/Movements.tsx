@@ -1,92 +1,133 @@
+import { useEffect, useState } from "react";
 import Table from "./HistoryTable";
 import MobileTable from "./MobileTable";
+import axios from "axios";
 
-const Movements = () => {
+type Movement = {
+  transactions: string[];
+};
 
-  const movements = [
-    {
-      id: 1,
-      name: "Compra de zapatos",
-      typeOf: "Gasto",
-      status: "Success",
-      date: "12/12/2021",
-      amount: 100,
-    },
-    {
-      id: 2,
-      name: "venta de zapatos",
-      typeOf: "Gasto",
-      status: "Failed",
-      date: "11/12/2021",
-      amount: 100,
-    },
-    {
-      id: 3,
-      name: "tranferencia de dinero",
-      typeOf: "Transferencia",
-      status: "Pending",
-      date: "10/12/2021",
-      amount: 100,
-    },
-    {
-      id: 4,
-      name: "venta de zapatos",
-      typeOf: "Recepccion de dinero",
-      status: "Failed",
-      date: "09/12/2021",
-      amount: 100,
-    },
-    {
-      id: 5,
-      name: "Netflix",
-      typeOf: "Gasto",
-      status: "Success",
-      date: "08/12/2021",
-      amount: 200,
-    },
-    {
-      id: 6,
-      name: "Pan",
-      typeOf: "Gasto",
-      status: "Success",
-      date: "08/12/2021",
-      amount: 20,
-    },
-    {
-      id: 7,
-      name: "Agua",
-      typeOf: "Gasto",
-      status: "Success",
-      date: "08/12/2021",
-      amount: 200,
-    }
+type WalletTransactionsData = {
+  type: string;
+  amount: string;
+  currency: string;
+  fromWalletId: string;
+  toWalletId?: string;
+  status: "Pending" | "Success" | "Failed";
+  deleted: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+};
 
-  ];
-  const getStatusClass = (status:string) => {
+const Movements: React.FC = () => {
+  const [walletTransactionsData, setWalletTransactionsData] = useState<
+    WalletTransactionsData[]
+  >([]);
+
+  useEffect(() => {
+    const fetchWalletTransactionsData = async () => {
+      try {
+        const response = await axios.get(
+          "https://beewalletback.onrender.com/api/wallets/transactions/0",
+          {
+            withCredentials: true,
+          }
+        );
+        if (response.status === 200) {
+          setWalletTransactionsData(response.data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch transactions:", error);
+        alert("Failed to fetch transactions. Please try again later.");
+      }
+    };
+
+    fetchWalletTransactionsData();
+  }, []);
+
+  // const movements = [
+  //   {
+  //     id: 1,
+  //     name: "Compra de zapatos",
+  //     typeOf: "Gasto",
+  //     status: "Success",
+  //     date: "12/12/2021",
+  //     amount: 100,
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "venta de zapatos",
+  //     typeOf: "Gasto",
+  //     status: "Failed",
+  //     date: "11/12/2021",
+  //     amount: 100,
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "tranferencia de dinero",
+  //     typeOf: "Transferencia",
+  //     status: "Pending",
+  //     date: "10/12/2021",
+  //     amount: 100,
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "venta de zapatos",
+  //     typeOf: "Recepccion de dinero",
+  //     status: "Failed",
+  //     date: "09/12/2021",
+  //     amount: 100,
+  //   },
+  //   {
+  //     id: 5,
+  //     name: "Netflix",
+  //     typeOf: "Gasto",
+  //     status: "Success",
+  //     date: "08/12/2021",
+  //     amount: 200,
+  //   },
+  //   {
+  //     id: 6,
+  //     name: "Pan",
+  //     typeOf: "Gasto",
+  //     status: "Success",
+  //     date: "08/12/2021",
+  //     amount: 20,
+  //   },
+  //   {
+  //     id: 7,
+  //     name: "Agua",
+  //     typeOf: "Gasto",
+  //     status: "Success",
+  //     date: "08/12/2021",
+  //     amount: 200,
+  //   },
+  // ];
+
+  const getStatusClass = (status: string) => {
     switch (status) {
-      case 'Success':
-        return 'text-[#1CC719]';
-      case 'Pending':
-        return 'text-yellow-500';
-      case 'Failed':
-        return 'text-[#B90707]';
+      case "Success":
+        return "text-[#1CC719]";
+      case "Pending":
+        return "text-yellow-500";
+      case "Failed":
+        return "text-[#B90707]";
       default:
-        return '';
+        return "";
     }
   };
-  const getPointClass = (status:string) => {
+  const getPointClass = (status: string) => {
     switch (status) {
-      case 'Success':
-        return 'bg-[#1CC719]';
-      case 'Pending':
-        return 'bg-yellow-500';
-      case 'Failed':
-        return 'bg-[#B90707]';
+      case "Success":
+        return "bg-[#1CC719]";
+      case "Pending":
+        return "bg-yellow-500";
+      case "Failed":
+        return "bg-[#B90707]";
       default:
-        return '';
+        return "";
     }
   };
-
 
   return (
     <main className="mt-8 max-sm:flex max-sm:flex-col max-sm:gap-5">
@@ -105,10 +146,14 @@ const Movements = () => {
       </section>
       <section className="md:w-[70rem]">
         <div className="hidden sm:block">
-          <Table movements={movements} getStatusClass={getStatusClass} getStatusPointClass={getPointClass} />
+          <Table
+            movements={Movements}
+            getStatusClass={getStatusClass}
+            getStatusPointClass={getPointClass}
+          />
         </div>
         <div className=" sm:hidden">
-          <MobileTable movements={movements} getStatusClass={getStatusClass} />
+          <MobileTable movements={Movements} getStatusClass={getStatusClass} />
         </div>
       </section>
     </main>

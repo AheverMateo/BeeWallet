@@ -18,7 +18,7 @@ type UserData = {
   email: string;
   roles: string[];
   phoneNumber: string;
-}
+};
 
 type WalletData = {
   userId: string;
@@ -27,7 +27,7 @@ type WalletData = {
   balance: string;
   currency: string;
   transactions: string[];
-}
+};
 
 export default function Dashboard() {
   const [userData, setUserData] = useState<UserData>({} as UserData);
@@ -65,8 +65,7 @@ export default function Dashboard() {
         const dataWallet: WalletData = await response.json();
         setWalletData(dataWallet);
       } else if (response.status === 401) {
-        console.error("Wallet not valid, redirecting to login.");
-        navigate("/login");
+        console.error("Wallet not valid.");
       } else {
         console.error("Error fetching wallet data:", response.statusText);
         alert("Error fetching data. Please try again later.");
@@ -98,20 +97,20 @@ export default function Dashboard() {
             <HeadR />
           </section>
           <section className="flex justify-between pl-4">
-            <p className="text-[1.625rem]">Hola { userData.firstName }</p>
+            <p className="text-[1.625rem]">Hola {userData.firstName}</p>
             <br />
           </section>
           <section className="flex gap-5">
             <div className="flex flex-col gap-5">
               <AccountData1
-                roles = { userData.roles }
-                cvu = { walletData.cvu }
-                balance = { walletData.balance }
+                roles={userData.roles}
+                cvu={walletData.cvu}
+                balance={walletData.balance}
               />
-              <AcData2 
-                firstName = { userData.firstName }
-                totalIncome = { "100" }
-                totalExpenses = { "100" }
+              <AcData2
+                firstName={userData.firstName}
+                totalIncome={"100"}
+                totalExpenses={"100"}
               />
             </div>
             <div>
