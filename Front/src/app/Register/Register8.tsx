@@ -1,3 +1,4 @@
+/*
 import HeaderRegister from "./HeaderRegister";
 import stepper3 from "../../assets/icons/stepper3.svg";
 import { Input } from "@/components/ui/input";
@@ -6,13 +7,13 @@ import { ChangeEvent, FormEvent } from "react";
 import { useGlobalStoreForm } from "@/store/userStore";
 
 const Register8 = () => {
-  const { formData, setFormData } = useGlobalStoreForm();
+ const { formData, setFormData } = useGlobalStoreForm();
 
   const handlerInfo = (event: ChangeEvent<HTMLInputElement>) => {
     const property = event.target.name;
     const value = event.target.value;
 
-    setFormData((prevState) => ({ ...prevState, [property]: value }));
+    //setFormData((prevState) => ({ ...prevState, [property]: value }));
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -91,4 +92,4 @@ const Register8 = () => {
   );
 };
 
-export default Register8;
+export default Register8;*/
