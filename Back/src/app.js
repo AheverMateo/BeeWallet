@@ -39,7 +39,7 @@ app.use(
       httpOnly: true,
       secure: false, // Ensures the cookie is sent only over HTTPS
       maxAge: 1000 * 60 * 60 * 24, // 24 hours
-      domain: ".onrender.com", // Covers all subdomains under onrender.com
+      // domain: ".onrender.com", // Covers all subdomains under onrender.com
       path: "/",
       sameSite: "Lax", // Allows cookies to be sent in all contexts
     },
