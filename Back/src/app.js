@@ -32,10 +32,10 @@ app.use(express.json()); // Parse JSON requests
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded requests
 app.use(
   cors({
-    origin: "https://c17-30-ft-node-react.onrender.com", // Adjust this to match your front-end domain
-    credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"],
+    origin: "https://c17-30-ft-node-react.onrender.com", // Allow your frontend domain
+    credentials: true, // Credentials are true to allow sending cookies with requests
     methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
 app.use(
@@ -51,6 +51,7 @@ app.use(
       httpOnly: true,
       secure: false,
       maxAge: 1000 * 60 * 60 * 24,
+      domain: ".onrender.com",
       path: "/",
     },
   }),
