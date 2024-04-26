@@ -42,20 +42,6 @@ const User = () => {
     fetchSessionData();
   }, [navigate]);
 
-  const handleLogout = async () => {
-    const response = await axios.get(
-      // "https://beewalletback.onrender.com/api/auth/logout",
-      "http://localhost:3000/api/auth/logout",
-      { withCredentials: true }
-    );
-    if (response.status === 200) {
-      console.log("Logout successful");
-      navigate("/login");
-    } else {
-      console.error("Logout failed:", response.statusText);
-    }
-  };
-
   return (
     <div className="flex ">
       <div className="ml-6 fixed">
@@ -165,7 +151,7 @@ const User = () => {
 
           <div className="flex flex-col justify-center items-center mt-20">
             <button
-              onClick={handleLogout}
+              type="submit"
               className="border-yellow-400 border rounded-full px-10 py-2 text-yellow-300"
             >
               Cerrar Sesion
