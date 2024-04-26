@@ -1,20 +1,20 @@
 import { Link } from "react-router-dom";
-import React, { useRef } from "react";
+import { useRef } from "react";
 
 const Register3 = () => {
-  const inputRefs = Array(6)
-    .fill(null)
-    .map(() => useRef<HTMLInputElement>(null));
+  // Create an array of refs at the component level, not inside any callback
+// eslint-disable-next-line react-hooks/rules-of-hooks
+  const inputRefs = Array.from({ length: 6 }, () => useRef<HTMLInputElement>(null));
 
   const handleKeyUp = (index: number) => {
+    // Check if the next input exists and focus it if possible
     if (index < 5 && inputRefs[index + 1].current) {
-      (inputRefs[index + 1].current as HTMLInputElement).focus();
+      inputRefs[index + 1].current?.focus();
     }
   };
 
   return (
     <main className="bg-[#0E0E0E] min-h-svh font-inter text-[#E2E2E2] md:flex">
-      <div></div>
       <div className="relative md:w-[49.32%] hidden md:block">
         <img
           src="/Polygon22.png"
@@ -24,10 +24,7 @@ const Register3 = () => {
       </div>
 
       <div className=" md:w-[50.68%] p-5">
-        <main
-          className="md:border-l-[#323231cc]
-       md:border-l-[3px] flex flex-col items-center gap-10 h-full"
-        >
+        <main className="md:border-l-[#323231cc] md:border-l-[3px] flex flex-col items-center gap-10 h-full">
           <section className="flex justify-between p-2 w-full ">
             <div>
               <br className="max-sm:hidden" />
@@ -66,7 +63,11 @@ const Register3 = () => {
                       id={`code-${index + 1}`}
                       ref={ref}
                       onKeyUp={() => handleKeyUp(index)}
-                      className="block w-9 h-9 py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      className="block w-[2.96rem] h-[4.2rem] py-3 
+                      text-[1.25rem] text-center text-[#FCCF58] 
+                      bg-[#0E0E0E] border border-[#E2E2E2] rounded-[0.63rem]
+                       focus:ring-[#FCCF58] focus:border-[#6F5308] 
+                       "
                       required
                     />
                   </div>
@@ -75,7 +76,7 @@ const Register3 = () => {
             </form>
           </section>
           <section className="flex flex-col justify-center items-center gap-4">
-            <Link to="/register4">
+            <Link to="/register/1">
               <button
                 className="bg-[#6F5308] text-[#FCCF58] hover:bg-[#FCCF58] hover:text-[#6F5308] rounded-[1.5625rem]
           h-[3rem] w-[20.5rem] shadow-[#00000040] shadow-md"
@@ -90,4 +91,5 @@ const Register3 = () => {
     </main>
   );
 };
+
 export default Register3;

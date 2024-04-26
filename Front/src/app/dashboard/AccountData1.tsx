@@ -1,24 +1,24 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import Dashboard from "../dashboard";
+// import Dashboard from "../dashboard";
 import eyeIcon from '/icons/eye.svg';
 import eyeOffIcon from '/icons/eye-off.svg';
 
 const AccountData1 = () => {
   const [isBlurred, setIsBlurred] = useState(false);
-  const [isTransferenceOpen, setIsTransferenceOpen] = useState(false);
+  // const [isTransferenceOpen, setIsTransferenceOpen] = useState(false);
   const icon : string = isBlurred ? eyeOffIcon : eyeIcon;
 
-  const handleClick = () => {
-    setIsBlurred(!isBlurred);
-  };
-  const handleOpenTransference = () => {
-    setIsTransferenceOpen(true);
-  };
+  // const handleClick = () => {
+  //   setIsBlurred(!isBlurred);
+  // };
+  // const handleOpenTransference = () => {
+  //   setIsTransferenceOpen(true);
+  // };
 
-  const handleCloseTransference = () => {
-    setIsTransferenceOpen(false);
-  };
+  // const handleCloseTransference = () => {
+  //   setIsTransferenceOpen(false);
+  // };
 
   return (
     <main

@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom"
 import { Outlet } from "react-router-dom"
 import Header from "./ui/header"
 import Footer from "./ui/footer"
+import LandingPage from "./LandingPage"
 // import { Bg } from "./ui/background-image"
 
 export default function Home() {
@@ -14,13 +15,14 @@ export default function Home() {
         <div className="">
             
             {
-                //<Header />
+                <Header />
             }
             <div>
                 <Outlet />
+                <LandingPage />
             </div>
             {
-                //<Footer />
+                <Footer />
             }
         </div>
     </>
