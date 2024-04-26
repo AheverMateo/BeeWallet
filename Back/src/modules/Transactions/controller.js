@@ -2,7 +2,13 @@ import TransactionModel from "./schema.js";
 import WalletModel from "../Wallets/schema.js";
 import { logger } from "../../config/logger.js";
 import { resSuccess, resFail } from "../../config/utils/response.js";
-import { NewTransfer, transferUpdate, transferByUserIdService,expenseHistoryService,incomeHistoryService } from "./services.js";
+import {
+  NewTransfer,
+  transferUpdate,
+  transferByUserIdService,
+  expenseHistoryService,
+  incomeHistoryService,
+} from "./services.js";
 
 // pasar validada
 export const transferBetweenAccounts = async (req, res) => {
@@ -15,7 +21,7 @@ export const transferBetweenAccounts = async (req, res) => {
     logger.error(`${error.stack}`);
     return resFail(res, 500, "Error while transferring");
   }
-};// check
+}; // check
 
 export const transferTypeUpdate = async (req, res) => {
   const { type, transactionId } = req.body;
@@ -26,12 +32,14 @@ export const transferTypeUpdate = async (req, res) => {
     logger.error(`${error.stack}`);
     return resFail(res, 500, "Error updating transfer");
   }
-};// check
+}; // check
 
 export const transferById = async (req, res) => {
   const { transactionId } = req.params;
   try {
-    const transfer = await TransactionModel.findById(transactionId).where("deleted").equals(false);
+    const transfer = await TransactionModel.findById(transactionId)
+      .where("deleted")
+      .equals(false);
     if (!transfer) {
       return resFail(res, 404, "Transaction not found");
     }
@@ -40,7 +48,7 @@ export const transferById = async (req, res) => {
     logger.error(`${error.stack}`);
     return resFail(res, 500, "Error updating transfer");
   }
-};// check
+}; // check
 
 export const transferByUserId = async (req, res) => {
   const { page } = req.params;
@@ -52,7 +60,7 @@ export const transferByUserId = async (req, res) => {
     logger.error(`${error.stack}`);
     return resFail(res, 500, "Error retrieving transactions");
   }
-};// check
+}; // check
 
 export const allTransfers = async (req, res) => {
   try {
@@ -72,7 +80,7 @@ export const allTransfers = async (req, res) => {
     logger.error(`${error.stack}`);
     return resFail(res, 500, "Error retrieving transactions");
   }
-};// check
+}; // check
 
 export const expenseHistory = async (req, res) => {
   const { userId } = req.session.user._id;
@@ -84,7 +92,7 @@ export const expenseHistory = async (req, res) => {
     logger.error(`${error.stack}`);
     return resFail(res, 500, "Error retrieving transactions");
   }
-}
+};
 
 export const incomeHistory = async (req, res) => {
   const { userId } = req.session.user._id;
@@ -95,7 +103,7 @@ export const incomeHistory = async (req, res) => {
     logger.error(`${error.stack}`);
     return resFail(res, 500, "Error retrieving transactions");
   }
-}
+};
 
 export const deleteTransfer = async (req, res) => {
   const { transactionId } = req.body;
@@ -118,4 +126,4 @@ export const deleteTransfer = async (req, res) => {
     logger.error(`${error.stack}`);
     return resFail(res, 500, "Error deleting transaction");
   }
-};// check
+}; // check
