@@ -54,11 +54,11 @@ const AccountData1: React.FC<AccountDataProps> = ({ cvu, balance }) => {
         <button className="h-[2rem] w-[8.2rem] bg-[#FCCF58] rounded-[1.15625rem] border border-solid border-[#FCCF58]">
           <Link to={"/dashboard/transference"} className="text-[#0E0E0E]">Transferir</Link>
         </button>
-        <button className="h-[2rem] w-[8.2rem] rounded-[1.15625rem] border border-solid border-[#FCFFFF]">
+        <button className="h-[2rem] w-[8.2rem] rounded-[1.15625rem] border border-[#FCCF58]">
           Ingresar
         </button>
         <button
-          className=" border border-solid border-[#FCFFFF] rounded-[1.15625rem]
+          className=" border border-[#FCCF58] rounded-[1.15625rem]
           h-[2rem] w-[8.2rem]"
         >
           Retirar
