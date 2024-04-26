@@ -46,9 +46,9 @@ app.use(
       dbName: "beewalletdb",
     }),
     cookie: {
-      // secure: true,
+      secure: true,
       httpOnly: true,
-      secure: false,
+      // secure: false,
       maxAge: 1000 * 60 * 60 * 24, // 24 hours
       sameSite: "none",
       // sameSite: "lax",
