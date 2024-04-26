@@ -36,10 +36,10 @@ app.use(
       dbName: "beewalletdb",
     }),
     cookie: {
-      httpOnly: true,
+      // httpOnly: true,
       secure: false,
       maxAge: 1000 * 60 * 60 * 24, // 24 hours
-      domain: ".onrender.com",
+      // domain: ".onrender.com",
       path: "/",
       sameSite: "None",
     },
