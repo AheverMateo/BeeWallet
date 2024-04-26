@@ -1,25 +1,6 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-interface UserData {
-  _id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phoneNumber: string;
-  roles: string[];
-}
-
-interface WalletData {
-  userId: string;
-  _id: string;
-  cvu: string;
-  balance: string;
-  currency: string;
-  transactions: string[];
-}
-
-const CVU = () => {
+const CVU: React.FC = () => {
   return (
     <div
       className="bg-[#0E0E0E] flex flex-col items-center z-20 max-md:w-[10.5rem] 
