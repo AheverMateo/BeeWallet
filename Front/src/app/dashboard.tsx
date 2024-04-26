@@ -53,14 +53,13 @@ export default function Dashboard() {
 
     const fetchSessionData = async () => {
       const response = await axios.get(
-        "https://beewalletback.onrender.com/api/auth/session",
-        // "http://localhost:3000/api/auth/session",
+        // "https://beewalletback.onrender.com/api/auth/session",
+        "http://localhost:3000/api/auth/session",
         { withCredentials: true }
       );
 
       if (response.status === 200) {
         const data: UserData = response.data.user;
-        console.log(data);
         setUserData(data);
       } else if (response.status === 401) {
         console.error("Session not valid, redirecting to login.");
@@ -71,13 +70,12 @@ export default function Dashboard() {
     };
 
     const fetchWalletData = async () => {
-      // const response = await axios.get("http://localhost:3000/api/wallets/me", { withCredentials: true });
-      const response = await axios.get("https://beewalletback.onrender.com/api/wallets/me", { withCredentials: true });
+      const response = await axios.get("http://localhost:3000/api/wallets/me", { withCredentials: true });
+      // const response = await axios.get("https://beewalletback.onrender.com/api/wallets/me", { withCredentials: true });
       if (response.status === 200) {
         const dataWallet = response.data.payload;
         // Assuming 'balance' might be a Decimal128 object
         dataWallet.balance = processDecimal128(dataWallet.balance);
-        console.log(dataWallet);
         setWalletData(dataWallet);
       } else if (response.status === 401) {
         console.error("Wallet not valid.");

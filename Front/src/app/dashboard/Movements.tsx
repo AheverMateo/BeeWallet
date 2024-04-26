@@ -7,10 +7,14 @@ import axios from "axios";
 //   transactions: string[];
 // };
 
-type WalletTransactionsData = {
+type Decimal128 = {
+  $numberDecimal: string;
+};
+
+type Transaction = {
   _id: string;
   type: string;
-  amount: string;
+  amount: string; // This will be processed to string
   currency: string;
   fromWalletId: string;
   toWalletId?: string;
@@ -21,22 +25,39 @@ type WalletTransactionsData = {
 };
 
 const Movements: React.FC = () => {
-  const [walletTransactionsData, setWalletTransactionsData] = useState<
-    WalletTransactionsData[]
-  >([]);
+  const [walletTransactionsData, setWalletTransactionsData] = useState<Transaction[]>([]);
 
   useEffect(() => {
+    // Helper function to check and convert Decimal128 to string
+    function processDecimal128(value: unknown): string {
+      if (
+        typeof value === "object" &&
+        value !== null &&
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (("$numberDecimal" in value))
+      ) {
+        return (value as Decimal128).$numberDecimal;
+      }
+      return value as string;
+    }
+
     const fetchWalletTransactionsData = async () => {
       try {
         const response = await axios.get(
-          "https://beewalletback.onrender.com/api/wallets/transactions/1",
-          // "http://localhost:3000/api/wallets/transactions/0",
+          // "https://beewalletback.onrender.com/api/wallets/transactions/1",
+          "http://localhost:3000/api/wallets/transactions/1",
           {
             withCredentials: true,
           }
         );
         if (response.status === 200) {
-          setWalletTransactionsData(response.data);
+          const transactions: Transaction[] = response.data.payload.map(
+            (transaction: Transaction) => ({
+              ...transaction,
+              amount: processDecimal128(transaction.amount), // Ensure amount is converted
+            })
+          );
+          setWalletTransactionsData(transactions);
         }
       } catch (error) {
         console.error("Failed to fetch transactions:", error);
@@ -178,7 +199,7 @@ const Movements: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {walletTransactionsData.map((transaction) => (
+                  {walletTransactionsData.map((transaction: Transaction) => (
                     <tr
                       className="bg-[#232323] border-b  dark:border-gray-700
                      hover:bg-gray-50 dark:hover:bg-gray-600"
@@ -209,7 +230,7 @@ const Movements: React.FC = () => {
                           transaction.status
                         )}`}
                       >
-                        {transaction.amount}
+                        {transaction.amount as string}
                       </td>
                     </tr>
                   ))}
@@ -236,7 +257,7 @@ const Movements: React.FC = () => {
                         <p>{transaction.type}</p>
                       </td>
                       <td className={getStatusClass(transaction.status)}>
-                        {transaction.amount}
+                        ${transaction.amount}
                       </td>
                     </tr>
                   ))}
