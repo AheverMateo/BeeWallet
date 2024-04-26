@@ -38,7 +38,7 @@ const AccountData1: React.FC<AccountDataProps> = ({ cvu, balance }) => {
             Tu CVU: <span className="text-[12px]">{cvu}</span>
           </p>
       </section>
-      <h1 className="md:text-[1.625rem] text-[1.5rem] text-[#B5B5B5]">
+      <h1 className="md:text-[1.2rem] text-[1.5rem] text-[#B5B5B5]">
         Dinero disponible
       </h1>
       <div className="flex gap-4">

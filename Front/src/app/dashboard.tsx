@@ -118,7 +118,7 @@ export default function Dashboard() {
                 cvu={walletData.cvu}
                 balance={walletData.balance}
               />
-              <AcData2 totalIncome={"100"} totalExpenses={"100"} />
+              <AcData2 totalIncome={"46400"} totalExpenses={"28200"} />
             </div>
             <div>
               <AccountData3 />
