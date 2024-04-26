@@ -52,6 +52,8 @@ app.use(
       secure: true,
       sameSite: "None",
       maxAge: 1000 * 60 * 60 * 24,
+      domain: ".vercel.app",
+      path: "/",
     },
   }),
 );
