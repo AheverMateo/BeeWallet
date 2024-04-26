@@ -56,7 +56,9 @@ const Table: React.FC<TableProps> = ({
                 <th scope="row" className="px-6 py-4 text-left align-middle ">
                   {movement.name}
                 </th>
-                <td className="px-6 py-4 text-left align-middle">{movement.typeOf}</td>
+                <td className="px-6 py-4 text-left align-middle">
+                  {movement.typeOf}
+                </td>
                 <td className="px-6 py-4 text-left align-middle flex justify-center items-center gap-2">
                   <p
                     className={`size-[5px] ${getStatusPointClass(
@@ -65,7 +67,9 @@ const Table: React.FC<TableProps> = ({
                   ></p>
                   {movement.status}
                 </td>
-                <td className="px-6 py-4 text-left align-middle">{movement.date}</td>
+                <td className="px-6 py-4 text-left align-middle">
+                  {movement.date}
+                </td>
                 <td
                   className={`px-6 py-4 text-left align-middle ${getStatusClass(
                     movement.status

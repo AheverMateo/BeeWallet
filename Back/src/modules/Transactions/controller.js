@@ -2,7 +2,7 @@ import TransactionModel from "./schema.js";
 import WalletModel from "../Wallets/schema.js";
 import { logger } from "../../config/logger.js";
 import { resSuccess, resFail } from "../../config/utils/response.js";
-import { NewTransfer, transferUpdate, transferByUserIdService } from "./services.js";
+import { NewTransfer, transferUpdate, transferByUserIdService,expenseHistoryService,incomeHistoryService } from "./services.js";
 
 // pasar validada
 export const transferBetweenAccounts = async (req, res) => {
@@ -73,6 +73,29 @@ export const allTransfers = async (req, res) => {
     return resFail(res, 500, "Error retrieving transactions");
   }
 };// check
+
+export const expenseHistory = async (req, res) => {
+  const { userId } = req.session.user._id;
+  //const { userId } = req.params;
+  try {
+    const transactions = await expenseHistoryService(userId);
+    resSuccess(res, 200, "Transactions retrieved successfully", transactions);
+  } catch (error) {
+    logger.error(`${error.stack}`);
+    return resFail(res, 500, "Error retrieving transactions");
+  }
+}
+
+export const incomeHistory = async (req, res) => {
+  const { userId } = req.session.user._id;
+  try {
+    const transactions = await incomeHistoryService(userId);
+    resSuccess(res, 200, "Transactions retrieved successfully", transactions);
+  } catch (error) {
+    logger.error(`${error.stack}`);
+    return resFail(res, 500, "Error retrieving transactions");
+  }
+}
 
 export const deleteTransfer = async (req, res) => {
   const { transactionId } = req.body;
