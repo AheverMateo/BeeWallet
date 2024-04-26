@@ -1,11 +1,5 @@
 import { useEffect, useState } from "react";
-// import Table from "./HistoryTable";
-// import MobileTable from "./MobileTable";
 import axios from "axios";
-
-// type Movement = {
-//   transactions: string[];
-// };
 
 type Decimal128 = {
   $numberDecimal: string;
@@ -33,7 +27,6 @@ const Movements: React.FC = () => {
       if (
         typeof value === "object" &&
         value !== null &&
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (("$numberDecimal" in value))
       ) {
         return (value as Decimal128).$numberDecimal;
@@ -67,65 +60,6 @@ const Movements: React.FC = () => {
     fetchWalletTransactionsData();
   }, []);
 
-  // const movements = [
-  //   {
-  //     id: 1,
-  //     name: "Compra de zapatos",
-  //     typeOf: "Gasto",
-  //     status: "Success",
-  //     date: "12/12/2021",
-  //     amount: 100,
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "venta de zapatos",
-  //     typeOf: "Gasto",
-  //     status: "Failed",
-  //     date: "11/12/2021",
-  //     amount: 100,
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "tranferencia de dinero",
-  //     typeOf: "Transferencia",
-  //     status: "Pending",
-  //     date: "10/12/2021",
-  //     amount: 100,
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "venta de zapatos",
-  //     typeOf: "Recepccion de dinero",
-  //     status: "Failed",
-  //     date: "09/12/2021",
-  //     amount: 100,
-  //   },
-  //   {
-  //     id: 5,
-  //     name: "Netflix",
-  //     typeOf: "Gasto",
-  //     status: "Success",
-  //     date: "08/12/2021",
-  //     amount: 200,
-  //   },
-  //   {
-  //     id: 6,
-  //     name: "Pan",
-  //     typeOf: "Gasto",
-  //     status: "Success",
-  //     date: "08/12/2021",
-  //     amount: 20,
-  //   },
-  //   {
-  //     id: 7,
-  //     name: "Agua",
-  //     typeOf: "Gasto",
-  //     status: "Success",
-  //     date: "08/12/2021",
-  //     amount: 200,
-  //   },
-  // ];
-
   const getStatusClass = (status: string) => {
     switch (status) {
       case "Success":
@@ -138,18 +72,6 @@ const Movements: React.FC = () => {
         return "";
     }
   };
-  // const getPointClass = (status: string) => {
-  //   switch (status) {
-  //     case "Success":
-  //       return "bg-[#1CC719]";
-  //     case "Pending":
-  //       return "bg-yellow-500";
-  //     case "Failed":
-  //       return "bg-[#B90707]";
-  //     default:
-  //       return "";
-  //   }
-  // };
 
   return (
     <main className="mt-8 max-sm:flex max-sm:flex-col max-sm:gap-5">
@@ -168,11 +90,6 @@ const Movements: React.FC = () => {
       </section>
       <section className="md:w-[70rem]">
         <div className="hidden sm:block">
-          {/*<Table
-            movements={Movements}
-            getStatusClass={getStatusClass}
-            getStatusPointClass={getPointClass}
-          />*/}
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg w-[76.6875rem]">
             <div className="overflow-y-auto max-h-80">
               <table
@@ -240,9 +157,6 @@ const Movements: React.FC = () => {
           </div>
         </div>
         <div className=" sm:hidden">
-          {/* 
-          <MobileTable movements={Movements} getStatusClass={getStatusClass} /> 
-          */}
           <div className="font-inter ">
             <section>
               <table className="w-full overflow-y-auto">
