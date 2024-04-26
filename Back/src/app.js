@@ -46,13 +46,13 @@ app.use(
       dbName: "beewalletdb",
     }),
     cookie: {
-      secure: true,
       httpOnly: true,
-      // secure: false,
       maxAge: 1000 * 60 * 60 * 24, // 24 hours
       sameSite: "none",
+      secure: false,
+      // secure: true,
       // sameSite: "lax",
-      partitioned: true,
+      // partitioned: true,
     },
   }),
 );
