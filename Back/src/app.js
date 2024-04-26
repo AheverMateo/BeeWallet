@@ -49,8 +49,7 @@ app.use(
     }),
     cookie: {
       httpOnly: true,
-      secure: true,
-      sameSite: "None",
+      secure: false,
       maxAge: 1000 * 60 * 60 * 24,
       domain: ".onrender.com",
       path: "/",
