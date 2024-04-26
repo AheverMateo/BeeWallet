@@ -1,82 +1,17 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 // import Dashboard from "../dashboard";
 import eyeIcon from "/icons/eye.svg";
 import eyeOffIcon from "/icons/eye-off.svg";
 
-interface UserData {
-  _id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phoneNumber: string;
+type AccountDataProps = {
   roles: string[];
-}
-
-interface WalletData {
-  userId: string;
-  _id: string;
   cvu: string;
   balance: string;
-  currency: string;
-  transactions: string[];
 }
 
-const AccountData1: React.FC<Props> = ({ Cvu, name, phone, mail }) => {
+const AccountData1: React.FC<AccountDataProps> = ({ roles, cvu, balance }) => {
   const [isBlurred, setIsBlurred] = useState(false);
-  const [userData, setUserData] = useState<UserData>({} as UserData);
-  const [walletData, setWalletData] = useState<WalletData | null>(null);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchSessionData = async () => {
-      const response = await fetch(
-        "https://beewalletback.onrender.com/api/auth/session",
-        {
-          method: "GET",
-          credentials: "include",
-        }
-      );
-
-      if (response.ok) {
-        const dataUser: UserData = await response.json();
-        setUserData(dataUser);
-      } else if (response.status === 401) {
-        console.error("Session not valid, redirecting to login.");
-        navigate("/login");
-      } else {
-        console.error("Error fetching session data:", response.statusText);
-        alert("Error fetching data. Please try again later.");
-      }
-    };
-
-    fetchSessionData();
-  }, [navigate]);
-
-  useEffect(() => {
-    const fetchWalletData = async () => {
-      const response = await fetch(
-        "https://beewalletback.onrender.com/api/wallets/me",
-        {
-          method: "GET",
-          credentials: "include",
-        }
-      );
-
-      if (response.ok) {
-        const dataWallet: WalletData = await response.json();
-        setWalletData(dataWallet);
-      } else if (response.status === 401) {
-        console.error("Wallet not valid, redirecting to login.");
-        navigate("/login");
-      } else {
-        console.error("Error fetching wallet data:", response.statusText);
-        alert("Error fetching data. Please try again later.");
-      }
-    };
-
-    fetchWalletData();
-  }, [navigate]);
 
   // const [isTransferenceOpen, setIsTransferenceOpen] = useState(false);
   const icon: string = isBlurred ? eyeOffIcon : eyeIcon;
@@ -99,10 +34,10 @@ const AccountData1: React.FC<Props> = ({ Cvu, name, phone, mail }) => {
     rounded-[1rem] gap-2 p-5 bg-[#161616]"
     >
       <section className="flex justify-between">
-        <p>Cuenta Beelancer</p>
+        <p>Cuenta { roles } Beelancer</p>
         <Link to={"/dashboard/CVU"}>
           <button className="bg-[#323131] rounded-[6.25rem] w-[7.4375rem] md:w-[8rem] p-1">
-            Tu CVU
+            Tu CVU: { cvu }
           </button>
         </Link>
       </section>
@@ -111,7 +46,7 @@ const AccountData1: React.FC<Props> = ({ Cvu, name, phone, mail }) => {
       </h1>
       <div className="flex gap-8">
         <h2 className={`text-[3rem] ${isBlurred ? "blur-lg" : ""}`}>
-          $7.321,5
+          { balance }
         </h2>
 
         <button onClick={() => setIsBlurred(!isBlurred)}>

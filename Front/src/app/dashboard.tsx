@@ -11,8 +11,27 @@ import SideBarHeader1 from "./dashboard/SideBarHeader1";
 import SideBarFooter from "./dashboard/SideBarFooter";
 import HeadR from "./dashboard/HeadR";
 
+type UserData = {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  roles: string[];
+  phoneNumber: string;
+};
+
+type WalletData = {
+  userId: string;
+  _id: string;
+  cvu: string;
+  balance: string;
+  currency: string;
+  transactions: string[];
+};
+
 export default function Dashboard() {
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState<UserData>({} as UserData);
+  const [walletData, setWalletData] = useState<WalletData>({} as WalletData);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,7 +52,28 @@ export default function Dashboard() {
       }
     };
 
+    const fetchWalletData = async () => {
+      const response = await fetch(
+        "https://beewalletback.onrender.com/api/wallets/me",
+        {
+          method: "GET",
+          credentials: "include",
+        }
+      );
+
+      if (response.ok) {
+        const dataWallet: WalletData = await response.json();
+        setWalletData(dataWallet);
+      } else if (response.status === 401) {
+        console.error("Wallet not valid.");
+      } else {
+        console.error("Error fetching wallet data:", response.statusText);
+        alert("Error fetching data. Please try again later.");
+      }
+    };
+
     fetchSessionData();
+    fetchWalletData();
   }, [navigate]);
 
   if (!userData) return <p>Loading...</p>;
@@ -63,12 +103,15 @@ export default function Dashboard() {
           <section className="flex gap-5">
             <div className="flex flex-col gap-5">
               <AccountData1
-                Cvu={userData.cvu}
-                name={userData.name}
-                phone={userData.phone}
-                mail={userData.mail}
+                roles={userData.roles}
+                cvu={walletData.cvu}
+                balance={walletData.balance}
               />
-              <AcData2 />
+              <AcData2
+                firstName={userData.firstName}
+                totalIncome={"100"}
+                totalExpenses={"100"}
+              />
             </div>
             <div>
               <AccountData3 />
@@ -85,4 +128,3 @@ export default function Dashboard() {
     </main>
   );
 }
-export default Dashboard;
