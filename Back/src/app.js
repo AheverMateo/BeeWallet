@@ -26,19 +26,6 @@ app.listen(PORT, () => {
 });
 
 // Middlewares //
-app.use(express.static("public")); // serve public
-app.use(addLogger); // general logging
-app.use(express.json()); // Parse JSON requests
-app.use(express.urlencoded({ extended: true })); // Parse URL-encoded requests
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type"],
-    optionsSuccessStatus: 200,
-  }),
-);
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -47,21 +34,32 @@ app.use(
     store: MongoStore.create({
       mongoUrl: process.env.MONGO_URL,
       dbName: "beewalletdb",
-      autoRemove: "native",
     }),
     cookie: {
-      httpOnly: true,
+      httpOnly: false,
+      secure: false,
+      maxAge: 1000 * 60 * 60 * 24, // 24 hours
+      // domain: ".onrender.com",
+      path: "/",
       sameSite: "None",
-      secure: true,
-      maxAge: 1000 * 60 * 60 * 24,
     },
   }),
 );
-app.use(compression({})); // Enable response compression
-
-//  Middlewares OAuth Google
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(
+  cors({
+    origin: "https://c17-30-ft-node-react.onrender.com", // Allow your frontend domain
+    credentials: true, // Credentials are true to allow sending cookies with requests
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
+app.use(express.static("public")); // serve public
+app.use(addLogger); // general logging
+app.use(express.json()); // Parse JSON requests
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded requests
+app.use(compression({})); // Enable response compression
 
 // Routers //
 app.use("/api/users", usersRouter);

@@ -8,6 +8,8 @@ import { createWalletWhenUserRegister } from "../../Wallets/services.js";
 import UsersService from "../service.js";
 
 export const getSession = (req, res) => {
+  console.log(req.session);
+  console.log(req.session.user);
   if (req.session && req.session.user) {
     return res.json({ success: true, user: req.session.user });
   } else {
@@ -59,19 +61,21 @@ export const createUser = async (req, res) => {
     await newUser.save();
     // Load session data
     req.session.user = {
-      _id: newUser._id,
+      _id: newUser._id.toString(),
       firstName: newUser.firstName,
       lastName: newUser.lastName,
       email: newUser.email,
       roles: newUser.roles,
-      dateOfBirth: newUser.dateOfBirth,
       phoneNumber: newUser.phoneNumber,
       address: newUser.address,
     };
-    // Send verification email
-    // todo: await mailsServices.sendVerificationEmail(service.payload..email, service.payload..vfToken);
-    // Respond with success and token
-    return resSuccess(res, 201, "User created successfully", newUser);
+    // Save the session
+    req.session.save((err) => {
+      if (err) {
+        return resFail(res, 500, "Failed to save session");
+      }
+      return resSuccess(res, 200, "User created", newUser);
+    });
   } catch (error) {
     logger.error(`${error.stack}`);
     return resFail(res, 500, "Internal Server Error", error.stack);
@@ -97,16 +101,22 @@ export const loginUser = async (req, res) => {
     }
     // Load session data
     req.session.user = {
-      _id: user._id,
+      _id: user._id.toString(),
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
       roles: user.roles,
-      dateOfBirth: user.dateOfBirth,
       phoneNumber: user.phoneNumber,
       address: user.address,
     };
-    return resSuccess(res, 200, "logged in successfully", user);
+    console.log("Session data before saving:", req.session.user);
+    req.session.save((err) => {
+      if (err) {
+        console.error("Session save error:", err);
+        return resFail(res, 500, "Failed to save session");
+      }
+      return resSuccess(res, 200, "Logged in successfully", user);
+    });
   } catch (error) {
     logger.error(`${error.stack}`);
     return resFail(res, 500, "Internal Server Error", error.stack);
