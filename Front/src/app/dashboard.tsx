@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import AccountData1 from "./dashboard/AccountData1";
 import AcData2 from "./dashboard/AccountData2";
 import AccountData3 from "./dashboard/AccountData3";
@@ -11,22 +11,15 @@ import SideBarHeader1 from "./dashboard/SideBarHeader1";
 import SideBarFooter from "./dashboard/SideBarFooter";
 import HeadR from "./dashboard/HeadR";
 
-interface UserData {
-  _id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phoneNumber: string;
-}
-
 export default function Dashboard() {
-  const [userData, setUserData] = useState<UserData | null>(null);
+  const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchSessionData = async () => {
-      const response = await axios.get("https://beewalletback.onrender.com/api/auth/session",
-        {withCredentials: true},
+      const response = await axios.get(
+        "https://beewalletback.onrender.com/api/auth/session",
+        { withCredentials: true }
       );
 
       if (response.status === 200) {
@@ -64,12 +57,17 @@ export default function Dashboard() {
             <HeadR />
           </section>
           <section className="flex justify-between pl-4">
-            <p className="text-[1.625rem]">Hola { userData.firstName }</p>
+            <p className="text-[1.625rem]">Hola {userData.firstName}</p>
             <br />
           </section>
           <section className="flex gap-5">
             <div className="flex flex-col gap-5">
-              <AccountData1 />
+              <AccountData1
+                Cvu={userData.cvu}
+                name={userData.name}
+                phone={userData.phone}
+                mail={userData.mail}
+              />
               <AcData2 />
             </div>
             <div>
@@ -87,3 +85,4 @@ export default function Dashboard() {
     </main>
   );
 }
+export default Dashboard;

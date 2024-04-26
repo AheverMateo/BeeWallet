@@ -22,7 +22,7 @@ interface WalletData {
   transactions: string[];
 }
 
-const AccountData1 = () => {
+const AccountData1: React.FC<Props> = ({ Cvu, name, phone, mail }) => {
   const [isBlurred, setIsBlurred] = useState(false);
   const [userData, setUserData] = useState<UserData>({} as UserData);
   const [walletData, setWalletData] = useState<WalletData | null>(null);
@@ -30,10 +30,13 @@ const AccountData1 = () => {
 
   useEffect(() => {
     const fetchSessionData = async () => {
-      const response = await fetch("https://beewalletback.onrender.com/api/auth/session", {
-        method: "GET",
-        credentials: "include",
-      });
+      const response = await fetch(
+        "https://beewalletback.onrender.com/api/auth/session",
+        {
+          method: "GET",
+          credentials: "include",
+        }
+      );
 
       if (response.ok) {
         const dataUser: UserData = await response.json();
@@ -52,10 +55,13 @@ const AccountData1 = () => {
 
   useEffect(() => {
     const fetchWalletData = async () => {
-      const response = await fetch("https://beewalletback.onrender.com/api/wallets/me", {
-        method: "GET",
-        credentials: "include",
-      });
+      const response = await fetch(
+        "https://beewalletback.onrender.com/api/wallets/me",
+        {
+          method: "GET",
+          credentials: "include",
+        }
+      );
 
       if (response.ok) {
         const dataWallet: WalletData = await response.json();
@@ -93,7 +99,7 @@ const AccountData1 = () => {
     rounded-[1rem] gap-2 p-5 bg-[#161616]"
     >
       <section className="flex justify-between">
-        <p>Cuenta { userData?.roles } Beelancer</p>
+        <p>Cuenta Beelancer</p>
         <Link to={"/dashboard/CVU"}>
           <button className="bg-[#323131] rounded-[6.25rem] w-[7.4375rem] md:w-[8rem] p-1">
             Tu CVU
@@ -105,7 +111,7 @@ const AccountData1 = () => {
       </h1>
       <div className="flex gap-8">
         <h2 className={`text-[3rem] ${isBlurred ? "blur-lg" : ""}`}>
-          ${ walletData?.balance }
+          $7.321,5
         </h2>
 
         <button onClick={() => setIsBlurred(!isBlurred)}>
