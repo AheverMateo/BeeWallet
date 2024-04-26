@@ -1,22 +1,19 @@
-
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-{/* rafce te permite obtener la estructura de los archivos en react*/}
-
 
 const LandingMobile = () => {
     
     const AbrirCuentaButton = () => {
       const navigate = useNavigate();
     
-      const buttonStyle = {
+      const buttonStyle = {//boton login
         width: "170px",
         height: "30px",
         borderRadius: "20px",
         background: "#FCCF58",
         boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
         color: "#000",
-        margin: "20px 0",
+        margin: "10px 0",
       };
     
       return (
@@ -29,19 +26,39 @@ const LandingMobile = () => {
     const ComenzarButton = () => {
       const navigate = useNavigate();
     
-      const buttonStyle = {
+      const buttonStyle = { //boton registrar
         width: "170px",
         height: "30px",
         borderRadius: "20px",
         background: "#FCCF58",
         boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
         color: "#000",
-        margin: "20px 0",
+        margin: "10px 0",
       };
     
       return (
         <Button onClick={() => navigate("/register")} style={buttonStyle}>
           Regístrate
+        </Button>
+      );
+    };
+
+    const ComenzarButton2 = () => {
+      const navigate = useNavigate();
+    
+      const buttonStyle = { //boton registrar2
+        width: "200px",
+        height: "30px",
+        borderRadius: "20px",
+        background: "#FCCF58",
+        boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+        color: "#000",
+        margin: "0px 0",
+      };
+    
+      return (
+        <Button onClick={() => navigate("/register")} style={buttonStyle}>
+          Comenzar
         </Button>
       );
     };
@@ -54,7 +71,7 @@ const LandingMobile = () => {
     fontWeight: 600,
     lineHeight: "34px",
     letterSpacing: "0.4px",
-    margin: "140px 0 -30px",
+    margin: "130px 0 -30px",
   };
 
   const beeWalletStyle: React.CSSProperties = {
@@ -87,7 +104,7 @@ const LandingMobile = () => {
     fontWeight: 400,
     lineHeight: "20px",
     textAlign: "center",
-    margin: "50px",
+    margin: "30px",
   };
 
   const descriptionStyle2: React.CSSProperties = {
@@ -110,10 +127,25 @@ const LandingMobile = () => {
     margin: "10px 0",
   };
 
-  const imagenStyle: React.CSSProperties = {
+  const imagenStyle: React.CSSProperties = { //Mobile
     width: "100%",
     height: "auto",
     margin: "20px 0",
+  };
+  
+  const imagenStyle2: React.CSSProperties = { //Chico y B
+    width: "100%",
+    height: "auto",
+    margin: "40px ",
+    marginLeft: "-130px",
+  };
+
+  const imagenStyle3: React.CSSProperties = { //MobilefONDO
+    width: "100%",
+    height: "auto",
+    margin: "100px 0",
+    transform: "scale(1.1)",
+   
   };
 
   const buttonContainerStyle: React.CSSProperties = {
@@ -121,14 +153,14 @@ const LandingMobile = () => {
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
-    margin: "20px 0",
+    margin: "10px 0",
   };
 
   const lineStyle: React.CSSProperties = {
     width: "216px",
     height: "1px",
     background: "#FCCF58",
-    margin: "20px 0",
+    margin: "10px 0",
   };
 
   const additionalTextStyle: React.CSSProperties = {
@@ -139,7 +171,7 @@ const LandingMobile = () => {
     fontStyle: "normal",
     fontWeight: 300,
     lineHeight: "22px",
-    margin: "20px 0",
+    margin: "10px 0",
   };
 
   const highlightedWordsStyle: React.CSSProperties = {
@@ -161,6 +193,14 @@ const LandingMobile = () => {
     lineHeight: "18px",
     margin: "10px", // Ajuste del margen
   };
+
+  const boxStyle: React.CSSProperties = {
+    border: "2px solid #FCCF58",
+    padding: "15px",
+    textAlign: "center",
+    color: "#FCCF58",
+  };
+  
 
   return (
     
@@ -207,9 +247,42 @@ const LandingMobile = () => {
           <p style={boxTextStyle}>
             En Beewallet nos inspiramos en el trabajo incansable y la eficiencia de las abejas para ofrecerte una experiencia única.
           </p>
+
+          <img src="/public/icons/ChicoB.png" alt="ChicoB Image" style={imagenStyle2} />
+
+          <p style={boxTextStyle}>
+          Estamos comprometidos en brindarte un servicio bancario que sea rápido, seguro y beneficioso para la comunidad.
+          </p>
+
+          <h1 style={beeWalletStyle2}>
+          Tipos de cuentas
+          </h1>
+
+          <img src="/public/icons/Cuentas.png" alt="Cuentas" style={imagenStyle} />
+          <img src="/public/icons/Pasos.png" alt="Psos" style={imagenStyle} />
+          
+
+          <h1 style={beeWalletStyle2}>
+          Por qué elegirnos
+          </h1>
+
+          <img src="/public/icons/innovacion.png" alt="innovacion" style={imagenStyle} />
+          <img src="/public/icons/compromiso.png" alt="compromis" style={imagenStyle} />
+          <img src="/public/icons/transparencia.png" alt="transparencia" style={imagenStyle} />
+          <img src="/public/icons/MobilFondo.png" alt="MF" style={imagenStyle3} />
+          
+          <div style={{ margin: "20px 0" }}>
+            <div style={boxStyle}>
+              Regístrate ahora y comienza a disfrutar de una experiencia bancaria que está en sintonía con la naturaleza.
+              <div style={buttonContainerStyle}>
+                <ComenzarButton2 />
+              </div>
+            </div>
+          </div>
+
         </div>
       );
   
 }
 
-export default LandingMobile
+export default LandingMobile;

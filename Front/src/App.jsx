@@ -5,7 +5,6 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Home from "./app/home";
-// import LandingPage from "./app/LandingPage";
 import Dashboard from "./app/dashboard";
 import Login from "./app/login";
 import Register from "./app/register";
@@ -33,7 +32,6 @@ const router = createBrowserRouter(
           element={<Home />}
           errorElement={<div>404</div>}
         />
-        {/* <Route index element={<LandingPage />} /> */}
         <Route path="/login" element={<Login />} />
           <Route path="/Register7" element={<Register7/>} />
           <Route path="/Register8" element={<Register8/>} />

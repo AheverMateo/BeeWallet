@@ -22,10 +22,10 @@ const Login: React.FC<LoginProps> = function Login() {
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const response = await axios.post("https://beewalletback.onrender.com/api/auth/login", 
-    // const response = await axios.post("http://localhost:3000/api/auth/login",
+    // const response = await axios.post("https://beewalletback.onrender.com/api/auth/login", 
+    const response = await axios.post("http://localhost:3000/api/auth/login",
     { email: values.email, password: values.password }, {
-      withCredentials: true
+      withCredentials: true,
     });
     if (response.data) {
       // Assuming the server sends back user data on successful login

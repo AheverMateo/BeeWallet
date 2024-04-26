@@ -27,8 +27,8 @@ app.listen(PORT, () => {
 
 app.use(
   cors({
-    origin: "https://c17-30-ft-node-react.onrender.com", // Allow your frontend domain
-    // origin: true,
+    // origin: "https://c17-30-ft-node-react.onrender.com", // Allow your frontend domain
+    origin: true,
     credentials: true, // Credentials are true to allow sending cookies with requests
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -46,11 +46,13 @@ app.use(
       dbName: "beewalletdb",
     }),
     cookie: {
-      secure: true,
-      // secure: false,
+      httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24, // 24 hours
       sameSite: "none",
+      secure: false,
+      // secure: true,
       // sameSite: "lax",
+      // partitioned: true,
     },
   }),
 );
