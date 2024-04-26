@@ -47,8 +47,7 @@ app.use(
     cookie: {
       secure: true,
       maxAge: 1000 * 60 * 60 * 24, // 24 hours
-      path: "/",
-      sameSite: "None",
+      sameSite: "none",
     },
   }),
 );

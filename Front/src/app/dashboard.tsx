@@ -29,8 +29,8 @@ export default function Dashboard() {
         {withCredentials: true},
       );
 
-      if (response.data) {
-        const data: UserData = await response.data;
+      if (response.status === 200) {
+        const data = response.data;
         setUserData(data);
       } else if (response.status === 401) {
         console.error("Session not valid, redirecting to login.");
