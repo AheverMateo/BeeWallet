@@ -109,14 +109,7 @@ export const loginUser = async (req, res) => {
       phoneNumber: user.phoneNumber,
       address: user.address,
     };
-    console.log("Session data before saving:", req.session.user);
-     await req.session.save((err) => {
-      if (err) {
-        console.error("Session save error:", err);
-        return resFail(res, 500, "Failed to save session");
-      }
-      return resSuccess(res, 200, "Logged in successfully", user);
-    });
+    return resSuccess(res, 200, "Logged in successfully", user);
   } catch (error) {
     logger.error(`${error.stack}`);
     return resFail(res, 500, "Internal Server Error", error.stack);
