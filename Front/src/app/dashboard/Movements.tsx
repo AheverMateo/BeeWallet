@@ -29,7 +29,7 @@ const Movements: React.FC = () => {
     const fetchWalletTransactionsData = async () => {
       try {
         const response = await axios.get(
-          "https://beewalletback.onrender.com/api/wallets/transactions/0",
+          "https://beewalletback.onrender.com/api/wallets/transactions/1",
           // "http://localhost:3000/api/wallets/transactions/0",
           {
             withCredentials: true,

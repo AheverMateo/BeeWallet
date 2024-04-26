@@ -4,7 +4,7 @@ import axios from "axios";
 import AccountData1 from "./dashboard/AccountData1";
 import AcData2 from "./dashboard/AccountData2";
 import AccountData3 from "./dashboard/AccountData3";
-// import Movements from "./dashboard/Movements";
+import Movements from "./dashboard/Movements";
 import SideBar from "./dashboard/SideBar";
 import SideBarHeader1 from "./dashboard/SideBarHeader1";
 // import SideBarHeader2 from "./dashboard/SideBarHeader2";
@@ -127,7 +127,7 @@ export default function Dashboard() {
             </div>
           </section>
           <section className="md:absolute md:bottom-0 lg:pb-5">
-            {/* <Movements /> */}
+            <Movements />
           </section>
         </div>
         <section className="max-sm:block md:hidden">
