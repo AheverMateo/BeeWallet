@@ -1,90 +1,156 @@
-import Table from "./HistoryTable";
-import MobileTable from "./MobileTable";
+import { useEffect, useState } from "react";
+// import Table from "./HistoryTable";
+// import MobileTable from "./MobileTable";
+import axios from "axios";
 
-const Movements = () => {
-  const movements = [
-    {
-      id: 1,
-      name: "Compra de zapatos",
-      typeOf: "Gasto",
-      status: "Enviada",
-      date: "12/12/2021",
-      amount: 100,
-    },
-    {
-      id: 2,
-      name: "venta de zapatos",
-      typeOf: "Gasto",
-      status: "Recibido",
-      date: "11/12/2021",
-      amount: 100,
-    },
-    {
-      id: 3,
-      name: "tranferencia de dinero",
-      typeOf: "Transferencia",
-      status: "Pendiente",
-      date: "10/12/2021",
-      amount: 100,
-    },
-    {
-      id: 4,
-      name: "venta de zapatos",
-      typeOf: "Recepccion de dinero",
-      status: "Recibido",
-      date: "09/12/2021",
-      amount: 100,
-    },
-    {
-      id: 5,
-      name: "Netflix",
-      typeOf: "Gasto",
-      status: "Enviada",
-      date: "08/12/2021",
-      amount: 200,
-    },
-    {
-      id: 6,
-      name: "Pan",
-      typeOf: "Gasto",
-      status: "Enviada",
-      date: "08/12/2021",
-      amount: 20,
-    },
-    {
-      id: 7,
-      name: "Agua",
-      typeOf: "Gasto",
-      status: "Enviada",
-      date: "08/12/2021",
-      amount: 200,
+// type Movement = {
+//   transactions: string[];
+// };
+
+type Decimal128 = {
+  $numberDecimal: string;
+};
+
+type Transaction = {
+  _id: string;
+  type: string;
+  amount: string; // This will be processed to string
+  currency: string;
+  fromWalletId: string;
+  toWalletId?: string;
+  status: "Pending" | "Success" | "Failed";
+  deleted: boolean;
+  createdAt: string;
+  updatedAt: string;
+};
+
+const Movements: React.FC = () => {
+  const [walletTransactionsData, setWalletTransactionsData] = useState<Transaction[]>([]);
+
+  useEffect(() => {
+    // Helper function to check and convert Decimal128 to string
+    function processDecimal128(value: unknown): string {
+      if (
+        typeof value === "object" &&
+        value !== null &&
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (("$numberDecimal" in value))
+      ) {
+        return (value as Decimal128).$numberDecimal;
+      }
+      return value as string;
     }
 
-  ];
-  const getStatusClass = (status:string) => {
+    const fetchWalletTransactionsData = async () => {
+      try {
+        const response = await axios.get(
+          // "https://beewalletback.onrender.com/api/wallets/transactions/1",
+          "http://localhost:3000/api/wallets/transactions/1",
+          {
+            withCredentials: true,
+          }
+        );
+        if (response.status === 200) {
+          const transactions: Transaction[] = response.data.payload.map(
+            (transaction: Transaction) => ({
+              ...transaction,
+              amount: processDecimal128(transaction.amount), // Ensure amount is converted
+            })
+          );
+          setWalletTransactionsData(transactions);
+        }
+      } catch (error) {
+        console.error("Failed to fetch transactions:", error);
+      }
+    };
+
+    fetchWalletTransactionsData();
+  }, []);
+
+  // const movements = [
+  //   {
+  //     id: 1,
+  //     name: "Compra de zapatos",
+  //     typeOf: "Gasto",
+  //     status: "Success",
+  //     date: "12/12/2021",
+  //     amount: 100,
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "venta de zapatos",
+  //     typeOf: "Gasto",
+  //     status: "Failed",
+  //     date: "11/12/2021",
+  //     amount: 100,
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "tranferencia de dinero",
+  //     typeOf: "Transferencia",
+  //     status: "Pending",
+  //     date: "10/12/2021",
+  //     amount: 100,
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "venta de zapatos",
+  //     typeOf: "Recepccion de dinero",
+  //     status: "Failed",
+  //     date: "09/12/2021",
+  //     amount: 100,
+  //   },
+  //   {
+  //     id: 5,
+  //     name: "Netflix",
+  //     typeOf: "Gasto",
+  //     status: "Success",
+  //     date: "08/12/2021",
+  //     amount: 200,
+  //   },
+  //   {
+  //     id: 6,
+  //     name: "Pan",
+  //     typeOf: "Gasto",
+  //     status: "Success",
+  //     date: "08/12/2021",
+  //     amount: 20,
+  //   },
+  //   {
+  //     id: 7,
+  //     name: "Agua",
+  //     typeOf: "Gasto",
+  //     status: "Success",
+  //     date: "08/12/2021",
+  //     amount: 200,
+  //   },
+  // ];
+
+  const getStatusClass = (status: string) => {
     switch (status) {
-      case 'Enviada':
-        return 'text-[#1CC719]';
-      case 'Pendiente':
-        return 'text-yellow-500';
-      case 'Recibido':
-        return 'text-[#B90707]';
+      case "Success":
+        return "text-[#1CC719]";
+      case "Pending":
+        return "text-yellow-500";
+      case "Failed":
+        return "text-[#B90707]";
       default:
-        return '';
+        return "";
     }
   };
-  const getPointClass = (status:string) => {
-    switch (status) {
-      case 'Enviada':
-        return 'bg-[#1CC719]';
-      case 'Pendiente':
-        return 'bg-yellow-500';
-      case 'Recibido':
-        return 'bg-[#B90707]';
-      default:
-        return '';
-    }
-  };
+  // const getPointClass = (status: string) => {
+  //   switch (status) {
+  //     case "Success":
+  //       return "bg-[#1CC719]";
+  //     case "Pending":
+  //       return "bg-yellow-500";
+  //     case "Failed":
+  //       return "bg-[#B90707]";
+  //     default:
+  //       return "";
+  //   }
+  // };
+
   return (
     <main className="mt-8 max-sm:flex max-sm:flex-col max-sm:gap-5">
       <section className="md:p-3 flex justify-between">
@@ -102,10 +168,103 @@ const Movements = () => {
       </section>
       <section className="md:w-[70rem]">
         <div className="hidden sm:block">
-          <Table movements={movements} getStatusClass={getStatusClass} getStatusPointClass={getPointClass} />
+          {/*<Table
+            movements={Movements}
+            getStatusClass={getStatusClass}
+            getStatusPointClass={getPointClass}
+          />*/}
+          <div className="relative overflow-x-auto shadow-md sm:rounded-lg w-[76.6875rem]">
+            <div className="overflow-y-auto max-h-80">
+              <table
+                className="w-full text-sm text-left rtl:text-right
+     bg-[#232323] text-gray-500 dark:text-gray-400 realative "
+              >
+                <thead className="text-xs uppercase sticky top-0 z-10 bg-[#232323]">
+                  <tr>
+                    <th scope="col" className="px-6 py-3 w-1/5">
+                      Nombre
+                    </th>
+                    <th scope="col" className="px-6 py-3 w-1/5">
+                      Tipo
+                    </th>
+                    <th scope="col" className="px-6 py-3 w-1/5">
+                      Status
+                    </th>
+                    <th scope="col" className="px-6 py-3 w-1/5">
+                      fecha
+                    </th>
+                    <th scope="col" className="px-6 py-3 w-1/5">
+                      monto
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {walletTransactionsData.map((transaction: Transaction) => (
+                    <tr
+                      className="bg-[#232323] border-b  dark:border-gray-700
+                     hover:bg-gray-50 dark:hover:bg-gray-600"
+                      key={transaction._id}
+                    >
+                      <th
+                        scope="row"
+                        className="px-6 py-4 text-left align-middle "
+                      >
+                        Transaction
+                      </th>
+                      <td className="px-6 py-4 text-left align-middle">
+                        {transaction.type}
+                      </td>
+                      <td className="px-6 py-4 text-left align-middle flex justify-center items-center gap-2">
+                        <p
+                          className={`size-[5px] ${getStatusClass(
+                            transaction.status
+                          )} rounded-full`}
+                        ></p>
+                        {transaction.status}
+                      </td>
+                      <td className="px-6 py-4 text-left align-middle">
+                        {transaction.createdAt}
+                      </td>
+                      <td
+                        className={`px-6 py-4 text-left align-middle ${getStatusClass(
+                          transaction.status
+                        )}`}
+                      >
+                        {transaction.amount as string}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
         <div className=" sm:hidden">
-          <MobileTable movements={movements} getStatusClass={getStatusClass} />
+          {/* 
+          <MobileTable movements={Movements} getStatusClass={getStatusClass} /> 
+          */}
+          <div className="font-inter ">
+            <section>
+              <table className="w-full overflow-y-auto">
+                <tbody className=" flex flex-col gap-5">
+                  {walletTransactionsData.map((transaction) => (
+                    <tr
+                      className="bg-[#161616]  text-[0.875rem] rounded-[0.625rem] flex justify-between items-center p-5"
+                      key={transaction._id}
+                    >
+                      <td className="flex flex-col gap-1">
+                        <p>Transaction</p>
+                        <p>{transaction.type}</p>
+                      </td>
+                      <td className={getStatusClass(transaction.status)}>
+                        ${transaction.amount}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </section>
+          </div>
         </div>
       </section>
     </main>

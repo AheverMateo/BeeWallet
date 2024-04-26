@@ -25,6 +25,16 @@ app.listen(PORT, () => {
   console.log("listening on port: " + PORT);
 });
 
+app.use(
+  cors({
+    // origin: "https://c17-30-ft-node-react.onrender.com", // Allow your frontend domain
+    origin: true,
+    credentials: true, // Credentials are true to allow sending cookies with requests
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
+
 // Middlewares //
 app.use(
   session({
@@ -36,25 +46,18 @@ app.use(
       dbName: "beewalletdb",
     }),
     cookie: {
-      httpOnly: false,
-      secure: false,
+      httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24, // 24 hours
-      // domain: ".onrender.com",
-      path: "/",
-      sameSite: "None",
+      sameSite: "none",
+      secure: false,
+      // secure: true,
+      // sameSite: "lax",
+      // partitioned: true,
     },
   }),
 );
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(
-  cors({
-    origin: "https://c17-30-ft-node-react.onrender.com", // Allow your frontend domain
-    credentials: true, // Credentials are true to allow sending cookies with requests
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  }),
-);
 app.use(express.static("public")); // serve public
 app.use(addLogger); // general logging
 app.use(express.json()); // Parse JSON requests

@@ -22,7 +22,7 @@ const Transferencia = () => {
         </Link>
       </section>
       <section className="flex flex-col gap-2">
-        <p>Destiantario</p>
+        <p>Destinatario</p>
         <input
           className="bg-[#161616] rounded-[1rem] p-3"
           type="text"

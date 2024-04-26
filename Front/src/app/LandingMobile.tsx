@@ -228,7 +228,7 @@ const LandingMobile = () => {
             <AbrirCuentaButton />
             <ComenzarButton />
           </div>
-          <img src="/public/icons/Component_3_mobile.png" alt="BeeWallet Image" style={imagenStyle} />
+          <img src="/icons/Component_3_mobile.png" alt="BeeWallet Image" style={imagenStyle} />
           <div>
             <p style={descriptionStyle2}>No somos un banco. </p>
             <p style={descriptionStyle2}>No somos una blockchain. </p>
