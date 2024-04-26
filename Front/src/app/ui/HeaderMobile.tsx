@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+//import { useNavigate } from "react-router-dom";
+//import { Button } from "@/components/ui/button"; 
 
 const HeaderMobile: React.FC = () => {
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
 
     return (
         <header className="grid grid-cols-[auto,1fr,auto] h-20 shadow px-8 gap-8 fixed z-10 " style={{ width: '100%', height: '104px', flexShrink: 0, background: '#0E0E0E', boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)' }}>
