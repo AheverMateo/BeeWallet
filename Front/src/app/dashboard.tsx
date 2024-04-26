@@ -9,17 +9,26 @@ import SideBarHeader1 from "./dashboard/SideBarHeader1";
 // import SideBarHeader2 from "./dashboard/SideBarHeader2";
 import SideBarFooter from "./dashboard/SideBarFooter";
 import HeadR from "./dashboard/HeadR";
+interface Props {
+  CVU: string;
+  name: string;
+  phone: string;
+  mail: string;
+}
 
-export default function Dashboard() {
+const Dashboard = () => {
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchSessionData = async () => {
-      const response = await fetch("https://beewalletback.onrender.com/api/auth/session", {
-        method: "GET",
-        credentials: "include",
-      });
+      const response = await fetch(
+        "https://beewalletback.onrender.com/api/auth/session",
+        {
+          method: "GET",
+          credentials: "include",
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -62,7 +71,12 @@ export default function Dashboard() {
           </section>
           <section className="flex gap-5">
             <div className="flex flex-col gap-5">
-              <AccountData1 />
+              <AccountData1
+                Cvu={userData.cvu}
+                name={userData.name}
+                phone={userData.phone}
+                mail={userData.mail}
+              />
               <AcData2 />
             </div>
             <div>
@@ -79,4 +93,5 @@ export default function Dashboard() {
       </main>
     </main>
   );
-}
+};
+export default Dashboard;

@@ -1,13 +1,20 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 // import Dashboard from "../dashboard";
-import eyeIcon from '/icons/eye.svg';
-import eyeOffIcon from '/icons/eye-off.svg';
+import eyeIcon from "/icons/eye.svg";
+import eyeOffIcon from "/icons/eye-off.svg";
+import CVU from "./CVU";
+interface Props {
+  Cvu: string;
+  name: string;
+  phone: string;
+  mail: string;
+}
 
-const AccountData1 = () => {
+const AccountData1: React.FC<Props> = ({ Cvu, name, phone, mail }) => {
   const [isBlurred, setIsBlurred] = useState(false);
   // const [isTransferenceOpen, setIsTransferenceOpen] = useState(false);
-  const icon : string = isBlurred ? eyeOffIcon : eyeIcon;
+  const icon: string = isBlurred ? eyeOffIcon : eyeIcon;
 
   // const handleClick = () => {
   //   setIsBlurred(!isBlurred);
@@ -28,32 +35,30 @@ const AccountData1 = () => {
     >
       <section className="flex justify-between">
         <p>Cuenta Beelancer</p>
-        <Link to={'/dashboard/CVU'}>
-        <button className="bg-[#323131] rounded-[6.25rem] w-[7.4375rem] md:w-[8rem] p-1">
-           Tu CVU 
+        <Link to={"/dashboard/CVU"}>
+          <button className="bg-[#323131] rounded-[6.25rem] w-[7.4375rem] md:w-[8rem] p-1">
+            Tu CVU
+            <div className="hidden">
+              <CVU Cvu={Cvu} name={name} phone={phone} mail={mail} />
+            </div>
           </button>
-          </Link>
+        </Link>
       </section>
       <h1 className="md:text-[1.625rem] text-[1.5rem] text-[#B5B5B5]">
         Disponible
       </h1>
       <div className="flex gap-8">
-        <h2 className={`text-[3rem] ${isBlurred ? 'blur-lg' : ''}`} >$7.321,5</h2>
+        <h2 className={`text-[3rem] ${isBlurred ? "blur-lg" : ""}`}>
+          $7.321,5
+        </h2>
 
-        
-      <button onClick={() => setIsBlurred(!isBlurred)}>
-        <img src={icon} alt="icon" />
-      </button>
-    
+        <button onClick={() => setIsBlurred(!isBlurred)}>
+          <img src={icon} alt="icon" />
+        </button>
       </div>
       <section className="flex justify-center gap-2  ">
-        <button 
-        className="h-[2rem] w-[8.2rem] bg-[#FCCF58] rounded-[1.15625rem] border border-solid border-[#FCFFFF]">
-        <Link to={'/dashboard/transference'}>
-          
-        Transferir
-        </Link>
-         
+        <button className="h-[2rem] w-[8.2rem] bg-[#FCCF58] rounded-[1.15625rem] border border-solid border-[#FCFFFF]">
+          <Link to={"/dashboard/transference"}>Transferir</Link>
         </button>
         <button className="h-[2rem] w-[8.2rem] rounded-[1.15625rem] border border-solid border-[#FCFFFF]">
           Ingresar
