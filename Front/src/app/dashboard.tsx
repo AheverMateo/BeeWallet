@@ -10,8 +10,16 @@ import SideBarHeader1 from "./dashboard/SideBarHeader1";
 import SideBarFooter from "./dashboard/SideBarFooter";
 import HeadR from "./dashboard/HeadR";
 
+interface UserData {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+}
+
 export default function Dashboard() {
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState<UserData | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,8 +30,8 @@ export default function Dashboard() {
       });
 
       if (response.ok) {
-        const data = await response.json();
-        setUserData(data.user);
+        const data: UserData = await response.json();
+        setUserData(data);
       } else if (response.status === 401) {
         console.error("Session not valid, redirecting to login.");
         navigate("/login");
@@ -57,7 +65,7 @@ export default function Dashboard() {
             <HeadR />
           </section>
           <section className="flex justify-between pl-4">
-            <p className="text-[1.625rem]">Hola Juana</p>
+            <p className="text-[1.625rem]">Hola { userData.firstName }</p>
             <br />
           </section>
           <section className="flex gap-5">
