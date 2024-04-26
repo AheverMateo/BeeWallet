@@ -110,7 +110,7 @@ export const loginUser = async (req, res) => {
       address: user.address,
     };
     console.log("Session data before saving:", req.session.user);
-    req.session.save((err) => {
+     await req.session.save((err) => {
       if (err) {
         console.error("Session save error:", err);
         return resFail(res, 500, "Failed to save session");
