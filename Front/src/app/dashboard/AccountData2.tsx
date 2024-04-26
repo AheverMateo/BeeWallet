@@ -1,10 +1,9 @@
 type AccountDataProps = {
-  firstName: string;
   totalIncome: string;
   totalExpenses: string;
 };
 
-const AccountData2: React.FC<AccountDataProps> = ({ firstName, totalIncome, totalExpenses }) => {
+const AccountData2: React.FC<AccountDataProps> = ({ totalIncome, totalExpenses }) => {
 
   return (
     <section
@@ -22,9 +21,9 @@ const AccountData2: React.FC<AccountDataProps> = ({ firstName, totalIncome, tota
         />
         <div className="grid">
           <h1 className="text-xs">
-            Ingresos Totales de: { firstName }
+            Ingresos Totales
           </h1>
-          <h2>{ totalIncome }</h2>
+          <h2>${ totalIncome }</h2>
         </div>
       </div>
       <div
@@ -38,7 +37,7 @@ const AccountData2: React.FC<AccountDataProps> = ({ firstName, totalIncome, tota
         />
         <div className="grid">
           <h1 className="text-xs"> Gastos Totales</h1>
-          <h2>{ totalExpenses }</h2>
+          <h2>${ totalExpenses }</h2>
         </div>
       </div>
     </section>

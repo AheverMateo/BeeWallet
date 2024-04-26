@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import Table from "./HistoryTable";
-import MobileTable from "./MobileTable";
+// import Table from "./HistoryTable";
+// import MobileTable from "./MobileTable";
 import axios from "axios";
 
-type Movement = {
-  transactions: string[];
-};
+// type Movement = {
+//   transactions: string[];
+// };
 
 type WalletTransactionsData = {
+  _id: string;
   type: string;
   amount: string;
   currency: string;
@@ -15,8 +16,8 @@ type WalletTransactionsData = {
   toWalletId?: string;
   status: "Pending" | "Success" | "Failed";
   deleted: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 };
 
 const Movements: React.FC = () => {
@@ -29,6 +30,7 @@ const Movements: React.FC = () => {
       try {
         const response = await axios.get(
           "https://beewalletback.onrender.com/api/wallets/transactions/0",
+          // "http://localhost:3000/api/wallets/transactions/0",
           {
             withCredentials: true,
           }
@@ -38,7 +40,6 @@ const Movements: React.FC = () => {
         }
       } catch (error) {
         console.error("Failed to fetch transactions:", error);
-        alert("Failed to fetch transactions. Please try again later.");
       }
     };
 
@@ -116,18 +117,18 @@ const Movements: React.FC = () => {
         return "";
     }
   };
-  const getPointClass = (status: string) => {
-    switch (status) {
-      case "Success":
-        return "bg-[#1CC719]";
-      case "Pending":
-        return "bg-yellow-500";
-      case "Failed":
-        return "bg-[#B90707]";
-      default:
-        return "";
-    }
-  };
+  // const getPointClass = (status: string) => {
+  //   switch (status) {
+  //     case "Success":
+  //       return "bg-[#1CC719]";
+  //     case "Pending":
+  //       return "bg-yellow-500";
+  //     case "Failed":
+  //       return "bg-[#B90707]";
+  //     default:
+  //       return "";
+  //   }
+  // };
 
   return (
     <main className="mt-8 max-sm:flex max-sm:flex-col max-sm:gap-5">
@@ -177,38 +178,38 @@ const Movements: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {movements.map((movement: Movement) => (
+                  {walletTransactionsData.map((transaction) => (
                     <tr
                       className="bg-[#232323] border-b  dark:border-gray-700
                      hover:bg-gray-50 dark:hover:bg-gray-600"
-                      key={movement.id}
+                      key={transaction._id}
                     >
                       <th
                         scope="row"
                         className="px-6 py-4 text-left align-middle "
                       >
-                        {movement.name}
+                        Transaction
                       </th>
                       <td className="px-6 py-4 text-left align-middle">
-                        {movement.typeOf}
+                        {transaction.type}
                       </td>
                       <td className="px-6 py-4 text-left align-middle flex justify-center items-center gap-2">
                         <p
-                          className={`size-[5px] ${getStatusPointClass(
-                            movement.status
+                          className={`size-[5px] ${getStatusClass(
+                            transaction.status
                           )} rounded-full`}
                         ></p>
-                        {movement.status}
+                        {transaction.status}
                       </td>
                       <td className="px-6 py-4 text-left align-middle">
-                        {movement.date}
+                        {transaction.createdAt}
                       </td>
                       <td
                         className={`px-6 py-4 text-left align-middle ${getStatusClass(
-                          movement.status
+                          transaction.status
                         )}`}
                       >
-                        {movement.amount}
+                        {transaction.amount}
                       </td>
                     </tr>
                   ))}
@@ -225,17 +226,17 @@ const Movements: React.FC = () => {
             <section>
               <table className="w-full overflow-y-auto">
                 <tbody className=" flex flex-col gap-5">
-                  {movements.map((movement: Movement) => (
+                  {walletTransactionsData.map((transaction) => (
                     <tr
                       className="bg-[#161616]  text-[0.875rem] rounded-[0.625rem] flex justify-between items-center p-5"
-                      key={movement.id}
+                      key={transaction._id}
                     >
                       <td className="flex flex-col gap-1">
-                        <p>{movement.name}</p>
-                        <p>{movement.typeOf}</p>
+                        <p>Transaction</p>
+                        <p>{transaction.type}</p>
                       </td>
-                      <td className={getStatusClass(movement.status)}>
-                        {movement.amount}
+                      <td className={getStatusClass(transaction.status)}>
+                        {transaction.amount}
                       </td>
                     </tr>
                   ))}

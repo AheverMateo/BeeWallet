@@ -46,7 +46,7 @@ const AccountData1: React.FC<AccountDataProps> = ({ roles, cvu, balance }) => {
       </h1>
       <div className="flex gap-8">
         <h2 className={`text-[3rem] ${isBlurred ? "blur-lg" : ""}`}>
-          { balance }
+          ${ balance }
         </h2>
 
         <button onClick={() => setIsBlurred(!isBlurred)}>
