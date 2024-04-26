@@ -60,6 +60,7 @@ export default function Dashboard() {
 
       if (response.status === 200) {
         const data: UserData = response.data.user;
+        console.log(data);
         setUserData(data);
       } else if (response.status === 401) {
         console.error("Session not valid, redirecting to login.");
@@ -76,6 +77,7 @@ export default function Dashboard() {
         const dataWallet = response.data.payload;
         // Assuming 'balance' might be a Decimal128 object
         dataWallet.balance = processDecimal128(dataWallet.balance);
+        console.log(dataWallet);
         setWalletData(dataWallet);
       } else if (response.status === 401) {
         console.error("Wallet not valid.");
@@ -87,9 +89,6 @@ export default function Dashboard() {
     fetchSessionData();
     fetchWalletData();
   }, [navigate]);
-
-  console.log(userData);
-  console.log(walletData);
 
   if (!userData) return <p>Loading...</p>;
   if (!walletData) return <p>Loading...</p>;
