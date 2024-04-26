@@ -88,6 +88,9 @@ export default function Dashboard() {
     fetchWalletData();
   }, [navigate]);
 
+  console.log(userData);
+  console.log(walletData);
+
   if (!userData) return <p>Loading...</p>;
   if (!walletData) return <p>Loading...</p>;
 
