@@ -26,18 +26,6 @@ app.listen(PORT, () => {
 });
 
 // Middlewares //
-app.use(express.static("public")); // serve public
-app.use(addLogger); // general logging
-app.use(express.json()); // Parse JSON requests
-app.use(express.urlencoded({ extended: true })); // Parse URL-encoded requests
-app.use(
-  cors({
-    origin: "https://c17-30-ft-node-react.onrender.com", // Allow your frontend domain
-    credentials: true, // Credentials are true to allow sending cookies with requests
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  }),
-);
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -53,15 +41,25 @@ app.use(
       maxAge: 1000 * 60 * 60 * 24, // 24 hours
       domain: ".onrender.com", // Covers all subdomains under onrender.com
       path: "/",
-      sameSite: "None", // Allows cookies to be sent in all contexts
+      sameSite: "Lax", // Allows cookies to be sent in all contexts
     },
   }),
 );
-app.use(compression({})); // Enable response compression
-
-//  Middlewares OAuth Google
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(
+  cors({
+    origin: "https://c17-30-ft-node-react.onrender.com", // Allow your frontend domain
+    credentials: true, // Credentials are true to allow sending cookies with requests
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
+app.use(express.static("public")); // serve public
+app.use(addLogger); // general logging
+app.use(express.json()); // Parse JSON requests
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded requests
+app.use(compression({})); // Enable response compression
 
 // Routers //
 app.use("/api/users", usersRouter);
