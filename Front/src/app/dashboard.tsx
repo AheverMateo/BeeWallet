@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import axios from 'axios';
 import AccountData1 from "./dashboard/AccountData1";
 import AcData2 from "./dashboard/AccountData2";
 import AccountData3 from "./dashboard/AccountData3";
@@ -24,20 +25,18 @@ export default function Dashboard() {
 
   useEffect(() => {
     const fetchSessionData = async () => {
-      const response = await fetch("https://beewalletback.onrender.com/api/auth/session", {
-        method: "GET",
-        credentials: "include",
-      });
+      const response = await axios.get("https://beewalletback.onrender.com/api/auth/session",
+        {withCredentials: true},
+      );
 
-      if (response.ok) {
-        const data: UserData = await response.json();
+      if (response.data) {
+        const data: UserData = await response.data;
         setUserData(data);
       } else if (response.status === 401) {
         console.error("Session not valid, redirecting to login.");
         navigate("/login");
       } else {
         console.error("Error fetching session data:", response.statusText);
-        alert("Error fetching data. Please try again later.");
       }
     };
 
