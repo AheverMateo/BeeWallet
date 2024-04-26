@@ -23,7 +23,7 @@ const Login: React.FC<LoginProps> = function Login() {
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const response = await axios.post("https://beewalletback.onrender.com/api/auth/login", 
-    {body: JSON.stringify({ email: values.email, password: values.password })}, {
+    { email: values.email, password: values.password }, {
       withCredentials: true
     });
     if (response.data) {
