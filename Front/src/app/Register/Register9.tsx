@@ -11,6 +11,7 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Register9 = () => {
     const [number, setNumber] = useState ("")
@@ -65,7 +66,9 @@ const Register9 = () => {
                     disabled={!number} 
                     className="rounded-full w-[40%] mt-8 select-none font-semibold text-white bg-yellow-600"
                     >
-                        Continuar
+                        <Link to="">
+                            Continuar
+                        </Link>
                     </Button>
             </div>
         </div>

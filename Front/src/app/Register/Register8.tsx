@@ -3,11 +3,12 @@ import stepper3 from "../../assets/icons/stepper3.svg"
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from 'react';
-import {useGlobalStoreForm} from "../../store/userStore"
+import { Link } from 'react-router-dom';
+//import {useGlobalStoreForm} from "../../store/userStore"
 
 const Register8 = () => {
 
-    const { setFormData } = useGlobalStoreForm();
+    //const { setFormData } = useGlobalStoreForm();
 
 
     const [formInfo, useFormInfo] = useState({
@@ -58,7 +59,9 @@ const Register8 = () => {
                     disabled={!formInfo.nombre || !formInfo.direccion || !formInfo.localidad || !formInfo.codigo}
                     className="rounded-full w-full mt-8 select-none font-semibold text-white bg-yellow-600"
                     >
+                    <Link to="/Register9" className='w-full'>
                         Contiuar
+                    </Link>
                     </Button>
                 </form>
             </div>

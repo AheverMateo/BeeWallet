@@ -42,6 +42,7 @@ export default function Register() {
             />
           </div>
           <div className="">
+
             <Button
               type="button"
               size="lg"
@@ -49,8 +50,10 @@ export default function Register() {
               className="rounded-full w-full mt-4 select-none font-semibold text-white bg-yellow-600"
               disabled={!values.email}
               onClick={() => setStep(step + 1)}
-            >
+              >
+            <Link to="/register/auth">
               Siguiente
+              </Link>
             </Button>
           </div>
           <div className="text-center mb-10">

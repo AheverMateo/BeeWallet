@@ -6,8 +6,10 @@ const HeaderRegister = () => {
   return (
     <div>
         <header className=' h-16 bg-black flex justify-between items-center'>
+        <Link to="/">
           <img className=' ml-8 pt-1' src={Logo} alt="" />
-          <Link to="">
+        </Link>
+          <Link to="/">
           <img className="w-6 bg-slate-800 py-1 rounded-full h-6 mr-4" src={close} alt="" />
           </Link>
         </header>
