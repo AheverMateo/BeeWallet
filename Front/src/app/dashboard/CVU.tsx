@@ -21,7 +21,7 @@ interface WalletData {
 
 const CVU = () => {
   return (
-    <main
+    <div
       className="bg-[#0E0E0E] flex flex-col items-center z-20 max-md:w-[10.5rem] 
     max-md:h-[63.9375rem] md:w-[43.75rem] md:h-[46.9375rem] rounded-[1rem] fixed p-3 font-inter"
     >
@@ -82,7 +82,7 @@ const CVU = () => {
           </div>
         </section>
       </>
-    </main>
+    </div>
   );
 };
 

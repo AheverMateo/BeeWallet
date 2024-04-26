@@ -146,14 +146,103 @@ const Movements: React.FC = () => {
       </section>
       <section className="md:w-[70rem]">
         <div className="hidden sm:block">
-          <Table
+          {/*<Table
             movements={Movements}
             getStatusClass={getStatusClass}
             getStatusPointClass={getPointClass}
-          />
+          />*/}
+          <div className="relative overflow-x-auto shadow-md sm:rounded-lg w-[76.6875rem]">
+            <div className="overflow-y-auto max-h-80">
+              <table
+                className="w-full text-sm text-left rtl:text-right
+     bg-[#232323] text-gray-500 dark:text-gray-400 realative "
+              >
+                <thead className="text-xs uppercase sticky top-0 z-10 bg-[#232323]">
+                  <tr>
+                    <th scope="col" className="px-6 py-3 w-1/5">
+                      Nombre
+                    </th>
+                    <th scope="col" className="px-6 py-3 w-1/5">
+                      Tipo
+                    </th>
+                    <th scope="col" className="px-6 py-3 w-1/5">
+                      Status
+                    </th>
+                    <th scope="col" className="px-6 py-3 w-1/5">
+                      fecha
+                    </th>
+                    <th scope="col" className="px-6 py-3 w-1/5">
+                      monto
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {movements.map((movement: Movement) => (
+                    <tr
+                      className="bg-[#232323] border-b  dark:border-gray-700
+                     hover:bg-gray-50 dark:hover:bg-gray-600"
+                      key={movement.id}
+                    >
+                      <th
+                        scope="row"
+                        className="px-6 py-4 text-left align-middle "
+                      >
+                        {movement.name}
+                      </th>
+                      <td className="px-6 py-4 text-left align-middle">
+                        {movement.typeOf}
+                      </td>
+                      <td className="px-6 py-4 text-left align-middle flex justify-center items-center gap-2">
+                        <p
+                          className={`size-[5px] ${getStatusPointClass(
+                            movement.status
+                          )} rounded-full`}
+                        ></p>
+                        {movement.status}
+                      </td>
+                      <td className="px-6 py-4 text-left align-middle">
+                        {movement.date}
+                      </td>
+                      <td
+                        className={`px-6 py-4 text-left align-middle ${getStatusClass(
+                          movement.status
+                        )}`}
+                      >
+                        {movement.amount}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
         <div className=" sm:hidden">
-          <MobileTable movements={Movements} getStatusClass={getStatusClass} />
+          {/* 
+          <MobileTable movements={Movements} getStatusClass={getStatusClass} /> 
+          */}
+          <div className="font-inter ">
+            <section>
+              <table className="w-full overflow-y-auto">
+                <tbody className=" flex flex-col gap-5">
+                  {movements.map((movement: Movement) => (
+                    <tr
+                      className="bg-[#161616]  text-[0.875rem] rounded-[0.625rem] flex justify-between items-center p-5"
+                      key={movement.id}
+                    >
+                      <td className="flex flex-col gap-1">
+                        <p>{movement.name}</p>
+                        <p>{movement.typeOf}</p>
+                      </td>
+                      <td className={getStatusClass(movement.status)}>
+                        {movement.amount}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </section>
+          </div>
         </div>
       </section>
     </main>
