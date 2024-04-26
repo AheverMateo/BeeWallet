@@ -2,12 +2,13 @@ import Table from "./HistoryTable";
 import MobileTable from "./MobileTable";
 
 const Movements = () => {
+
   const movements = [
     {
       id: 1,
       name: "Compra de zapatos",
       typeOf: "Gasto",
-      status: "Enviada",
+      status: "Success",
       date: "12/12/2021",
       amount: 100,
     },
@@ -15,7 +16,7 @@ const Movements = () => {
       id: 2,
       name: "venta de zapatos",
       typeOf: "Gasto",
-      status: "Recibido",
+      status: "Failed",
       date: "11/12/2021",
       amount: 100,
     },
@@ -23,7 +24,7 @@ const Movements = () => {
       id: 3,
       name: "tranferencia de dinero",
       typeOf: "Transferencia",
-      status: "Pendiente",
+      status: "Pending",
       date: "10/12/2021",
       amount: 100,
     },
@@ -31,7 +32,7 @@ const Movements = () => {
       id: 4,
       name: "venta de zapatos",
       typeOf: "Recepccion de dinero",
-      status: "Recibido",
+      status: "Failed",
       date: "09/12/2021",
       amount: 100,
     },
@@ -39,7 +40,7 @@ const Movements = () => {
       id: 5,
       name: "Netflix",
       typeOf: "Gasto",
-      status: "Enviada",
+      status: "Success",
       date: "08/12/2021",
       amount: 200,
     },
@@ -47,7 +48,7 @@ const Movements = () => {
       id: 6,
       name: "Pan",
       typeOf: "Gasto",
-      status: "Enviada",
+      status: "Success",
       date: "08/12/2021",
       amount: 20,
     },
@@ -55,7 +56,7 @@ const Movements = () => {
       id: 7,
       name: "Agua",
       typeOf: "Gasto",
-      status: "Enviada",
+      status: "Success",
       date: "08/12/2021",
       amount: 200,
     }
@@ -63,11 +64,11 @@ const Movements = () => {
   ];
   const getStatusClass = (status:string) => {
     switch (status) {
-      case 'Enviada':
+      case 'Success':
         return 'text-[#1CC719]';
-      case 'Pendiente':
+      case 'Pending':
         return 'text-yellow-500';
-      case 'Recibido':
+      case 'Failed':
         return 'text-[#B90707]';
       default:
         return '';
@@ -75,16 +76,18 @@ const Movements = () => {
   };
   const getPointClass = (status:string) => {
     switch (status) {
-      case 'Enviada':
+      case 'Success':
         return 'bg-[#1CC719]';
-      case 'Pendiente':
+      case 'Pending':
         return 'bg-yellow-500';
-      case 'Recibido':
+      case 'Failed':
         return 'bg-[#B90707]';
       default:
         return '';
     }
   };
+
+
   return (
     <main className="mt-8 max-sm:flex max-sm:flex-col max-sm:gap-5">
       <section className="md:p-3 flex justify-between">

@@ -25,11 +25,6 @@ app.listen(PORT, () => {
   console.log("listening on port: " + PORT);
 });
 
-// Middlewares //
-app.use(express.static("public")); // serve public
-app.use(addLogger); // general logging
-app.use(express.json()); // Parse JSON requests
-app.use(express.urlencoded({ extended: true })); // Parse URL-encoded requests
 app.use(
   cors({
     origin: "https://c17-30-ft-node-react.onrender.com", // Allow your frontend domain
@@ -38,6 +33,8 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
+
+// Middlewares //
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -48,19 +45,19 @@ app.use(
       dbName: "beewalletdb",
     }),
     cookie: {
-      httpOnly: true,
-      secure: false,
-      maxAge: 1000 * 60 * 60 * 24,
-      domain: ".onrender.com",
-      path: "/",
+      secure: true,
+      maxAge: 1000 * 60 * 60 * 24, // 24 hours
+      sameSite: "none",
     },
   }),
 );
-app.use(compression({})); // Enable response compression
-
-//  Middlewares OAuth Google
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.static("public")); // serve public
+app.use(addLogger); // general logging
+app.use(express.json()); // Parse JSON requests
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded requests
+app.use(compression({})); // Enable response compression
 
 // Routers //
 app.use("/api/users", usersRouter);

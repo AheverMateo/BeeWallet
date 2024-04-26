@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import axios from "axios";
 import AccountData1 from "./dashboard/AccountData1";
 import AcData2 from "./dashboard/AccountData2";
 import AccountData3 from "./dashboard/AccountData3";
@@ -9,36 +10,26 @@ import SideBarHeader1 from "./dashboard/SideBarHeader1";
 // import SideBarHeader2 from "./dashboard/SideBarHeader2";
 import SideBarFooter from "./dashboard/SideBarFooter";
 import HeadR from "./dashboard/HeadR";
-interface Props {
-  CVU: string;
-  name: string;
-  phone: string;
-  mail: string;
-}
 
-const Dashboard = () => {
+export default function Dashboard() {
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchSessionData = async () => {
-      const response = await fetch(
+      const response = await axios.get(
         "https://beewalletback.onrender.com/api/auth/session",
-        {
-          method: "GET",
-          credentials: "include",
-        }
+        { withCredentials: true }
       );
 
-      if (response.ok) {
-        const data = await response.json();
-        setUserData(data.user);
+      if (response.status === 200) {
+        const data = response.data;
+        setUserData(data);
       } else if (response.status === 401) {
         console.error("Session not valid, redirecting to login.");
         navigate("/login");
       } else {
         console.error("Error fetching session data:", response.statusText);
-        alert("Error fetching data. Please try again later.");
       }
     };
 
@@ -66,7 +57,7 @@ const Dashboard = () => {
             <HeadR />
           </section>
           <section className="flex justify-between pl-4">
-            <p className="text-[1.625rem]">Hola Juana</p>
+            <p className="text-[1.625rem]">Hola {userData.firstName}</p>
             <br />
           </section>
           <section className="flex gap-5">
@@ -93,5 +84,5 @@ const Dashboard = () => {
       </main>
     </main>
   );
-};
+}
 export default Dashboard;

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Eye } from "@/assets/icons/eye";
@@ -21,23 +22,17 @@ const Login: React.FC<LoginProps> = function Login() {
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const response = await fetch("https://beewalletback.onrender.com/api/auth/login", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email: values.email, password: values.password }),
+    const response = await axios.post("https://beewalletback.onrender.com/api/auth/login", 
+    { email: values.email, password: values.password }, {
+      withCredentials: true
     });
-
-    if (response.ok) {
+    if (response.data) {
       // Assuming the server sends back user data on successful login
-      const userData = await response.json();
+      const userData = response.data;
       console.log("Login successful:", userData);
       navigate("/dashboard");
     } else {
-      const errorData = await response.json();
-      setError(errorData.error || "Unknown error");
+      setError("Unknown error");
     }
   };
 

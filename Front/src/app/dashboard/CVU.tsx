@@ -1,12 +1,25 @@
-import { Link } from "react-router-dom";
-interface Props {
-  Cvu: string;
-  name: string;
-  phone: string;
-  mail: string;
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+interface UserData {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  roles: string[];
 }
 
-const CVU: React.FC<Props> = ({ Cvu, name, phone, mail }) => {
+interface WalletData {
+  userId: string;
+  _id: string;
+  cvu: string;
+  balance: string;
+  currency: string;
+  transactions: string[];
+}
+
+const CVU = () => {
   return (
     <main
       className="bg-[#0E0E0E] flex flex-col items-center z-20 max-md:w-[10.5rem] 
@@ -31,16 +44,10 @@ const CVU: React.FC<Props> = ({ Cvu, name, phone, mail }) => {
           </p>
           <div className="bg-[#232323] flex flex-col p-5 gap-4 rounded-[1rem]">
             <section className="p-6 flex flex-col gap-5">
-              <div>
-                <h2>Tu alias</h2>
-                <p>{name}</p>
-              </div>
-              <div>
-                <h2 className="pt-5 border-t-[1px] boder-t-[#323131cc]">
-                  Tu cvu
-                </h2>
-                <p>{Cvu}</p>
-              </div>
+              <h2>Tu alias</h2>
+              <h2 className="pt-5 border-t-[1px] boder-t-[#323131cc]">
+                Tu cvu
+              </h2>
             </section>
             <section className="flex justify-center">
               <button
@@ -59,16 +66,10 @@ const CVU: React.FC<Props> = ({ Cvu, name, phone, mail }) => {
           </p>
           <div className="bg-[#232323] flex flex-col p-5 gap-4 rounded-[1rem]">
             <section className="p-6 flex flex-col gap-5">
-              <div>
-                <h2>Telefono</h2>
-                <p>{phone}</p>
-              </div>
-              <div>
-                <h2 className="pt-5 border-t-[1px] boder-t-[#323131cc]">
-                  Correo electrónico
-                </h2>
-                <p>{mail}</p>
-              </div>
+              <h2>Telefono</h2>
+              <h2 className="pt-5 border-t-[1px] boder-t-[#323131cc]">
+                Correo electrónico
+              </h2>
             </section>
             <section className="flex justify-center">
               <button
