@@ -52,6 +52,7 @@ app.use(
       maxAge: 1000 * 60 * 60 * 24, // 24 hours
       sameSite: "none",
       // sameSite: "lax",
+      partitioned: true,
     },
   }),
 );
