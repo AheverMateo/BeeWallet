@@ -2,8 +2,8 @@ import HeaderRegister from "./HeaderRegister";
 import stepper3 from "../../assets/icons/stepper3.svg";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { ChangeEvent, FormEvent, useState } from "react";
-import { useGlobalStoreForm } from "@/store/userStore";
+import { /*ChangeEvent,*/ FormEvent /*, useState*/ } from "react";
+// import { useGlobalStoreForm } from "@/store/userStore";
 
 const Register8 = () => {
   // const  [formData, setFormData]  = useState();
