@@ -34,17 +34,20 @@ app.use(
   }),
 );
 
+app.set("trust proxy", 1);
+
 // Middlewares //
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     store: MongoStore.create({
       mongoUrl: process.env.MONGO_URL,
       ttl: 3600,
       dbName: "beewalletdb",
     }),
+    proxy: true,
     cookie: {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24, // 24 hours
