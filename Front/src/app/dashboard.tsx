@@ -52,8 +52,7 @@ export default function Dashboard() {
 
     const fetchSessionData = async () => {
       const response = await axios.get(
-        // "https://beewalletback.onrender.com/api/auth/session",
-        "http://localhost:3000/api/auth/session",
+        "https://beewalletback.onrender.com/api/auth/session",
         { withCredentials: true }
       );
 
