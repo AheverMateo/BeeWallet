@@ -147,7 +147,7 @@ const Movements: React.FC = () => {
                           transaction.status
                         )}`}
                       >
-                        {transaction.amount as string}
+                        ${transaction.amount as string}
                       </td>
                     </tr>
                   ))}

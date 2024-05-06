@@ -12,7 +12,7 @@ const AccountData2: React.FC<AccountDataProps> = ({ totalIncome, totalExpenses }
     >
       <div
         className="flex object-center justify-center 
-      bg-[#161616] rounded-[1rem] p-4 h-[4.69rem] w-[12.94rem]"
+      bg-[#161616] rounded-[1rem] gap-3 p-4 h-[4.69rem] w-[12.94rem]"
       >
         <img
           src="/icons/UpCircle1.svg"
@@ -28,7 +28,7 @@ const AccountData2: React.FC<AccountDataProps> = ({ totalIncome, totalExpenses }
       </div>
       <div
         className="flex item-center justify-center 
-      bg-[#161616] h-[4.69rem] w-[12.94rem] rounded-[1rem] p-4"
+      bg-[#161616] h-[4.69rem] w-[12.94rem] rounded-[1rem] p-4 gap-3"
       >
         <img
           src="/icons/UpCircle1.svg"

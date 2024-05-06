@@ -109,6 +109,7 @@ export const loginUser = async (req, res) => {
       phoneNumber: user.phoneNumber,
       address: user.address,
     };
+    await req.session.save();
     return resSuccess(res, 200, "Logged in successfully", user);
   } catch (error) {
     logger.error(`${error.stack}`);

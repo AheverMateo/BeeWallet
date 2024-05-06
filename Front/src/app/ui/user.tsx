@@ -4,9 +4,43 @@ import discard from "../../assets/icons/discard.svg";
 import visto from "../../assets/icons/visto.svg";
 import logo from "../../assets/icons/Logo.svg";
 import HeaderR from "../../app/dashboard/HeadR";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+type UserData = {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+};
 
 const User = () => {
+  const [userData, setUserData] = useState<UserData>({} as UserData);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchSessionData = async () => {
+      const response = await axios.get(
+        // "https://beewalletback.onrender.com/api/auth/session",
+        "http://localhost:3000/api/auth/session",
+        { withCredentials: true }
+      );
+
+      if (response.status === 200) {
+        const data: UserData = response.data.user;
+        setUserData(data);
+      } else if (response.status === 401) {
+        console.error("Session not valid, redirecting to login.");
+        navigate("/login");
+      } else {
+        console.error("Error fetching session data:", response.statusText);
+      }
+    };
+
+    fetchSessionData();
+  }, [navigate]);
 
   return (
     <div className="flex ">
@@ -20,14 +54,18 @@ const User = () => {
             <img className="ml-2" src={imgUser} alt="" />
             <div className=" flex flex-col ml-10 justify-center">
               <h4 className=" text-gray-400 text-sm">Nombre y Apellido</h4>
-              <p className="text-gray-300 text-xl font-bold">Nicolas Ippoliti</p>
+              <p className="text-gray-300 text-xl font-bold">
+                {userData.firstName} {userData.lastName}
+              </p>
             </div>
           </div>
 
           <div className=" flex flex-col w-full rounded-xl px-8 py-6 mt-10 bg-zinc-900">
             <h4 className="text-gray-400 text-sm mb-2">Telefono</h4>
             <div className="flex justify-between">
-              <p className="text-gray-300 text-xl mb-2">+54******0552</p>
+              <p className="text-gray-300 text-xl mb-2">
+                +54 {userData.phoneNumber}
+              </p>
               <img
                 className="rounded-full py-1 px-1 h-5 mt-2 bg-green-900"
                 src={visto}
@@ -39,9 +77,7 @@ const User = () => {
               Correo electrónico
             </h4>
             <div className="flex justify-between">
-              <p className="text-gray-300 text-xl mb-2">
-                nicolasippoliti@gmail.com
-              </p>
+              <p className="text-gray-300 text-xl mb-2">{userData.email}</p>
               <img
                 className="rounded-full py-1 px-1 h-5 mt-2 bg-green-900"
                 src={visto}
@@ -52,22 +88,52 @@ const User = () => {
             <h4 className="text-gray-400 text-sm mt-4 mb-2">
               Fecha de Nacimiento
             </h4>
-            <p className="text-gray-300 text-xl mb-2">21/07/2001</p>
+            <div className="flex justify-between">
+              <p className="text-gray-300 text-xl mb-2">21/08/2001</p>
+              <img
+                className="rounded-full py-1 px-1 h-5 mt-2 bg-green-900"
+                src={visto}
+                alt=""
+              />
+            </div>
+            <hr className="border-gray-400" />
           </div>
 
           <div className=" flex flex-col w-full rounded-xl px-8 py-6 mt-10 bg-zinc-900">
             <h4 className="text-gray-400 text-sm mb-2">
               Dirección (calle y número)
             </h4>
-            <p className="text-gray-300 text-xl mb-2">Avenida Córdoba 1234.</p>
+            <div className="flex justify-between">
+            <p className="text-gray-300 text-xl mb-2">Mitre 853</p>
+            <img
+                className="rounded-full py-1 px-1 h-5 mt-2 bg-green-900"
+                src={visto}
+                alt=""
+              />
+            </div>
             <hr className="border-gray-400" />
             <h4 className="text-gray-400 text-sm mt-4 mb-2">Código Postal</h4>
-            <p className="text-gray-300 text-xl mb-2">1234</p>
+            <div className="flex justify-between">
+            <p className="text-gray-300 text-xl mb-2">9108</p>
+            <img
+                className="rounded-full py-1 px-1 h-5 mt-2 bg-green-900"
+                src={visto}
+                alt=""
+              />
+            </div>
             <hr className="border-gray-400" />
             <h4 className="text-gray-400 text-sm mt-4 mb-2">Ciudad y País</h4>
+            <div className="flex justify-between">
             <p className="text-gray-300 text-xl mb-2">
-              Cordoba, Argentina.
+              Bahia Blanca, Argentina
             </p>
+            <img
+                className="rounded-full py-1 px-1 h-5 mt-2 bg-green-900"
+                src={visto}
+                alt=""
+              />
+            </div>
+            <hr className="border-gray-400" />
           </div>
           <div className=" mt-20">
             <h1 className="text-2xl font-bold text-white mb-8">
@@ -85,8 +151,10 @@ const User = () => {
           </div>
 
           <div className="flex flex-col justify-center items-center mt-20">
-            <Link to="/">
-            <button className="border-yellow-400 border rounded-full px-10 py-2 text-yellow-300">
+            <button
+              type="submit"
+              className="border-yellow-400 border rounded-full px-10 py-2 text-yellow-300"
+            >
               Cerrar Sesion
             </button>
             </Link>

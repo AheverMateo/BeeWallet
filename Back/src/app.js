@@ -27,32 +27,32 @@ app.listen(PORT, () => {
 
 app.use(
   cors({
-    // origin: "https://c17-30-ft-node-react.onrender.com", // Allow your frontend domain
-    origin: true,
+    origin: "https://c17-30-ft-node-react.onrender.com", // Allow your frontend domain
     credentials: true, // Credentials are true to allow sending cookies with requests
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
 
+app.set("trust proxy", 1);
+
 // Middlewares //
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     store: MongoStore.create({
       mongoUrl: process.env.MONGO_URL,
+      ttl: 3600,
       dbName: "beewalletdb",
     }),
+    proxy: true,
     cookie: {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24, // 24 hours
       sameSite: "none",
-      secure: false,
-      // secure: true,
-      // sameSite: "lax",
-      // partitioned: true,
+      secure: true,
     },
   }),
 );
