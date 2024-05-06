@@ -5,6 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Home from "./app/home";
+// import LandingPage from "./app/LandingPage";
 import Dashboard from "./app/dashboard";
 import Login from "./app/login";
 import Register from "./app/register";
@@ -19,7 +20,7 @@ import Register5 from "./app/Register/Register5";
 import Register3 from "./app/Register/Register3";
 import Register18 from "./app/Register/Register18";
 import Register21 from "./app/Register/Register21";
-import Register8 from "./app/Register/Register8";
+//import Register8 from "./app/Register/Register8";
 import Register9 from "./app/Register/Register9";
 
 const router = createBrowserRouter(
@@ -32,9 +33,9 @@ const router = createBrowserRouter(
           element={<Home />}
           errorElement={<div>404</div>}
         />
+        {/* <Route index element={<LandingPage />} /> */}
         <Route path="/login" element={<Login />} />
           <Route path="/Register7" element={<Register7/>} />
-          <Route path="/Register8" element={<Register8/>} />
           <Route path="/Register9" element={<Register9/>} />
         <Route path="/user" element={<User />} />
         <Route path="/register" element={<Register />} />

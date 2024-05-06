@@ -4,8 +4,10 @@ import discard from "../../assets/icons/discard.svg";
 import visto from "../../assets/icons/visto.svg";
 import logo from "../../assets/icons/Logo.svg";
 import HeaderR from "../../app/dashboard/HeadR";
+import { Link } from "react-router-dom";
 
 const User = () => {
+
   return (
     <div className="flex ">
       <div className="ml-6 fixed">
@@ -18,7 +20,7 @@ const User = () => {
             <img className="ml-2" src={imgUser} alt="" />
             <div className=" flex flex-col ml-10 justify-center">
               <h4 className=" text-gray-400 text-sm">Nombre y Apellido</h4>
-              <p className="text-gray-300 text-xl font-bold">Jane Doe</p>
+              <p className="text-gray-300 text-xl font-bold">Nicolas Ippoliti</p>
             </div>
           </div>
 
@@ -38,7 +40,7 @@ const User = () => {
             </h4>
             <div className="flex justify-between">
               <p className="text-gray-300 text-xl mb-2">
-                janedoe.2024@outlook.com
+                nicolasippoliti@gmail.com
               </p>
               <img
                 className="rounded-full py-1 px-1 h-5 mt-2 bg-green-900"
@@ -50,7 +52,7 @@ const User = () => {
             <h4 className="text-gray-400 text-sm mt-4 mb-2">
               Fecha de Nacimiento
             </h4>
-            <p className="text-gray-300 text-xl mb-2">00/00/0000</p>
+            <p className="text-gray-300 text-xl mb-2">21/07/2001</p>
           </div>
 
           <div className=" flex flex-col w-full rounded-xl px-8 py-6 mt-10 bg-zinc-900">
@@ -64,27 +66,30 @@ const User = () => {
             <hr className="border-gray-400" />
             <h4 className="text-gray-400 text-sm mt-4 mb-2">Ciudad y País</h4>
             <p className="text-gray-300 text-xl mb-2">
-              Buenos Aires, Argentina.
+              Cordoba, Argentina.
             </p>
           </div>
           <div className=" mt-20">
             <h1 className="text-2xl font-bold text-white mb-8">
               Configuracion
             </h1>
-            <div className="  flex flex-col w-full rounded-xl  px-6 py-10  mt-5 bg-zinc-900">
-              <h4 className="text-gray-400 text-sm mt-4 mb-2"></h4>
-              <p className="text-gray-300 text-xl mb-2"></p>
-              <hr className="border-gray-400" />
-              <h4 className="text-gray-400 text-sm mt-4 mb-2"></h4>
-              <p className="text-gray-300 text-xl mb-2"></p>
+            <div className="  flex flex-col w-full rounded-xl  px-6 py-10  mt-2 bg-zinc-900">
+            <h4 className="text-gray-400 text-sm mt-4 mb-2">Preferencias de notificación</h4>
+            <p className="text-gray-300 text-xl mb-2">Personaliza cómo deseas recibir notificaciones.</p>
+            <hr className="border-gray-400" />
+            <hr className="border-gray-400" />
+            <h4 className="text-gray-400 text-sm mt-4 mb-2">Configuración de cuenta</h4>
+            <p className="text-gray-300 text-xl mb-2">Ajustes relacionados con tu cuenta de usuario.</p>
               <hr />
             </div>
           </div>
 
           <div className="flex flex-col justify-center items-center mt-20">
+            <Link to="/">
             <button className="border-yellow-400 border rounded-full px-10 py-2 text-yellow-300">
               Cerrar Sesion
             </button>
+            </Link>
             <div className="mt-10 flex">
               <img className="mr-2" src={discard} alt="" />
               <p className="text-gray-300 cursor-pointer">Eliminar Cuenta</p>
