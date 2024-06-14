@@ -5,7 +5,18 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'inter': ['Inter', 'sans-serif']
+      },
+      colors: {
+        proyectColor: {
+          yellow:"#FCCF58",
+          yellowOpac: "#6F5308",
+          blackOpac: "#232323",
+        }
+      }
+    },
   },
   plugins: [],
 }

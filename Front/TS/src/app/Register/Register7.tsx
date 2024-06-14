@@ -1,12 +1,3 @@
-import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
-import { Button } from "@/components/ui/button";
 import stepper2 from "../../assets/icons/stepper2.svg"
 import HeaderRegister from './HeaderRegister'
 import { Link } from "react-router-dom";
@@ -34,34 +25,16 @@ const Register7 = () => {
             </div>
 
             <div className='mt-10'>
-            <Select>
-                <SelectTrigger className="w-[500px]">
-                    <SelectValue placeholder="Pais" />
-                </SelectTrigger>
-                <SelectContent className=" ml-4 ">
-                    <SelectGroup className='bg-white pt-1'>
-                    <SelectItem value="Argentina" className='hover:bg-yellow-700'>Argentina</SelectItem>
-                    <SelectItem value="Bolivia" className='hover:bg-yellow-700'>Bolivia</SelectItem>
-                    <SelectItem value="Brasil" className='hover:bg-yellow-700'>Brasil</SelectItem>
-                    <SelectItem value="Chile" className='hover:bg-yellow-700'>Chile</SelectItem>
-                    <SelectItem value="Colombia" className='hover:bg-yellow-700'>Colombia</SelectItem>
-                    <SelectItem value="Ecuador" className='hover:bg-yellow-700'>Ecuador</SelectItem>
-                    <SelectItem value="Paraguay" className='hover:bg-yellow-700'>Paraguay</SelectItem>
-                    <SelectItem value="Peru" className='hover:bg-yellow-700'>Peru</SelectItem>
-                    <SelectItem value="Uruguay" className='hover:bg-yellow-700'>Uruguay</SelectItem>
-                    </SelectGroup>
-                </SelectContent>
-                </Select>
+                
             </div>
-            <Button
+            <button
             type="submit"
-            size="lg" 
             className="rounded-full w-[43%] mt-8 select-none font-semibold text-white bg-yellow-600"
             >
             <Link to="/Register8" className="w-[43%]">
                 Contiuar
             </Link>
-            </Button>
+            </button>
         </div>
     </div>
     )
